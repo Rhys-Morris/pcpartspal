@@ -20,8 +20,11 @@
     <%= render "shared/nav" %>
 
     <!-- Flash messages -->
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+      <% flash.each do |key, message| %>
+        <div class="flash">
+          <p class="<%= key %>"><%= message %></p>
+        </div>
+      <% end %>
 
     <!-- Main yield block -->
     <%= yield %>

@@ -1,0 +1,26 @@
+.flash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .notice, .alert, .success {
+        text-align: center;
+        font-size: 1.6rem;
+        width: 100%;
+        height: 4rem;
+        padding-top: 1rem;
+
+    }
+
+    .notice {
+        background: rgb(255, 194, 80);
+    }
+
+    .alert {
+        background: rgb(253, 87, 87);
+    }
+
+    .success {
+        background: rgb(108, 192, 108);
+    }
+}
