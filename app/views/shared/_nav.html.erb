@@ -1,0 +1,26 @@
+<nav class="nav">
+    <div class="nav__logo">PCPartsPal</div>
+    <ul class="nav__navlist">
+        <% if !user_signed_in? %>
+            <li class="nav__navlist__list-item">
+                <%= link_to "Register", new_user_registration_path, class: "nav__navlist__link" %>
+            </li>
+            <li class="nav__navlist__list-item">
+                <%= link_to "Sign In", new_user_session_path, class: "nav__navlist__link" %>
+            </li>
+        <% else %>
+        <li class="nav__navlist__list-item">
+            <a href="" class="nav__navlist__link">Buy</a>
+        </li>
+        <li class="nav__navlist__list-item">
+            <a href="" class="nav__navlist__link">Sell</a>
+        </li>
+        <li class="nav__navlist__list-item">
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav__navlist__link" %>
+        </li>
+        <li class="nav__navlist__list-item">
+            <a href="" class="nav__navlist__link">Profile</a>
+        </li>
+        <% end %>
+    </ul>
+</nav>

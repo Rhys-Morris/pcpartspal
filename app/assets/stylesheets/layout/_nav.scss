@@ -1,0 +1,37 @@
+.nav {
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5rem;
+    background: $color-black;
+
+    &__logo {
+        color: $color-grey-medium;
+        font-weight: 300;
+        font-size: 2.4rem;
+    }
+
+    &__navlist {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &__list-item {
+            padding: 0 2rem;
+            list-style: none;
+        }
+        &__link {
+            color: $color-grey-medium;
+            text-decoration: none;
+            padding-bottom: 1rem;
+            border: 2px solid transparent;
+            transition: .2s all;
+
+            &:hover {
+                border-bottom: 2px solid $color-grey-medium;
+            }
+        }
+    }
+}
