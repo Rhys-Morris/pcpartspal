@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /profiles or /profiles.json
   def index
@@ -26,7 +27,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to edit_profile_path, notice: "Please take the time to update your profile!" }
+        format.html { redirect_to edit_profile_path, notice: "Profile successfully created!" }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new, status: :unprocessable_entity }

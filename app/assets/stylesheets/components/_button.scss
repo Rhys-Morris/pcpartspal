@@ -1,20 +1,41 @@
 .btn {
     padding: 1rem 1.5rem;
     font-weight: 300;
-    text-transform: uppercase;
     outline: none;
     border-radius: .3rem;
     cursor: pointer;
+    transition: .2s all;
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
+.btn-up {
+    text-transform: uppercase;
 }
 
 .btn-ghost {
     background-color: white;
     color: $color-black;
     border: 2px solid $color-black;
-    transition: .2s all;
     &:hover {
         background: $color-black;
         color: $color-grey-light;
-        transform: translateY(-2px);
+    }
+}
+
+.btn-cta {
+    background-color: $color-orangered;
+    color:$color-grey-light;
+    border: 2px solid $color-orangered;
+
+    &--ghost {
+        background-color: rgba(black, .5);
+        color: $color-grey-light;
+        border: 2px solid $color-orangered;
+        &:hover {
+            background: $color-orangered;
+            color: $color-grey-light;
+        }
     }
 }

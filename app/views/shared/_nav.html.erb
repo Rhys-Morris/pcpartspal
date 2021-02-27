@@ -1,5 +1,7 @@
 <nav class="nav">
-    <div class="nav__logo">PCPartsPal</div>
+    <div>
+        <%= link_to "PCPartsPal", root_url, class:"nav__logo" %>
+    </div>
     <ul class="nav__navlist">
         <% if !user_signed_in? %>
             <li class="nav__navlist__list-item">
@@ -19,7 +21,7 @@
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav__navlist__link" %>
         </li>
         <li class="nav__navlist__list-item">
-            <a href="" class="nav__navlist__link">Profile</a>
+            <%= link_to "Profile", profile_path(current_user.id), class: "nav__navlist__link" %>
         </li>
         <% end %>
     </ul>

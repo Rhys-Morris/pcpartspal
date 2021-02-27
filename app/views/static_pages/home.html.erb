@@ -1,2 +1,11 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<main class="main-home">
+    <div class="hero">
+        <div class="hero__text">
+            <h1 class="hero__text__title">Looking for PC parts?</h1>
+            <h2 class="hero__text__subtitle">You've come to the right place</h2>
+            <div class="hero__buttons">
+                <%= link_to "Get Started", new_user_registration_path, class: "hero__cta--1 btn-cta btn" %>
+                <%= link_to "Browse", root_url, class: "hero__cta--1 btn btn-cta--ghost" %>
+            </div>
+    </div>
+</main>
