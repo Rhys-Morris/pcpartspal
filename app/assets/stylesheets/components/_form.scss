@@ -1,0 +1,39 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    &__header {
+        font-size: 2.4rem;
+        font-weight: 300;
+        letter-spacing: 2px;
+    }
+    &__field {
+        margin: 2rem 0;
+
+    }
+    &__label {
+
+    }
+    &__input {
+        padding: 1rem 1rem;
+        width: 30rem;
+    }
+    &__submit {
+        margin-bottom: 2rem;
+    }
+    &__login-redirect{
+        justify-self: flex-start;
+        &__link {
+            text-decoration: none;
+            color: $color-black;
+            border-bottom: 1px solid $color-black;
+            transition: .2s all;
+
+            &:hover {
+                color: $color-grey-dark;
+                border-bottom: 1px solid $color-grey-medium;
+            }
+        }
+    }
+}
