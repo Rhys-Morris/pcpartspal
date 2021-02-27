@@ -1,0 +1,33 @@
+.user-profile {
+    display: flex;
+    width: 100rem;
+    padding: 3rem 0;
+
+    &__sidebar {
+        width: 15rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &__list{
+            width: 100%;
+            &__list-item {
+                list-style: none;
+                padding: 3rem;
+                box-shadow: 0px 3px 0px 0px #EAEAEA;
+                transition: .4s all;
+                &:hover {
+                    cursor: pointer;
+                    background: $color-black;
+                    box-shadow: none;
+                    
+                    span {
+                        color: $color-grey-light;
+                    }
+                }
+            }
+        }
+    }
+    &__content {
+
+    }
+}

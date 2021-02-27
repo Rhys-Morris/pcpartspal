@@ -1,10 +1,8 @@
 <div class="user-panel">
     <div class="user-panel__info">
-        <div class="user-panel__picture">
-
-        </div>
+        <%= image_tag "profile-default.png", alt: "default-profile-pic", class: "user-panel__picture" %>
         <div class="user-panel__user-info">
-            <p class="user-panel__user-info__top">
+            <p class="user-panel__user-info__top user-panel__user-info__username ">
                 <%= @profile.user.username %> 
             </p>
             <p>Joined in <%= @profile.created_at.year %> </p>
