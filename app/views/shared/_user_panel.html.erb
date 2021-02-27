@@ -1,0 +1,37 @@
+<div class="user-panel">
+    <div class="user-panel__info">
+        <div class="user-panel__picture">
+
+        </div>
+        <div class="user-panel__user-info">
+            <p class="user-panel__user-info__top">
+                <%= @profile.user.username %> 
+            </p>
+            <p>Joined in <%= @profile.created_at.year %> </p>
+        </div>
+        <div class="user-panel__user-info">
+            <p class="user-panel__user-info__top">
+                <% if !@profile.location.blank? %>
+                    <%= @profile.location %>
+                <% else %>
+                    <%= "No location" %> 
+                <% end %>
+            </p>
+            <p>
+                <% if !@profile.postcode.blank? %>
+                    <%= @profile.postcode %>
+                <% else %>
+                    <%= "No postcode" %> 
+                <% end %>
+            </p>
+        </div>
+        <div class="user-panel__user-listings-info">
+            Listing # to add
+        </div>
+    </div>
+    <% if @profile.id == current_user.id %>
+        <%= link_to "Edit Profile", edit_profile_path(current_user.id), class: "user-panel__btn btn btn-ghost" %>
+    <% else %>
+        <%= link_to "Send Message", root_url, class: "user-panel__btn btn btn-ghost" %>
+    <% end %>
+</div>

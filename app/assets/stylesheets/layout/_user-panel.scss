@@ -1,0 +1,36 @@
+.user-panel {
+    width: 100rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    &__picture {
+        height:5rem;
+        width: 5rem;
+        border-radius: 50%;
+        background: black;
+        margin-right: 3rem;
+    }
+    &__user-info {
+        display: flex;
+        flex-direction: column;
+        margin-right: 3rem;
+
+        &__top {
+            margin-bottom: .5rem;
+        }
+
+    }
+    &__user-listings-info {
+        display: flex;
+        flex-direction: column;
+    }
+    &__btn {
+        text-decoration: none;
+        font-size: 1.6rem;
+    }
+}

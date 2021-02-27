@@ -9,6 +9,13 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1 or /profiles/1.json
   def show
+    if current_user.id == params[:id].to_i
+      # Current users profile
+      render "user_profile"
+    else
+      # Non current user's profile
+      render "show"
+    end
   end
 
   # GET /profiles/new

@@ -1,24 +1,5 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Bio:</strong>
-  <%= @profile.bio %>
-</p>
+  <%= render "shared/user_panel" %>
 
-<p>
-  <strong>Location:</strong>
-  <%= @profile.location %>
-</p>
-
-<p>
-  <strong>Postcode:</strong>
-  <%= @profile.postcode %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @profile.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+</div>

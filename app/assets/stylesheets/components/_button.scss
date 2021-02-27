@@ -28,11 +28,13 @@
     background-color: $color-orangered;
     color:$color-grey-light;
     border: 2px solid $color-orangered;
+    padding: 1.5rem 2.5rem;
 
     &--ghost {
         background-color: rgba(black, .5);
         color: $color-grey-light;
         border: 2px solid $color-orangered;
+        padding: 1.5rem 2.5rem;
         &:hover {
             background: $color-orangered;
             color: $color-grey-light;
