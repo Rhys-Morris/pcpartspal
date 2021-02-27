@@ -15,9 +15,15 @@
     &__label {
 
     }
-    &__input {
+    &__input, &__text {
         padding: 1rem 1rem;
         width: 30rem;
+        margin-top: .3rem;
+    }
+
+    &__text {
+        resize: vertical;
+        height: 10rem;
     }
     &__submit {
         margin-bottom: 2rem;

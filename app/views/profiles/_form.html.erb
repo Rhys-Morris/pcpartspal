@@ -1,4 +1,8 @@
-<%= form_with(model: profile) do |form| %>
+<div class="form">
+
+  <h2 class="form__header">Profile Details</h2>
+
+  <%= form_with(model: profile) do |form| %>
   <% if profile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
@@ -11,27 +15,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :bio %>
-    <%= form.text_area :bio %>
+  <div class="field form__field">
+    <%= form.label :bio, class: "form__label" %> <br>
+    <%= form.text_area :bio, class: "form__text" %>
   </div>
 
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
+  <div class="field form__field">
+    <%= form.label :location, class: "form__label" %> <br>
+    <%= form.text_field :location, class: "form__input" %>
   </div>
 
-  <div class="field">
-    <%= form.label :postcode %>
-    <%= form.number_field :postcode %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="field form__field">
+    <%= form.label :postcode, class: "form__label" %> <br>
+    <%= form.number_field :postcode, class: "form__input" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Update", class: "form__submit btn btn-ghost" %>
   </div>
 <% end %>
+
+
+</div>
