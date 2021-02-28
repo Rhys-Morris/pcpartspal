@@ -9,17 +9,19 @@
 
   <div class="field form__field">
     <%= form.label :description, class: "form__label"  %>
-    <%= form.text_area :description, class: "form__text"  %>
+    <%= form.text_area :description, class: "form__text", placeholder: "Comments on previous use, age etc"  %>
   </div>
 
   <div class="field form__field">
-    <%= form.label :price, class: "form__label"  %> (in AUD)
-    <%= form.number_field :price, class: "form__number", min: "1" %>
+    <%= form.label :price, class: "form__label"  %>
+    <%= form.number_field :price, class: "form__number", min: "1", placeholder: "in AUD" %>
   </div>
 
-  <div class="field form__field">
-    <%= form.label :condition, class: "form__label"  %>
-    <%= form.number_field :condition %>
+  <div class="field form__field form__field--row">
+    <% conditions.each do |option| %>
+      <%= form.label :condition, option.capitalize, class: "form__label--radio"  %>
+      <%= form.radio_button :condition, option, class: "form__radio"%>
+    <% end %>
   </div>
 
   <div class="field form__field">

@@ -14,23 +14,54 @@
         flex-direction: column;
         font-size: 1.6rem;
 
+        &--row {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        
         select {
         padding: 1rem 1rem;
-        width: 30rem;
+        width: 50rem;
         margin-top: .3rem;
+        border: 1px solid $color-grey-medium;
+        background: white;
+        border-radius: .3rem;
         }
+    }
+
+    &__label {
+        margin-bottom: .3rem;
+    }
+
+    &__label--radio {
+        margin-right: 1rem;
+    }
+
+    &__radio {
+        margin-right: 3rem;
     }
 
     &__input, &__text {
         padding: 1rem 1rem;
-        width: 30rem;
+        width: 50rem;
         margin-top: .3rem;
+        border: 1px solid $color-grey-medium;
+        border-radius: .3rem;
+        font-family: 'Roboto', sans-serif;
+
+        &::placeholder {
+            font-family: 'Roboto', sans-serif;
+    
+        }
     }
 
     &__number {
         padding: 1rem 1rem;
         width: 10rem;
         margin-top: .3rem;
+        border: 1px solid $color-grey-medium;
+        border-radius: .3rem;
     }
     
 

@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: %i[ index show ]
-  before_action :set_categories_brands, only: %i[ new edit]
+  before_action :set_form_parameters, only: %i[ new edit]
 
   # GET /listings or /listings.json
   def index
@@ -28,34 +28,30 @@ class ListingsController < ApplicationController
     @listing["user_id"] = user_id
       
     if @listing.save
-      format.html { redirect_to @listing, notice: "Listing was successfully created." }
-      format.json { render :show, status: :created, location: @listing }
+      flash[:success] = "Listing successfully created."
+      redirect_to @listing
     else
-      set_categories_brands
+      set_form_parameters
       render "new"
     end
   end
 
   # PATCH/PUT /listings/1 or /listings/1.json
   def update
-    respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to @listing, notice: "Listing was successfully updated." }
-        format.json { render :show, status: :ok, location: @listing }
+        flash[:success] = "Listing successfully updated."
+        redirect_to @listing
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
+        set_form_parameters
+        render "edit"
       end
-    end
   end
 
   # DELETE /listings/1 or /listings/1.json
   def destroy
     @listing.destroy
-    respond_to do |format|
-      format.html { redirect_to listings_url, notice: "Listing was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    flash[:success] = "Listing was successfully destroyed."
+    redirect_to listings_path
   end
 
   private
@@ -69,8 +65,9 @@ class ListingsController < ApplicationController
       params.require(:listing).permit(:title, :description, :price, :sold, :condition, :category_id, :brand_id)
     end
 
-    def set_categories_brands
+    def set_form_parameters
       @categories = Category.all
       @brands = Brand.all
+      @conditions = Listing.conditions.keys
     end
 end
