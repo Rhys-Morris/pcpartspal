@@ -1,5 +1,5 @@
 <main class="main-home">
-    <div class="hero">
+    <section class="hero">
         <div class="hero__text">
             <h1 class="hero__text__title">Looking for PC parts?</h1>
             <h2 class="hero__text__subtitle">You've come to the right place</h2>
@@ -7,5 +7,27 @@
                 <%= link_to "Get Started", new_user_registration_path, class: "hero__cta--1 btn-cta btn" %>
                 <%= link_to "Browse", root_url, class: "hero__cta--1 btn btn-cta--ghost" %>
             </div>
-    </div>
+        </section>
+    <section class="categories">
+        <h2 class="categories__title header-2">Browse by category</h2>
+        <div class="card-wrapper">
+            <% @categories.each do |category| %>
+                <div class="card">
+                    <%= image_tag "profile-default.png", class: "card__image" %>
+                    <span class="card__text"><%= category.name %></span>
+                </div>
+            <% end %>
+        </div>
+    </section>
+    <section class="brands">
+        <h2 class="brands__title header-2">Browse popular brands</h2>
+        <div class="card-wrapper">
+            <% @brands.each do |brand| %>
+                <div class="card">
+                    <%= image_tag "profile-default.png", class: "card__image" %>
+                    <span class="card__text"><%= brand.name %></span>
+                </div>
+            <% end %>
+        </div>
+    </section>
 </main>

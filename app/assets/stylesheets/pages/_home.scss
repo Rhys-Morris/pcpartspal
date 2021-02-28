@@ -1,0 +1,13 @@
+.categories, .brands {
+    margin-top: 7.5rem;
+    text-align: center;
+    &__title {
+        margin-bottom: 3rem;
+        display: inline-block;
+    }
+}
+
+.brands {
+    background-color: $color-grey-light;
+    padding: 3rem;
+}
