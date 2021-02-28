@@ -13,14 +13,14 @@
     }
 
     .notice {
-        background: rgb(255, 194, 80);
+        background: $color-notice;
     }
 
     .alert {
-        background: rgb(253, 87, 87);
+        background: $color-alert;
     }
 
     .success {
-        background: rgb(108, 192, 108);
+        background: $color-success;
     }
 }

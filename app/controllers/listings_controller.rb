@@ -31,9 +31,8 @@ class ListingsController < ApplicationController
       format.html { redirect_to @listing, notice: "Listing was successfully created." }
       format.json { render :show, status: :created, location: @listing }
     else
-      puts "---------------"
-      puts @listing.errors.full_messages
-      redirect_to new_listing_path
+      set_categories_brands
+      render "new"
     end
   end
 

@@ -1,0 +1,19 @@
+#error_explanation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    background-color: $color-alert;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+    }
+
+    li {
+        list-style: circle;
+
+    }
+}

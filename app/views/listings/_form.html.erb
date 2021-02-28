@@ -1,15 +1,4 @@
 <%= form_with(model: listing) do |form| %>
-  <% if listing.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
-
-      <ul>
-        <% listing.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
   
   <h2 class="form__header">Create Listing</h2>
 
@@ -44,6 +33,6 @@
   </div>
 
   <div class="actions"> 
-    <%= form.submit "Create Listing", class: "form__field btn btn-up btn-ghost" %>
+    <%= form.submit "Submit", class: "form__field btn btn-up btn-ghost" %>
   </div>
 <% end %>
