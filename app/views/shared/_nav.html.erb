@@ -12,10 +12,10 @@
             </li>
         <% else %>
         <li class="nav__navlist__list-item">
-            <a href="" class="nav__navlist__link">Buy</a>
+            <%= link_to "Buy", listings_path, class: "nav__navlist__link" %>
         </li>
         <li class="nav__navlist__list-item">
-            <a href="" class="nav__navlist__link">Sell</a>
+            <%= link_to "Sell", new_listing_path, class: "nav__navlist__link" %>
         </li>
         <li class="nav__navlist__list-item">
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav__navlist__link" %>

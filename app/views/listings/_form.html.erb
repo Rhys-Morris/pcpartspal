@@ -1,0 +1,49 @@
+<%= form_with(model: listing) do |form| %>
+  <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+        <% listing.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <h2 class="form__header">Create Listing</h2>
+
+  <div class="field form__field">
+    <%= form.label :title, class: "form__label" %> 
+    <%= form.text_field :title, class: "form__input"  %>
+  </div>
+
+  <div class="field form__field">
+    <%= form.label :description, class: "form__label"  %>
+    <%= form.text_area :description, class: "form__text"  %>
+  </div>
+
+  <div class="field form__field">
+    <%= form.label :price, class: "form__label"  %> (in AUD)
+    <%= form.number_field :price, class: "form__number", min: "1" %>
+  </div>
+
+  <div class="field form__field">
+    <%= form.label :condition, class: "form__label"  %>
+    <%= form.number_field :condition %>
+  </div>
+
+  <div class="field form__field">
+    <%= form.label :category_id, class: "form__label" %>
+    <%= form.select :category_id, categories.map {|cat| [cat.name, cat.id]} %>
+  </div>
+
+  <div class="field form__field ">
+    <%= form.label :brand_id, class: "form__label" %>
+    <%= form.select :brand_id, brands.map {|brand| [brand.name, brand.id]} %>
+  </div>
+
+  <div class="actions"> 
+    <%= form.submit "Create Listing", class: "form__field btn btn-up btn-ghost" %>
+  </div>
+<% end %>
