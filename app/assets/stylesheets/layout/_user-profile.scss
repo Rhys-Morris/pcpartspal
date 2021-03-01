@@ -1,6 +1,6 @@
 .user-profile {
     display: flex;
-    width: 100rem;
+    width: 100%;
     padding: 3rem 0;
 
     &__sidebar {
@@ -13,7 +13,7 @@
             &__list-item {
                 list-style: none;
                 padding: 3rem;
-                box-shadow: 0px 3px 0px 0px #EAEAEA;
+                box-shadow: $box-shadow-default;
                 transition: .4s all;
                 &:hover {
                     cursor: pointer;

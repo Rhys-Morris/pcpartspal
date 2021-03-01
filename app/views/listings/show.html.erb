@@ -1,44 +1,52 @@
-<p id="notice"><%= notice %></p>
+<main class="listing-show">
+  <div class="listing-show__return-links">
+    <%= link_to "All Listings", listings_path, class: "listing-show__return-links__link" %>
+    <span class="listing-show__return-links__spacer">></span>
+    <%= link_to @listing.category.name, listings_path, class: "listing-show__return-links__link" %>
+    <span class="listing-show__return-links__spacer">></span>
+    <span class="listing-show__return-links__current"><%= @listing.title %></span>
+  </div>
+  
+  <section class="listing-show__wrapper">
 
-<p>
-  <strong>Title:</strong>
-  <%= @listing.title %>
-</p>
+    <div class="listing-show__images">
+      <%= image_tag "profile-default.png", class: "listing-show__images__main" %>
+    </div>
+    <div class="listing-show__details">
+      <h2 class="listing-show__title">
+        <%= @listing.title %>
+      </h2>
+      <h3 class="listing-show__brand">
+        <%= @listing.brand.name %>
+      </h3>
+      <p class="listing-show__description">
+        <span>Description:</span> <%= @listing.description %>
+      </p>
+      <span class="listing-show__condition">
+        <span>Condition:</span> <%= @listing.condition %>
+      </span>
+      <span class="listing-show__price">
+        $<%= @listing.price %>
+      </span>
+      <% if user_signed_in? %>
+        <button class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
+      <% end %>
+      <button class="listing-show__message btn btn-up btn-ghost">Message</button>
+      <div class="listing-show__user-details">
+        <span class="listing-show__user-details__name">
+          <%= @listing.user.username %>
+        </span>
+        <span class="listing-show__user-details__listing-total">
+          <%= user_listing_count(@listing.user) %>
+        </span>
+      </div>
+      <div class="listing-show__user-buttons">
+        <% if user_signed_in? && @listing.user_id == current_user.id %>
+          <%= link_to "Edit", edit_listing_path(@listing.id), class: "listing-show__user-buttons--edit btn btn-up btn-ghost" %>
+          <%= link_to "Delete", delete_listing_path(@listing.id), method: :delete, class: "listing-show__user-buttons--delete btn btn-up btn-ghost" %>
+        <% end %>
+      </div>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @listing.description %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
-</p>
-
-<p>
-  <strong>Sold:</strong>
-  <%= @listing.sold %>
-</p>
-
-<p>
-  <strong>Condition:</strong>
-  <%= @listing.condition %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @listing.category_id %>
-</p>
-
-<p>
-  <strong>Brand:</strong>
-  <%= @listing.brand_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @listing.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<%= link_to 'Back', listings_path %>
+  </section>
+</main>

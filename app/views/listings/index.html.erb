@@ -1,41 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Listings</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Sold</th>
-      <th>Condition</th>
-      <th>Category</th>
-      <th>Brand</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div class="listings-panel">
+    <span class="listings-panel__total">
+      <%= @listings.count %> listings
+    </span>
+    <input type="text" class="listings-panel__search", placeholder="Search">
+  </div>
+  <section class="card-container">
     <% @listings.each do |listing| %>
-      <tr>
-        <td><%= listing.title %></td>
-        <td><%= listing.description %></td>
-        <td><%= listing.price %></td>
-        <td><%= listing.sold %></td>
-        <td><%= listing.condition %></td>
-        <td><%= listing.category_id %></td>
-        <td><%= listing.brand_id %></td>
-        <td><%= listing.user_id %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <a href=" <%= listing_path(listing.id) %> " class="card--listing">
+        <%= image_tag "profile-default.png", class: "card--listing__image" %>
+        <span class="card--listing__time">
+          <%= time_ago_in_words(listing.created_at) %> ago
+        </span>
+        <span class="card--listing__brand">
+          <%= listing.brand.name.upcase %>
+        </span>
+        <span class="card--listing__title">
+          <%= listing.title %>
+        </span>
+        <span class="card--listing__price">
+          $<%= listing.price %>
+        </span>
+      </a>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Listing', new_listing_path %>
+  </section>
+</div>

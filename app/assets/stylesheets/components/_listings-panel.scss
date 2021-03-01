@@ -1,0 +1,21 @@
+.listings-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 2rem;
+    box-shadow: $box-shadow-default;
+    &__total {
+        padding: 0 2rem;
+    }
+    &__search {
+        padding: 1rem 1.5rem;
+        width: 30rem;
+        border: 1px solid $color-grey-medium;
+
+        &::placeholder {
+            font-family: 'Roboto', sans-serif;
+            color: $color-black;
+        }
+    }
+}
