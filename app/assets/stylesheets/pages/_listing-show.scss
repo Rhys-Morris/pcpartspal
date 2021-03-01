@@ -34,6 +34,25 @@
 
         &__main {
             width: 100%;
+            margin-bottom: 1rem;;
+        }
+
+        &__thumbnail-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            flex-wrap: wrap;
+            padding: 2rem;
+        }
+        &__thumbnail {
+            width: 15rem;
+            height: 12.5rem;
+            border: 2px solid transparent;
+            transition: .3s all;
+
+            &:hover {
+                border: 2px solid $color-black;
+            }
         }
     }
 
@@ -69,13 +88,16 @@
         margin-bottom: 1.5rem;
     }
     &__price {
-        font-size: 2rem;
+        font-size: 2.4rem;
         font-weight: 500;
         margin-bottom: 2rem;
+        align-self: flex-end;
+        margin-right: 1.5rem;
     }
 
     &__message {
         margin-bottom: 2rem;
+        margin-top: .3rem;
     }
 
     &__user-details {

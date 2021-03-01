@@ -45,16 +45,27 @@
     text-decoration: none;
     color: $color-black;
     transition: .5s all;
+    margin: 2rem;
+    height: 32.5rem;
+    width: 20rem;
 
     &:hover {
         border: 1px solid $color-grey-medium;
     }
-    &__image {
+
+    &__image-wrapper {
         width: 15rem;
+        height: 17.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__image {
+        width: 100%;
         padding-bottom: .5rem;
     }
     &__time {
-        color: $color-grey-medium;
+        color: $color-grey-dark;
         padding-bottom: .5rem;
         box-shadow: $box-shadow-default;
         margin-bottom: 1.5rem;

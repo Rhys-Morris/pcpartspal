@@ -10,7 +10,14 @@
   <section class="listing-show__wrapper">
 
     <div class="listing-show__images">
-      <%= image_tag "profile-default.png", class: "listing-show__images__main" %>
+      <% if @listing.images.attached? %>
+        <%= image_tag @listing.images[0], class: "listing-show__images__main"%>
+        <div class="listing-show__images__thumbnail-container">
+          <% (1...@listing.images.count).each do |image| %>
+            <%= image_tag @listing.images[image], class: "listing-show__images__thumbnail" %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <div class="listing-show__details">
       <h2 class="listing-show__title">

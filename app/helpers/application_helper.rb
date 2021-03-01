@@ -7,4 +7,12 @@ module ApplicationHelper
             "#{count} listings for sale"
         end
     end
+
+    def format_title(title)
+        if title.length > 45
+            title[0..42] + "..."
+        else
+            title
+        end
+    end
 end

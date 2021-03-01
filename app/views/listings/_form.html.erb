@@ -34,6 +34,11 @@
     <%= form.select :brand_id, brands.map {|brand| [brand.name, brand.id]} %>
   </div>
 
+  <div class="field form__field ">
+    <%= form.label :images, class: "form__label" %>
+    <%= form.file_field :images, multiple: true, accept: 'image/png, image/jpg, image/jpeg' %>
+  </div>
+
   <div class="actions"> 
     <%= form.submit "Submit", class: "form__field btn btn-up btn-ghost" %>
   </div>

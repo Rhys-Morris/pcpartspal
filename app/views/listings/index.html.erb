@@ -9,7 +9,15 @@
   <section class="card-container">
     <% @listings.each do |listing| %>
       <a href=" <%= listing_path(listing.id) %> " class="card--listing">
-        <%= image_tag "profile-default.png", class: "card--listing__image" %>
+        <% if listing.images.attached? %>
+          <div class="card--listing__image-wrapper">
+            <%= image_tag listing.images[0], class: "card--listing__image" %>
+          </div>
+        <% else %>
+          <div class="card--listing__image-wrapper">
+            <%= image_tag "profile-default.png", class: "card--listing__image" %>
+          </div>
+        <% end %>
         <span class="card--listing__time">
           <%= time_ago_in_words(listing.created_at) %> ago
         </span>
@@ -17,7 +25,7 @@
           <%= listing.brand.name.upcase %>
         </span>
         <span class="card--listing__title">
-          <%= listing.title %>
+          <%= format_title(listing.title) %>
         </span>
         <span class="card--listing__price">
           $<%= listing.price %>
