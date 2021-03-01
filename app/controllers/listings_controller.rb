@@ -66,8 +66,8 @@ class ListingsController < ApplicationController
     end
 
     def set_form_parameters
-      @categories = Category.all
-      @brands = Brand.all
+      @categories = Category.all.sort_by { |cat| cat.name }
+      @brands = Brand.all.sort_by { |brand| brand.name }
       @conditions = Listing.conditions.keys
     end
 end

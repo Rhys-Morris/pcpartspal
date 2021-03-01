@@ -2,13 +2,13 @@
 
   <div class="listings-panel">
     <span class="listings-panel__total">
-      <%= @listings.count %> listings
+      <%= listing_count(@listings) %>
     </span>
     <input type="text" class="listings-panel__search", placeholder="Search">
   </div>
   <section class="card-container">
     <% @listings.each do |listing| %>
-      <a href=" <%= listing_path(listing.id) %> " class="card--listing">
+      <a href="<%= listing_path(listing.id) %>" class="card--listing">
         <% if listing.images.attached? %>
           <div class="card--listing__image-wrapper">
             <%= image_tag listing.images[0], class: "card--listing__image" %>

@@ -95,6 +95,17 @@
         margin-right: 1.5rem;
     }
 
+    &__watchlist {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+        a {
+            color: $color-black;
+            &:hover {
+                color: $color-grey-medium;
+            }
+        }
+    }
+
     &__message {
         margin-bottom: 2rem;
         margin-top: .3rem;

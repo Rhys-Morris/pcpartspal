@@ -3,6 +3,7 @@ class Listing < ApplicationRecord
   belongs_to :brand
   belongs_to :user
   has_many_attached :images
+  has_many :watchlists, through: :listingswatchlist
   enum condition: { Used: 0, New: 1 }
 
   # Validations

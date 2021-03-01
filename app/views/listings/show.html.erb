@@ -1,3 +1,5 @@
+<%= puts "---------- Start of show #{current_user.profile.id}" %>
+
 <main class="listing-show">
   <div class="listing-show__return-links">
     <%= link_to "All Listings", listings_path, class: "listing-show__return-links__link" %>
@@ -35,7 +37,12 @@
       <span class="listing-show__price">
         $<%= @listing.price %>
       </span>
-      <% if user_signed_in? %>
+      <% if current_user && current_user.id != @listing.user.id %>
+        <span class="listing-show__watchlist">
+          Add to <%= link_to "Watchlist", listings_path %>
+        </span>
+      <% end %>
+      <% if user_signed_in? && current_user.id != @listing.user.id %>
         <button class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
       <% end %>
       <button class="listing-show__message btn btn-up btn-ghost">Message</button>
