@@ -1,5 +1,4 @@
-<%= puts "---------- Start of show #{current_user.profile.id}" %>
-
+<!-- Return links -->
 <main class="listing-show">
   <div class="listing-show__return-links">
     <%= link_to "All Listings", listings_path, class: "listing-show__return-links__link" %>
@@ -11,6 +10,7 @@
   
   <section class="listing-show__wrapper">
 
+    <!-- Listing Images -->
     <div class="listing-show__images">
       <% if @listing.images.attached? %>
         <%= image_tag @listing.images[0], class: "listing-show__images__main"%>
@@ -21,6 +21,8 @@
         </div>
       <% end %>
     </div>
+
+    <!-- Listing Text Details -->
     <div class="listing-show__details">
       <h2 class="listing-show__title">
         <%= @listing.title %>
@@ -37,23 +39,37 @@
       <span class="listing-show__price">
         $<%= @listing.price %>
       </span>
+
+      <!-- Watchlist -->
       <% if current_user && current_user.id != @listing.user.id %>
-        <span class="listing-show__watchlist">
-          Add to <%= link_to "Watchlist", listings_path %>
-        </span>
+        <% if !current_user.profile.listings.include?(@listing) %>
+          <span class="listing-show__watchlist">
+            Add to <%= link_to "Watchlist", create_watch_path(watch: { listing_id: @listing.id, profile_id: current_user.profile.id}), method: :post %>
+          </span>
+        <% else %>
+          <span class="listing-show__watchlist">
+            Remove from <%= link_to "Watchlist", delete_watch_path(current_user.profile.watches.where("listing_id": @listing.id)[0].id), method: :delete %>
+          </span>
+        <% end %>
       <% end %>
+
+      <!-- Buy and Message -->
       <% if user_signed_in? && current_user.id != @listing.user.id %>
         <button class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
       <% end %>
       <button class="listing-show__message btn btn-up btn-ghost">Message</button>
+
+      <!-- Seller Details -->
       <div class="listing-show__user-details">
         <span class="listing-show__user-details__name">
-          <%= @listing.user.username %>
+          <%= link_to @listing.user.username, profile_path(@listing.user.profile.id) %>
         </span>
         <span class="listing-show__user-details__listing-total">
           <%= user_listing_count(@listing.user) %>
         </span>
       </div>
+
+      <!-- Update/Delete if authorised -->
       <div class="listing-show__user-buttons">
         <% if user_signed_in? && @listing.user_id == current_user.id %>
           <%= link_to "Edit", edit_listing_path(@listing.id), class: "listing-show__user-buttons--edit btn btn-up btn-ghost" %>

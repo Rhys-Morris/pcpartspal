@@ -2,4 +2,18 @@
 
   <%= render "shared/user_panel" %>
 
+  <!-- Could be made into partial  -->
+  <div class="container__start mt-3">
+    <div class="user-profile__content">
+      <div class="user-profile__content__my-listings">
+          <h3 class="user-profile__content__header">Listings</h3>
+          <div class="card-container">
+              <% @profile.user.listings.each do |listing| %>
+                  <%= render "shared/listing-card", listing: listing %>
+              <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+
 </div>

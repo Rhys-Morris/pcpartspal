@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ListingsWatchlistTest < ActiveSupport::TestCase
+class WatchTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

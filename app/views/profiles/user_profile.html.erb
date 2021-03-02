@@ -12,8 +12,27 @@
                 <li class="user-profile__sidebar__list__list-item"><span>Purchases</span></li>
             </ul>
         </div>
+        <!-- Could be made into partial - listings -->
         <div class="user-profile__content">
+            <div class="user-profile__content__my-listings">
+                <h3 class="user-profile__content__header">My Listings</h3>
+                <div class="card-container">
+                    <% @profile.user.listings.each do |listing| %>
+                        <%= render "shared/listing-card", listing: listing %>
+                    <% end %>
+                </div>
+            </div>
 
+            <div class="user-profile__content__watchlist">
+                <h3 class="user-profile__content__header">Watchlist</h3>
+                <div class="card-container">
+                    <% @profile.listings.each do |listing| %>
+                        <%= render "shared/listing-card", listing: listing %>
+                    <% end %>
+                </div>
+            </div>
+
+            </div>
         </div>
     </section>
 

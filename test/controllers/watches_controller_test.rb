@@ -1,6 +1,6 @@
 require "test_helper"
 
-class WatchlistTest < ActiveSupport::TestCase
+class WatchesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

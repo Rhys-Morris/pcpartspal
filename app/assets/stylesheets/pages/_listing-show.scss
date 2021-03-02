@@ -118,6 +118,13 @@
             font-weight: 500;
             font-size: 1.6rem;
             margin-bottom: .3rem;
+            a {
+                color: $color-black;
+                text-decoration: none;
+                &:hover {
+                    color: $color-grey-medium;
+                }
+            }
         }
         &__listing-total {
             font-weight: 300;
