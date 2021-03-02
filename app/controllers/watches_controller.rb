@@ -1,4 +1,5 @@
 class WatchesController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_watch, only: %i[ destroy ]
     before_action :watch_params, only: %i[ create ]
 

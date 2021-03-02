@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_form_parameters, only: %i[ new edit]
+  before_action :create_stripe_session, only: %i[ show ]
 
   # GET /listings or /listings.json
   def index
@@ -69,5 +70,30 @@ class ListingsController < ApplicationController
       @categories = Category.all.sort_by { |cat| cat.name }
       @brands = Brand.all.sort_by { |brand| brand.name }
       @conditions = Listing.conditions.keys
+    end
+
+    def create_stripe_session
+      return if !user_signed_in?
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+          name: @listing.title,
+          description: @listing.description,
+          images: [@listing.images[0].service_url],
+          amount: @listing.price.to_i * 100,
+          currency: 'aud',
+          quantity: 1,
+        }],
+        payment_intent_data: {
+          metadata: {
+            listing_id: @listing.id,
+            purchaser_id: current_user.id
+          }
+        },
+        success_url: "#{root_url}/payments/success",
+        cancel_url: "#{root_url}/listings"
+      )
+      @session_id = session.id
     end
 end

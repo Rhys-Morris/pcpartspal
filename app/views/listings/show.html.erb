@@ -55,7 +55,7 @@
 
       <!-- Buy and Message -->
       <% if user_signed_in? && current_user.id != @listing.user.id %>
-        <button class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
+        <button data-stripe="payment" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
       <% end %>
       <button class="listing-show__message btn btn-up btn-ghost">Message</button>
 
@@ -80,3 +80,16 @@
 
   </section>
 </main>
+
+<!-- Stripe session -->
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+    const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
+    stripe.redirectToCheckout({
+      sessionId: "<%= @session_id %>"
+    });
+  });
+</script>

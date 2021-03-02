@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
+  get 'payments/success', to: 'payments#success', as: 'payment_success'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :profiles, except: %i[ index ]
   resources :listings
