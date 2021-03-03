@@ -21,7 +21,6 @@
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav__navlist__link" %>
         </li>
         <li class="nav__navlist__list-item">
-            <%= puts "----------- #{current_user.profile.id}" %>
             <%= link_to "Profile", profile_path(current_user.profile.id), class: "nav__navlist__link" %>
         </li>
         <% end %>
