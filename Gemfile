@@ -27,6 +27,7 @@ gem 'mini_magick'
 
 # Custom gems
 gem 'devise'
+gem 'nested_form'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

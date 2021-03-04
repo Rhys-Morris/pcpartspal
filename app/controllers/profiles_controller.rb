@@ -30,13 +30,19 @@ class ProfilesController < ApplicationController
   # POST /profiles or /profiles.json
   def create
 
+    puts "-------"
+    puts "In create"
+    pp params
     @profile = Profile.new(profile_params)
+    @profile.user_id = current_user.id
 
     respond_to do |format|
       if @profile.save
         format.html { redirect_to edit_profile_path, notice: "Profile successfully created!" }
         format.json { render :show, status: :created, location: @profile }
       else
+        puts "------------"
+        puts "In profile create error thrown"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
