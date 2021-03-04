@@ -1,6 +1,6 @@
 <div class="container--row">
-    <div class="payment-success__image">
-
+    <div class="payment-success__image-box">
+        <%= image_tag @listing.images[0], alt: "listing-image", class: "payment-success__image-box__image" %>
     </div>
     <div class="payment-success__text">
         <h2 class="payment-success__text__header header-2">Payment successful!</h2>
@@ -8,10 +8,7 @@
             Congratulations on your purchase of <%= @listing.title.capitalize %>
         </h3>
         <span class="payment-success__text__receipt">
-            Your payment receipt can be found at
-            <span class="payment-success__text__receipt-url">
-                <%= @purchase.receipt_url %>
-            </span>
+            Your payment receipt can be found at: <%= link_to @purchase.receipt_url, @purchase.receipt_url, class: "payment-success__text__receipt-url"  %>
         </span>
     </div>
 </div>

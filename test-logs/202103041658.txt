@@ -1,0 +1,74 @@
+
+Listing Factory
+  is valid
+  testing factory properties
+    has the correct title
+    has the correct price
+    has a correct association with a user
+    has a correct association with a brand
+    has a correct association with a category
+
+User Factory
+  is valid
+  testing factory properties
+    has the correct email
+    has the correct username
+
+Brand Factory
+  is valid
+  testing factory properties
+    has the correct name
+
+Category Factory
+  is valid
+  testing factory properties
+    has the correct name
+
+Purchase Factory
+  is valid
+  testing factory properties
+    has the correct receipt_url
+    has the correct association with a listing
+    has the correct association with a user
+
+Profile Factory
+  is valid
+  testing factory properties
+    has the correct postcode
+    has the correct bio
+    has the correct association with a user
+
+Brand
+  validations
+    is valid when given all attributes
+    is invalid when name is empty
+    is invalid when a duplicate entry
+
+Category
+  validations
+    is valid when given all attributes
+    is invalid when name is empty
+    is invalid when a duplicate entry
+
+Listing
+  validations
+    is valid when given all attributes
+    is invalid when title is empty
+    is invalid when price is empty
+    is invalid when price is < 1
+    is invalid when description length is > 500 characters
+    is invalid when condition is empty
+
+Profile
+  validations
+    is valid when given all attributes
+    is invalid when postcode is invalid number
+
+Purchase
+  validations
+    is valid when given all attributes
+    is invalid when payment_id is empty
+
+Finished in 0.34128 seconds (files took 1.03 seconds to load)
+37 examples, 0 failures
+

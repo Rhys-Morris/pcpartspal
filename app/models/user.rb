@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :profile, dependent: :destroy
   has_many :listings, dependent: :destroy
-  has_many :purchases, dependent: :destroy
+  has_many :purchases
   validates :username, uniqueness: true
   before_create :init_profile
 
