@@ -79,9 +79,45 @@ RSpec.describe "Purchase Factory" do
         it "has the correct association with a listing" do
             expect(@purchase.listing.brand.name).to eq "Samsung"
         end
-        it "has the correct association with a category" do
+        it "has the correct association with a user" do
             expect(@purchase.user.email).to eq "test@example.com"
         end
     end
+end
 
+RSpec.describe "Profile Factory" do
+    it "is valid" do
+        expect(build(:profile)).to be_valid
+    end
+    context "testing factory properties" do
+        before(:all) do
+            @profile = build(:profile)
+        end
+        it "has the correct postcode" do
+            expect(@profile.postcode).to be 3000
+        end
+        it "has the correct bio" do
+            expect(@profile.bio).to eq "This is a user bio"
+        end
+        it "has the correct association with a user" do
+            expect(@profile.user.email).to eq "test@example.com"
+        end
+    end
+end
+
+RSpec.describe "Watch Factory" do
+    it "is valid" do
+        expect(build(:watch)).to be_valid
+    end
+    context "testing factory properties" do
+        before(:all) do
+            @watch = build(:watch)
+        end
+        it "has the correct association with a profile and user" do
+            expect(@watch.profile.user.email).to eq "test@example.com"
+        end
+        it "has the correct association with a listing" do
+            expect(@watch.listing.brand.name).to eq "Samsung"
+        end
+    end
 end
