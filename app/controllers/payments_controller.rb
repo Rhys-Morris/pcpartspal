@@ -1,21 +1,17 @@
 class PaymentsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[ webhook ]
-  # before_action :authenticate_user! - this is causing an issue with saving Purchase
+  before_action :authenticate_user!, only: [:success]
 
   def success
     puts params[:listingId]
     listing_id = params[:listingId]
     @purchase = Purchase.find_by_listing_id(listing_id.to_i)
-    puts "--------"
-    puts @purchase
     @listing = Listing.find(listing_id.to_i)
-    puts @listing.title
   end
 
   def webhook
     payment_id = params[:data][:object][:payment_intent]
     payment = Stripe::PaymentIntent.retrieve(payment_id)
-    puts "------------"
     payment_id = payment.id
     receipt_url = payment.charges.data[0].receipt_url
     purchaser_id = payment.metadata.purchaser_id
