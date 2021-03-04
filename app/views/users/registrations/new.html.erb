@@ -19,6 +19,7 @@
       <%= f.fields_for :profile do |profile| %>
         <div class="field form__field">
           <%= profile.label :location, class: "form__label" %>
+          <span class="form__field__extra-info">(city you reside in)</span>
           <%= profile.text_field :location, class: "form__input" %>
         </div>
         <div class="field form__field">

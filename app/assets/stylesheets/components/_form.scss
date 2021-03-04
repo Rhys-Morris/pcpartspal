@@ -18,7 +18,10 @@
             flex-direction: row;
             align-items: center;
         }
-
+        
+        &__extra-info {
+            font-style: italic;
+        }
         
         select {
         padding: 1rem 1rem;
