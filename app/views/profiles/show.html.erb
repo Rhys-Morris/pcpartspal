@@ -9,7 +9,9 @@
           <h3 class="user-profile__content__header">Listings</h3>
           <div class="card-container">
               <% @profile.user.listings.each do |listing| %>
+                <% if listing.sold != true %>
                   <%= render "shared/listing-card", listing: listing %>
+                <% end %>
               <% end %>
           </div>
       </div>

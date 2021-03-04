@@ -18,7 +18,9 @@
                 <h3 class="user-profile__content__header">My Listings</h3>
                 <div class="card-container">
                     <% @profile.user.listings.each do |listing| %>
-                        <%= render "shared/listing-card", listing: listing %>
+                        <% if listing.sold != true %>
+                            <%= render "shared/listing-card", listing: listing %>
+                        <% end %>
                     <% end %>
                 </div>
             </div>
@@ -27,12 +29,36 @@
                 <h3 class="user-profile__content__header">Watchlist</h3>
                 <div class="card-container">
                     <% @profile.listings.each do |listing| %>
-                        <%= render "shared/listing-card", listing: listing %>
+                        <% if listing.sold != true %>
+                            <%= render "shared/listing-card", listing: listing %>
+                        <% end %>
                     <% end %>
                 </div>
             </div>
 
+            <div class="user-profile__content__sold">
+                <h3 class="user-profile__content__header">My Sales</h3>
+                <div class="card-container">
+                    <% @profile.user.listings.each do |listing| %>
+                        <% if listing.sold == true %>
+                            <%= render "shared/listing-card", listing: listing %>
+                        <% end %>
+                    <% end %>
+                </div>
             </div>
+
+            <div class="user-profile__content__purchases">
+                <h3 class="user-profile__content__header">My Purchases</h3>
+                <div class="card-container">
+                    <% @profile.user.purchases.each do |purchase| %>
+                        <% if purchase.user_id == @profile.user.id %>
+                            <% listing = Listing.find(purchase.listing_id) %>
+                            <%= render "shared/listing-card", listing: listing %>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+
         </div>
     </section>
 

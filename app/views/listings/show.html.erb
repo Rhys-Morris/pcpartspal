@@ -37,7 +37,11 @@
         <span>Condition:</span> <%= @listing.condition %>
       </span>
       <span class="listing-show__price">
-        $<%= @listing.price %>
+        <% if !@listing.sold %>
+          $<%= @listing.price %>
+        <% else %>
+          <span class="sold-text">Sold</span>
+        <% end %>
       </span>
 
       <!-- Watchlist -->
@@ -54,7 +58,7 @@
       <% end %>
 
       <!-- Buy and Message -->
-      <% if user_signed_in? && current_user.id != @listing.user.id %>
+      <% if user_signed_in? && current_user.id != @listing.user.id && @listing.sold != true %>
         <button data-stripe="payment" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
       <% end %>
       <button class="listing-show__message btn btn-up btn-ghost">Message</button>
@@ -71,7 +75,7 @@
 
       <!-- Update/Delete if authorised -->
       <div class="listing-show__user-buttons">
-        <% if user_signed_in? && @listing.user_id == current_user.id %>
+        <% if user_signed_in? && @listing.user_id == current_user.id && @listing.sold != true %>
           <%= link_to "Edit", edit_listing_path(@listing.id), class: "listing-show__user-buttons--edit btn btn-up btn-ghost" %>
           <%= link_to "Delete", delete_listing_path(@listing.id), method: :delete, class: "listing-show__user-buttons--delete btn btn-up btn-ghost" %>
         <% end %>

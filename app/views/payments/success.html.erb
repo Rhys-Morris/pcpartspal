@@ -1,1 +1,17 @@
-<h2>Successful payment!</h2>
+<div class="container--row">
+    <div class="payment-success__image">
+
+    </div>
+    <div class="payment-success__text">
+        <h2 class="payment-success__text__header header-2">Payment successful!</h2>
+        <h3 class="payment-success__text__subheader">
+            Congratulations on your purchase of <%= @listing.title.capitalize %>
+        </h3>
+        <span class="payment-success__text__receipt">
+            Your payment receipt can be found at
+            <span class="payment-success__text__receipt-url">
+                <%= @purchase.receipt_url %>
+            </span>
+        </span>
+    </div>
+</div>

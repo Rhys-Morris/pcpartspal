@@ -9,6 +9,14 @@
     &__start {
         align-self: start;
     }
+
+    &--row {
+    display: flex;
+    padding: 3rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10vw;
+    }
 }
 
 .main-home {

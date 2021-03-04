@@ -3,8 +3,9 @@ class Listing < ApplicationRecord
   belongs_to :brand
   belongs_to :user
   has_many_attached :images
-  has_many :watches
+  has_many :watches, dependent: :destroy
   has_many :profiles, through: :watches
+  has_many :purchases, dependent: :destroy
   enum condition: { Used: 0, New: 1 }
 
   # Validations

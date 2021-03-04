@@ -1,0 +1,12 @@
+.payment-success {
+    &__text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        &__header {
+            margin-bottom: 3rem;
+        }
+    }
+}
