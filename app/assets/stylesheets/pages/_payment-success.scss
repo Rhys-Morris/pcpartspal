@@ -1,12 +1,35 @@
 .payment-success {
+
+    &__image-box {
+        width: 40%;
+        margin-right: 3rem;
+
+        &__image{
+            width: 100%;
+        }
+    }
     &__text {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
+        text-align: center;
 
-        &__header {
+        &__header, &__subheader, &__receipt {
             margin-bottom: 3rem;
+        }
+
+        &__receipt {
+            line-height: 2;
+        }
+
+        &__receipt-url {
+            text-decoration: underline;
+            color: $color-black;
+
+            &:hover {
+                color: $color-grey-medium;
+            }
         }
     }
 }
