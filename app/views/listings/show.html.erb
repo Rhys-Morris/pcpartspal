@@ -47,7 +47,7 @@
       <!-- Postage costs -->
       <% if user_signed_in? %>
         <div class="listing-show__postage">
-          <%= aus_post(@listing.user.profile.postcode, current_user.profile.postcode) %>
+          Postage cost is <span>$<%= @postage_cost %></span> with Australia Post Regular Parcel delivery
         </div>
       <% end %>
 

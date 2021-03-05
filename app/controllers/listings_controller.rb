@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_form_parameters, only: %i[ new edit]
+  before_action :calculate_postage, only: %i[ show ]
   before_action :create_stripe_session, only: %i[ show ]
   skip_before_action :verify_authenticity_token, only: %i[ index ]
 
@@ -106,7 +107,7 @@ class ListingsController < ApplicationController
           name: @listing.title,
           description: @listing.description,
           images: [@listing.images[0].service_url],
-          amount: @listing.price.to_i * 100,
+          amount: (@listing.price.to_i * 100) + (@postage_cost * 100).to_i,
           currency: 'aud',
           quantity: 1,
         }],
@@ -120,5 +121,41 @@ class ListingsController < ApplicationController
         cancel_url: "#{root_url}/listings"
       )
       @session_id = session.id
+    end
+
+    def calculate_postage
+      # API key
+      api_key = "c48a22bb-0ffa-4a4e-aa55-586af1e58b92"
+
+      # Package set up
+      service_code = "AUS_PARCEL_REGULAR"
+      parcel_length = 50
+      parcel_width = 30
+      parcel_height = 10
+      parcel_weight = 1.5
+
+      # Set up query params
+      query_params = {
+          "from_postcode" => @listing.user.profile.postcode,
+          "to_postcode" => current_user.profile.postcode,
+          "length" => parcel_length,
+          "width" => parcel_width,
+          "height" => parcel_height,
+          "weight" => parcel_weight,
+          "service_code" => service_code    
+      }
+
+      url = "https://digitalapi.auspost.com.au/postage/parcel/domestic/calculate.json?"
+  
+      response = Faraday.get(url + query_params.to_query) do |req|
+          req.headers["AUTH-KEY"] = api_key
+      end
+
+      # Response debugging
+      # puts "------------"
+      # pp response
+
+      parsed_response = JSON.parse(response.body)
+      @postage_cost = parsed_response["postage_result"]["total_cost"].to_f
     end
 end
