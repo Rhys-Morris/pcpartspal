@@ -2,7 +2,7 @@ require 'faraday'
 
 module ApplicationHelper
     def user_listing_count(user)
-        count = Listing.where("user_id": user.id).count
+        count = Listing.where("user_id": user.id, "sold": false).count
         if count == 1
             "#{count} listing for sale"
         else
