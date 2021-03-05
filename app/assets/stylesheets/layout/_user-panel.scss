@@ -35,9 +35,15 @@
         flex-direction: column;
         padding: 0 3rem;
     }
+
+    &__buttons {
+        display: flex;
+        
+    }
+    
     &__btn {
         text-decoration: none;
         font-size: 1.6rem;
-        margin-right: 3rem;
+        margin-right: 1rem;
     }
 }

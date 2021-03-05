@@ -21,10 +21,11 @@
     align-items: center;
     transition: .3s all;
     margin: 2rem;
-    border: 2px solid $color-black;
+    border: 2px solid $color-orangered;
     background-position: center;
     background-size: cover;
     border-radius: 1rem;
+    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
 
     &:hover {
         cursor: pointer;
@@ -38,6 +39,7 @@
     padding: 2.5rem;
     border-radius: 50%;
     border: 1px solid $color-grey-medium;
+    background-color: white;
     }
 
     &__image {
@@ -53,6 +55,8 @@
         width: 100%;
         padding: .6rem;
         color: $color-grey-light;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
     }
 }
 
