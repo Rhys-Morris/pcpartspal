@@ -5,16 +5,16 @@
     <section class="user-profile">
         <div class="user-profile__sidebar">
             <ul class="user-profile__sidebar__list">
-                <li class="user-profile__sidebar__list__list-item"><span>My Messages</span></li>
-                <li class="user-profile__sidebar__list__list-item"><span>My Listings</span></li>
-                <li class="user-profile__sidebar__list__list-item"><span>Watchlist</span></li>
-                <li class="user-profile__sidebar__list__list-item"><span>Sold Listings</span></li>
-                <li class="user-profile__sidebar__list__list-item"><span>Purchases</span></li>
+                <li id="my-listings" class="user-profile__sidebar__list__list-item"><span>My Listings</span></li>
+                <li id="watchlist" class="user-profile__sidebar__list__list-item"><span>Watchlist</span></li>
+                <li id="sold-listings" class="user-profile__sidebar__list__list-item"><span>Sold Listings</span></li>
+                <li id="purchases" class="user-profile__sidebar__list__list-item"><span>Purchases</span></li>
+                <li id="my-messages" class="user-profile__sidebar__list__list-item"><span>My Messages</span></li>
             </ul>
         </div>
         <!-- Could be made into partial - listings -->
         <div class="user-profile__content">
-            <div class="user-profile__content__my-listings">
+            <div class="user-profile__content__my-listings" data-target="my-listings">
                 <h3 class="user-profile__content__header">My Listings</h3>
                 <div class="card-container">
                     <% @profile.user.listings.each do |listing| %>
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="user-profile__content__watchlist">
+            <div class="user-profile__content__watchlist hidden" data-target="watchlist">
                 <h3 class="user-profile__content__header">Watchlist</h3>
                 <div class="card-container">
                     <% @profile.listings.each do |listing| %>
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="user-profile__content__sold">
+            <div class="user-profile__content__sold hidden" data-target="sold-listings">
                 <h3 class="user-profile__content__header">My Sales</h3>
                 <div class="card-container">
                     <% @profile.user.listings.each do |listing| %>
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="user-profile__content__purchases">
+            <div class="user-profile__content__purchases hidden" data-target="purchases">
                 <h3 class="user-profile__content__header">My Purchases</h3>
                 <div class="card-container">
                     <% @profile.user.purchases.each do |purchase| %>
@@ -59,7 +59,20 @@
                 </div>
             </div>
 
+            <div class="user-profile__content__purchases hidden" data-target="my-messages">
+                <h3 class="user-profile__content__header">Messages</h3>
+            </div>
+
         </div>
     </section>
 
 </div>
+
+<script>
+    container = document.querySelector('.user-profile__sidebar');
+    container.addEventListener('click', (e) => {
+        target = e.target.closest(".user-profile__sidebar__list__list-item").id;
+        document.querySelectorAll("[data-target]").forEach(section => section.classList.add("hidden"));
+        document.querySelector(`[data-target='${target}']`).classList.remove("hidden");
+    });
+</script>
