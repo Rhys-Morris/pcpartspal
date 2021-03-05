@@ -14,15 +14,17 @@
 
 .card, .card--brand {
     height: 20rem;
-    width: 20rem;
+    width: 27.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     transition: .3s all;
     margin: 2rem;
     border: 2px solid $color-black;
-    padding: 2rem;
+    background-position: center;
+    background-size: cover;
+    border-radius: 1rem;
 
     &:hover {
         cursor: pointer;
@@ -47,6 +49,10 @@
         font-size: 1.6rem;
         font-weight: 300;
         margin-top: .3rem;
+        background: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        padding: .6rem;
+        color: $color-grey-light;
     }
 }
 
