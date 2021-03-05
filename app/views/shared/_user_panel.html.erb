@@ -28,7 +28,7 @@
             </p>
         </div>
         <div class="user-panel__user-listings-info">
-            <%= listing_count(@profile.user.listings) %>
+            <%= user_listing_count(@profile.user) %>
         </div>
     </div>
     <% if @profile.id == current_user.id %>

@@ -3,10 +3,34 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_form_parameters, only: %i[ new edit]
   before_action :create_stripe_session, only: %i[ show ]
+  skip_before_action :verify_authenticity_token, only: %i[ index ]
 
   # GET /listings or /listings.json
   def index
-    @listings = Listing.all
+    # This is working but could be better written
+
+    # Check for query params to sort
+    if params.include?("category")
+      @category_id = Category.find_by("name": params["category"])
+    end
+
+    if params.include?("brand")
+      @brand_id = Brand.find_by("name": params["brand"])
+    end
+
+    # Set @listings 
+    if @brand_id && @category_id
+      @listings = Listing.where("category_id": @category_id, "brand_id": @brand_id)
+    elsif @brand_id
+      @listings = Listing.where("brand_id": @brand_id)
+    elsif @category_id
+      @listings = Listing.where("category_id": @category_id)
+    else
+      @listings = Listing.all
+    end
+
+    # Filter out sold listings
+    @listings = @listings.select { |listing| listing.sold != true }
   end
 
   # GET /listings/1 or /listings/1.json

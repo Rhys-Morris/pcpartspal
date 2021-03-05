@@ -44,6 +44,13 @@
         <% end %>
       </span>
 
+      <!-- Postage costs -->
+      <% if user_signed_in? %>
+        <div class="listing-show__postage">
+          <%= aus_post(@listing.user.profile.postcode, current_user.profile.postcode) %>
+        </div>
+      <% end %>
+
       <!-- Watchlist -->
       <% if current_user && current_user.id != @listing.user.id %>
         <% if !current_user.profile.listings.include?(@listing) %>
@@ -55,13 +62,6 @@
             Remove from <%= link_to "Watchlist", delete_watch_path(current_user.profile.watches.where("listing_id": @listing.id)[0].id), method: :delete %>
           </span>
         <% end %>
-      <% end %>
-      
-      <!-- Postage costs -->
-      <% if user_signed_in? %>
-        <div class="listing-show__postage">
-          <%= aus_post(@listing.user.profile.postcode, current_user.profile.postcode) %>
-        </div>
       <% end %>
 
       <!-- Buy and Message -->

@@ -2,15 +2,20 @@
 
   <div class="listings-panel">
     <span class="listings-panel__total">
-      <%= listing_count(Listing.where("sold": "false")) %>
+      <%= listing_count(@listings) %>
     </span>
     <input type="text" class="listings-panel__search", placeholder="Search">
   </div>
-  <section class="card-container">
-    <% @listings.each do |listing| %>
-      <% if listing.sold != true %>
-        <%= render "shared/listing-card", listing: listing %>
+  <div class="listings-main">
+    <div class="filter">
+      <%= render "shared/filter-listings" %>
+    </div>
+    <div class="card-container">
+      <% @listings.each do |listing| %>
+        <% if listing.sold != true %>
+          <%= render "shared/listing-card", listing: listing %>
+        <% end %>
       <% end %>
-    <% end %>
-  </section>
+    </div>
+  </div>
 </div>

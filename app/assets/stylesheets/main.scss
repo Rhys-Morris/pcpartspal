@@ -4,6 +4,7 @@
 @import "components/button";
 @import "components/cards";
 @import "components/errors";
+@import "components/filter";
 @import "components/flash";
 @import "components/form";
 @import "components/listings-panel";
@@ -13,5 +14,6 @@
 @import "layout/user-panel";
 @import "layout/user-profile";
 @import "pages/home";
+@import "pages/listings-index";
 @import "pages/listing-show";
 @import "pages/payment-success";
