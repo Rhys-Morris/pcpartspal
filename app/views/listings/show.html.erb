@@ -56,6 +56,13 @@
           </span>
         <% end %>
       <% end %>
+      
+      <!-- Postage costs -->
+      <% if user_signed_in? %>
+        <div class="listing-show__postage">
+          <%= aus_post(@listing.user.profile.postcode, current_user.profile.postcode) %>
+        </div>
+      <% end %>
 
       <!-- Buy and Message -->
       <% if user_signed_in? && current_user.id != @listing.user.id && @listing.sold != true %>
@@ -81,7 +88,6 @@
         <% end %>
       </div>
     </div>
-
   </section>
 </main>
 
