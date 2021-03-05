@@ -30,12 +30,12 @@
     }
 
     &--brand {
-    height: 15rem;
-    width: 17.5rem;
+    height: 20rem;
+    width: 22.5rem;
     justify-content: center;
-    border: none;
-    padding: 0;
-    margin: 2rem;
+    padding: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid $color-grey-medium;
     }
 
     &__image {
