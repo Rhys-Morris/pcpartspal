@@ -31,9 +31,12 @@
             <%= user_listing_count(@profile.user) %>
         </div>
     </div>
-    <% if @profile.id == current_user.id %>
+    <div>
+        <% if @profile.id == current_user.id %>
         <%= link_to "Edit Profile", edit_profile_path(current_user.id), class: "user-panel__btn btn btn-ghost" %>
-    <% else %>
+        <%= link_to "Delete Account", "/users", method: :delete, class: "user-panel__btn btn btn-delete", data: { confirm: "Are you sure?" } %>
+        <% else %>
         <%= link_to "Send Message", root_url, class: "user-panel__btn btn btn-ghost" %>
     <% end %>
+    </div>
 </div>

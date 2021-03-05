@@ -21,6 +21,17 @@
     }
 }
 
+.btn-delete {
+    background-color: $color-orangered;
+    color: $color-grey-light;
+    border: 2px solid transparent;
+    &:hover {
+        background: $color-grey-light;
+        color: $color-orangered;
+        border: 2px solid $color-orangered;
+    }
+}
+
 .btn-cta {
     background-color: $color-orangered;
     color:$color-grey-light;

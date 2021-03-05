@@ -51,6 +51,7 @@ class ListingsController < ApplicationController
     user_id = current_user.id
     @listing = Listing.new(listing_params)
     @listing["user_id"] = user_id
+    @listing["sold"] = false
       
     if @listing.save
       flash[:success] = "Listing successfully created."
