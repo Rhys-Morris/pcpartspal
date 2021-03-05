@@ -12,8 +12,7 @@
         <h2 class="categories__title header-2">Browse by category</h2>
         <div class="card-wrapper">
             <% @categories.each do |category| %>
-                <% format_category_image = category.name.downcase.gsub(/ /, "-") %>
-                <div class="card", style='background-image: url(<%= asset_path format_category_image %>)'>
+                <div class="card", style='background-image: url(<%= asset_path format_background_image(category.name) %>);'>
                     <span class="card__text"><%= category.name %></span>
                 </div>
             <% end %>
