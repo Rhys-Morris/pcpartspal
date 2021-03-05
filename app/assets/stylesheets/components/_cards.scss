@@ -12,22 +12,35 @@
     align-items: center;
     }
 
-.card {
-    height: 30rem;
+.card, .card--brand {
+    height: 20rem;
     width: 20rem;
-    margin: 0 2rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     transition: .3s all;
+    margin: 2rem;
+    border: 2px solid $color-black;
+    padding: 2rem;
 
     &:hover {
         cursor: pointer;
         transform:translateY(-.5rem);
     }
 
+    &--brand {
+    height: 15rem;
+    width: 17.5rem;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    margin: 2rem;
+    }
+
     &__image {
-        width: 100%;
+        width: 80%;
+
     }
     &__text {
         text-transform: uppercase;
@@ -51,7 +64,7 @@
     width: 20rem;
 
     &:hover {
-        border: 1px solid $color-grey-medium;
+        border: 1px solid $color-grey-dark;
     }
 
     &__image-wrapper {

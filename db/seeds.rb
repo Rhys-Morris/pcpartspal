@@ -8,7 +8,7 @@
 
 categories = ['Power Supply', 'Graphics Cards', 'CPUs', 'Memory',
               'Hard Drives and SSDs', 'Cases', 'Cooling', 'Motherboards', 'Mice & Keyboards', 'Monitors']
-brands = ['Cooler Master', 'Logitech', 'Corsair', 'Ducky', 'Thermaltake', 'Fractal', 'MSI', 'AMD', 'Intel', 'Nvidia',
+brands = ['Cooler Master', 'Logitech', 'Corsair', 'Thermaltake', 'Fractal', 'MSI', 'AMD', 'Intel', 'Nvidia',
           'ASUS', 'Lenovo', 'Gigabyte', 'Dell', 'ASRock', 'Razer', 'BenQ', 'G.Skill', 'Samsung', 'Seagate', 'Western Digital',
           'Sapphire', 'XFX', 'EVGA' ]
 

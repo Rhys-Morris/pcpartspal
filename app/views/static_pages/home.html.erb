@@ -23,9 +23,8 @@
         <h2 class="brands__title header-2">Browse popular brands</h2>
         <div class="card-wrapper">
             <% @brands.each do |brand| %>
-                <div class="card">
-                    <%= image_tag "profile-default.png", class: "card__image" %>
-                    <span class="card__text"><%= brand.name %></span>
+                <div class="card--brand">
+                    <%= image_tag "#{brand.name.downcase.gsub(/ /, "-")}.png", class: "card__image" %>
                 </div>
             <% end %>
         </div>
