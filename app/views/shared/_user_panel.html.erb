@@ -1,6 +1,10 @@
 <div class="user-panel">
     <div class="user-panel__info">
-        <%= image_tag "profile-default.png", alt: "default-profile-pic", class: "user-panel__picture" %>
+        <% if @profile.image.attached? %>
+            <%= image_tag @profile.image, alt: "profile-pic", class: "user-panel__picture" %>
+        <% else %>
+            <%= image_tag "profile-default.png", alt: "default-profile-pic", class: "user-panel__picture" %>
+        <% end %>
         <div class="user-panel__user-info">
             <p class="user-panel__user-info__top user-panel__user-info__username ">
                 <%= @profile.user.username %> 
