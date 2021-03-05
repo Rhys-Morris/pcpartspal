@@ -27,7 +27,7 @@
 
   <div class="field form__field">
     <%= form.label :postcode, class: "form__label" %>
-    <%= form.number_field :postcode, class: "form__input" %>
+    <%= form.number_field :postcode, class: "form__input", max: 9944, min: 200 %>
   </div>
 
   <div class="field form__field ">

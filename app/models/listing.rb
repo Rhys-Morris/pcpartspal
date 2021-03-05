@@ -10,7 +10,7 @@ class Listing < ApplicationRecord
 
   # Validations
   validates :title, presence: true
-  validates :description, length: { maximum: 250 }
+  validates :description, length: { maximum: 500 }
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :condition, presence: true
 
