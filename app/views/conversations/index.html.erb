@@ -27,7 +27,7 @@
               <%= last_message.body %>
             </p>
             <p class="inbox__conversation__recent-message__time-sent">
-              <%= time_sent(last_message.created_at) %>
+              <%= time_ago_in_words(last_message.created_at) %> ago
             </p>
             </div>
           </div>

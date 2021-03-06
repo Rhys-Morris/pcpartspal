@@ -1,5 +1,7 @@
-<div class="container">
+<!-- Get current user's co-ords -->
+<% user_coords = get_coords(current_user.profile.postcode) %>
 
+<div class="container">
   <div class="listings-panel">
     <span class="listings-panel__total">
       <%= listing_count(@listings) %>
@@ -13,7 +15,7 @@
     <div class="card-container">
       <% @listings.each do |listing| %>
         <% if listing.sold != true %>
-          <%= render "shared/listing-card", listing: listing %>
+          <%= render "shared/listing-card", listing: listing, user_coords: user_coords %>
         <% end %>
       <% end %>
     </div>

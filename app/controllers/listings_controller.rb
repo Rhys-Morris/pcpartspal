@@ -7,20 +7,12 @@ class ListingsController < ApplicationController
 
   # GET /listings or /listings.json
   def index
-    @listings = Listing.all    
+    @listings = Listing.all
   end
 
   def filter
-    pp params
-
-    if params[:category_id] && params[:brand_id]
-      @listings = Listing.where("brand_id": params[:brand_id], "category_id": params[:category_id])  
-    elsif params[:category_id]
-      @listings = Listing.where("category_id": params[:category_id])
-    elsif params[:brand_id]
-      @listings = Listing.where("brand_id": params[:brand_id])
-    end
-
+    filtered_hash = filter_params.reject {|k, v| v.blank?}.to_h
+    @listings = Listing.filter(filtered_hash)
     render "index"
   end
 
@@ -39,9 +31,7 @@ class ListingsController < ApplicationController
 
   # POST /listings or /listings.json
   def create
-    user_id = current_user.id
-    @listing = Listing.new(listing_params)
-    @listing["user_id"] = user_id
+    current_user.listings.new(listing_params)
     @listing["sold"] = false
       
     if @listing.save
@@ -77,10 +67,14 @@ class ListingsController < ApplicationController
       @listing = Listing.find(params[:id])
     end
 
+    def filter_params 
+      params.require(:filter).permit(:commit, :category_id, :brand_id)
+    end 
+
     # Only allow a list of trusted parameters through.
-    def listing_params
-      params.require(:listing).permit(:title, :description, :price, :sold, :condition, :category_id, :brand_id, images: [])
-    end
+    def filter_params 
+      params.require(:filtered).permit(:commit, :category_id, :brand_id)
+    end 
 
     def set_form_parameters
       @categories = Category.all.sort_by { |cat| cat.name }

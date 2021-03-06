@@ -14,4 +14,7 @@ class Listing < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :condition, presence: true
 
+  def self.filter(filtered_params)
+    Listing.where(filtered_params)
+  end 
 end

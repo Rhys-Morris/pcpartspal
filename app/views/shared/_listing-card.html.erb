@@ -1,3 +1,8 @@
+<!-- Get coords for listing -->
+<% listing_coords = get_coords(listing.user.profile.postcode) %>
+<!-- Get distance from current use to listing -->
+<% get_distance(user_coords, listing_coords) %>
+
 <a href="<%= listing_path(listing.id) %>" class="card--listing">
     <% if listing.images.attached? %>
       <div class="card--listing__image-wrapper">

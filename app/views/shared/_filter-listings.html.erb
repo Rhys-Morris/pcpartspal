@@ -3,12 +3,12 @@
 <%= form_with url: "/listings/filter", method: :get do |form| %>
   <div class="field form__field">
     <%= form.label :category_id, class: "form__label" %>
-    <%= form.select :category_id, @categories.map {|cat| [cat.name, cat.id]} %>
+    <%= form.select "filtered[category_id]", @categories.map {|cat| [cat.name, cat.id]}, {include_blank: true} %>
   </div>
 
   <div class="field form__field ">
     <%= form.label :brand_id, class: "form__label" %>
-    <%= form.select :brand_id, @brands.map {|brand| [brand.name, brand.id]} %>
+    <%= form.select "filtered[brand_id]", @brands.map {|brand| [brand.name, brand.id]},{include_blank: true}  %>
   </div>
 
   <div class="actions"> 
@@ -16,4 +16,3 @@
     <%= link_to "Reset", listings_path, class: "btn btn-up btn-ghost filter__reset" %>
   </div>
 <% end %>
-
