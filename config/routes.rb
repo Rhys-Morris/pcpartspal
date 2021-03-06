@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/payments/webhook', to: 'payments#webhook'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :profiles, except: %i[ index ]
+  get 'listings/filter', to: 'listings#filter', as: 'filter_listings'
   resources :listings
   delete '/listings/(:id)', to: 'listings#destroy', as: 'delete_listing'
   post '/watches', to: 'watches#create', as: 'create_watch'

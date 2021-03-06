@@ -6,4 +6,12 @@ class Profile < ApplicationRecord
   validates :location, presence: true
   validates :postcode, numericality: { greater_than: 200, less_than: 9945 }
   validates :bio, length: { maximum: 500 }
+
+  #  Insert latitude and longitude into profile
+  geocoded_by :address
+  before_save :geocode
+
+    def address
+      "#{self.location}, Australia"
+    end
 end
