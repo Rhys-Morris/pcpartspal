@@ -19,7 +19,7 @@
               <h4 class="conversation__messages__subject"><%= message.subject %></h4>
             </div>
             <p class="conversation__messages__body"><%= message.body %></p>
-            <p class="conversation__messages__sent"><%= time_sent(message.created_at) %></p>
+            <p class="conversation__messages__sent"><%= time_ago_in_words(message.created_at) %> ago</p>
           </li>
         <% end %>
       <% end %>

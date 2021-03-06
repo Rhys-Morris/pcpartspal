@@ -124,6 +124,7 @@ class ListingsController < ApplicationController
     end
 
     def calculate_postage
+      return nil if !user_signed_in?
       # API key
       api_key = "c48a22bb-0ffa-4a4e-aa55-586af1e58b92"
 
