@@ -3,6 +3,15 @@
     <span class="listings-panel__total">
       <%= listing_count(@listings) %>
     </span>
+    <div class="listings-panel__distance-filter">
+      <label for="distance" class="listings-panel__distance-filter__label">Distance Filter:</label>
+      <select name="distance" id="filter">
+        <option value="Infinity">No limit</option>
+        <option value="50">50 kilometres</option>
+        <option value="100">100 kilometres</option>
+        <option value="200">200 kilometres</option>
+      </select>
+    </div>
     <input type="text" class="listings-panel__search", placeholder="Search titles">
   </div>
   <div class="listings-main">
@@ -12,7 +21,7 @@
     <div class="card-container">
       <% @listings.each do |listing| %>
         <% if listing.sold != true %>
-          <%= render "shared/listing-card", listing: listing, user_coords: user_coords %>
+          <%= render "shared/listing-card", listing: listing %>
         <% end %>
       <% end %>
     </div>
@@ -37,5 +46,17 @@
         title.closest(".card--listing").classList.add("hidden");
       }
     });
+  })
+</script>
+
+<script>
+  const filter = document.querySelector("#filter");
+  filter.addEventListener('change', () => {
+    cards.forEach(card => {
+      card.classList.remove("hidden");
+      if (Number(card.dataset.distance) > Number(filter.value)) {
+        card.classList.add("hidden");
+      }
+    })
   })
 </script>

@@ -8,16 +8,10 @@ class Profile < ApplicationRecord
   validates :bio, length: { maximum: 500 }
 
   #  Insert latitude and longitude into profile
-  before_save :get_coords
+  geocoded_by :address
+  before_save :geocode
 
-  def get_coords
-    response = Faraday.get("http://api.beliefmedia.com/postcodes/#{self.postcode}.json")
-    parsed_response = JSON.parse(response.body)
-
-    puts "--------------"
-    puts parsed_response
-
-    self.latitude = parsed_response["data"]["latitude"]
-    self.longitude = parsed_response["data"]["longitude"]
-  end
+    def address
+      "#{self.location}, Australia"
+    end
 end

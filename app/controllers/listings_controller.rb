@@ -31,8 +31,7 @@ class ListingsController < ApplicationController
 
   # POST /listings or /listings.json
   def create
-    current_user.listings.new(listing_params)
-    @listing["sold"] = false
+    @listing = current_user.listings.new(listing_params)
       
     if @listing.save
       flash[:success] = "Listing successfully created."
@@ -68,12 +67,12 @@ class ListingsController < ApplicationController
     end
 
     def filter_params 
-      params.require(:filter).permit(:commit, :category_id, :brand_id)
+      params.require(:filtered).permit(:commit, :category_id, :brand_id)
     end 
 
     # Only allow a list of trusted parameters through.
-    def filter_params 
-      params.require(:filtered).permit(:commit, :category_id, :brand_id)
+    def listing_params 
+      params.require(:listing).permit(:title, :description, :price, :condition, :category_id, :brand_id, images: [])
     end 
 
     def set_form_parameters
@@ -86,11 +85,11 @@ class ListingsController < ApplicationController
       return if !user_signed_in?
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
-        customer_email: current_user.email,
+        customer_email: current_user.email || nil,
         line_items: [{
           name: @listing.title,
           description: @listing.description,
-          images: [@listing.images[0].service_url],
+          images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
           amount: (@listing.price.to_i * 100) + (@postage_cost * 100).to_i,
           currency: 'aud',
           quantity: 1,
