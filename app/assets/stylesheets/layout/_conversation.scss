@@ -1,0 +1,82 @@
+.conversation {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 60%;
+
+    &__send {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    &__recipient {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        box-shadow: $box-shadow-default;
+
+        &__name {
+            font-weight: 300;
+            font-size: 2.4rem;
+            margin-left: 2rem;
+        }
+    }
+
+    &__message {
+        padding: 1.2rem;
+        border: 1px solid $color-grey-medium;
+        border-radius: 1rem;
+        margin-bottom: 1rem;
+        width: 80%;
+
+        &--sent {
+            align-self: flex-end;
+            border: 1px solid $color-notice;
+            background: $color-notice;
+        }
+    }
+
+    &__messages {
+        width: 100%;
+        margin-top: 3rem;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        &__header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+
+        }
+
+        &__subject {
+            font-weight: 300;
+            text-transform: uppercase;
+            font-size: 1.6rem;
+        }
+        &__body {
+            margin-bottom: 1.5rem;
+        }
+
+        &__sent {
+            color: $color-grey-dark;
+            font-style: italic;
+        }
+    }
+
+    &__new-message {
+        margin-top: 5rem;
+
+        &__header {
+            font-weight: 300;
+            text-transform: uppercase;
+            padding-left: 1rem;
+            border-left: 2px solid orangered;
+        }
+    }
+}

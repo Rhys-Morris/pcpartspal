@@ -67,8 +67,8 @@
       <!-- Buy and Message -->
       <% if user_signed_in? && current_user.id != @listing.user.id && @listing.sold != true %>
         <button data-stripe="payment" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
+        <%= link_to "Message", create_conversation_path(sender_id: current_user.id, receiver_id: @listing.user.id), method: :post, class: "listing-show__message btn btn-up btn-ghost" %>
       <% end %>
-      <button class="listing-show__message btn btn-up btn-ghost">Message</button>
 
       <!-- Seller Details -->
       <div class="listing-show__user-details">
