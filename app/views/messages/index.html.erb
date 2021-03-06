@@ -47,9 +47,9 @@
 </div>
 
 <script>
-  create_message = document.querySelector(".conversation__send");
-  new_message_box = document.querySelector(".conversation__new-message")
-  send_message = document.querySelector(".message-send");
+  const create_message = document.querySelector(".conversation__send");
+  const new_message_box = document.querySelector(".conversation__new-message")
+  const send_message = document.querySelector(".message-send");
   [create_message, send_message].forEach(element => {
     element.addEventListener('click', () => {
     create_message.classList.toggle("hidden");

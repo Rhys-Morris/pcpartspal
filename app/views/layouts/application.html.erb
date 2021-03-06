@@ -31,3 +31,11 @@
     <%= yield %>
   </body>
 </html>
+
+<script>
+  // Hide flash messages after 8 secs
+  const flash = document.querySelector('.flash')
+  setTimeout(() => {
+    flash.classList.add("hidden")
+  }, 8000)
+</script>
