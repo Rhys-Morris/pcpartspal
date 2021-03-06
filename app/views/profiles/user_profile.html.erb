@@ -9,7 +9,7 @@
                 <li id="watchlist" class="user-profile__sidebar__list__list-item"><span>Watchlist</span></li>
                 <li id="sold-listings" class="user-profile__sidebar__list__list-item"><span>Sold Listings</span></li>
                 <li id="purchases" class="user-profile__sidebar__list__list-item"><span>Purchases</span></li>
-                <li id="my-messages" class="user-profile__sidebar__list__list-item"><span>My Messages</span></li>
+                <a href="<%= conversations_path %>" class="user-profile__sidebar__messages-link"><li class="user-profile__sidebar__list__list-item">My Messages</li></a>
             </ul>
         </div>
         <!-- Could be made into partial - listings -->
@@ -59,10 +59,6 @@
                 </div>
             </div>
 
-            <div class="user-profile__content__purchases hidden" data-target="my-messages">
-                <h3 class="user-profile__content__header">Messages</h3>
-            </div>
-
         </div>
     </section>
 
@@ -71,6 +67,9 @@
 <script>
     container = document.querySelector('.user-profile__sidebar');
     container.addEventListener('click', (e) => {
+        // Prevent hidden class addition if redirecting to inbox
+        if (e.target.className == "user-profile__sidebar__messages-link") return
+        
         target = e.target.closest(".user-profile__sidebar__list__list-item").id;
         document.querySelectorAll("[data-target]").forEach(section => section.classList.add("hidden"));
         document.querySelector(`[data-target='${target}']`).classList.remove("hidden");

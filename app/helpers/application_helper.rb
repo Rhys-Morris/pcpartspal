@@ -25,4 +25,8 @@ module ApplicationHelper
             title
         end
     end
+
+    def time_sent(created_at)
+        time_ago_in_words(Time.now - created_at)
+    end
 end

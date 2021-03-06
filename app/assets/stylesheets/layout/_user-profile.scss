@@ -29,6 +29,11 @@
                 }
             }
         }
+
+        &__messages-link {
+            color: $color-black;
+            text-decoration: none;
+        }
     }
     &__content {
         display: flex;
