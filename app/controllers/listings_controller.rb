@@ -1,37 +1,27 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: %i[ index show ]
-  before_action :set_form_parameters, only: %i[ new edit]
+  before_action :set_form_parameters, only: %i[ new edit index filter ]
   before_action :calculate_postage, only: %i[ show ]
   before_action :create_stripe_session, only: %i[ show ]
-  skip_before_action :verify_authenticity_token, only: %i[ index ]
 
   # GET /listings or /listings.json
   def index
-    # This is working but could be better written
+    @listings = Listing.all    
+  end
 
-    # Check for query params to sort
-    if params.include?("category")
-      @category_id = Category.find_by("name": params["category"])
+  def filter
+    pp params
+
+    if params[:category_id] && params[:brand_id]
+      @listings = Listing.where("brand_id": params[:brand_id], "category_id": params[:category_id])  
+    elsif params[:category_id]
+      @listings = Listing.where("category_id": params[:category_id])
+    elsif params[:brand_id]
+      @listings = Listing.where("brand_id": params[:brand_id])
     end
 
-    if params.include?("brand")
-      @brand_id = Brand.find_by("name": params["brand"])
-    end
-
-    # Set @listings 
-    if @brand_id && @category_id
-      @listings = Listing.where("category_id": @category_id, "brand_id": @brand_id)
-    elsif @brand_id
-      @listings = Listing.where("brand_id": @brand_id)
-    elsif @category_id
-      @listings = Listing.where("category_id": @category_id)
-    else
-      @listings = Listing.all
-    end
-
-    # Filter out sold listings
-    @listings = @listings.select { |listing| listing.sold != true }
+    render "index"
   end
 
   # GET /listings/1 or /listings/1.json

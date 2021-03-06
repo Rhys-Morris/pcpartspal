@@ -1,23 +1,19 @@
 <h3 class="filter__header">Filter Results</h3>
-<select class="filter__select" id="category_filter">
-  <%= Category.all.each do |cat| %>
-    <option><%= cat.name.capitalize %></option>
-  <% end %>
-</select>
-<select class="filter__select" id="brand_filter">
-  <%= Brand.all.each do |brand| %>
-    <option><%= brand.name.capitalize %></option>
-  <% end %>
-</select>
-<button class="btn btn-up btn-ghost filter__submit">Filter</button>
 
-<script>
-  filter = document.querySelector(".filter__submit");
-  brand = document.querySelector("#brand_filter").value;
-  category = document.querySelector("#category_filter").value;
-  filter.addEventListener('click', () => {
-    fetch(`https://localhost:3000/listings?category=${category}&brand=${brand}`, { method: 'POST' })
-      .then(results => response.json())
-      .then(response => console.log(response));
-  })
-</script>
+<%= form_with url: "/listings/filter", method: :get do |form| %>
+  <div class="field form__field">
+    <%= form.label :category_id, class: "form__label" %>
+    <%= form.select :category_id, @categories.map {|cat| [cat.name, cat.id]} %>
+  </div>
+
+  <div class="field form__field ">
+    <%= form.label :brand_id, class: "form__label" %>
+    <%= form.select :brand_id, @brands.map {|brand| [brand.name, brand.id]} %>
+  </div>
+
+  <div class="actions"> 
+    <%= form.submit "Filter", class: "btn btn-up btn-ghost" %>
+    <%= link_to "Reset", listings_path, class: "btn btn-up btn-ghost filter__reset" %>
+  </div>
+<% end %>
+
