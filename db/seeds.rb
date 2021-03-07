@@ -12,12 +12,14 @@ def get_locations
     parsed_response["data"]
 end
 
+# Category and Brand model names
 categories = ['Power Supply', 'Graphics Cards', 'CPUs', 'Memory',
               'Hard Drives and SSDs', 'Cases', 'Cooling', 'Motherboards', 'Mice & Keyboards', 'Monitors']
 brands = ['Cooler Master', 'Logitech', 'Corsair', 'Thermaltake', 'Fractal', 'MSI', 'AMD', 'Intel', 'Nvidia',
           'ASUS', 'Lenovo', 'Gigabyte', 'Dell', 'ASRock', 'Razer', 'BenQ', 'G.Skill', 'Samsung', 'Seagate', 'Western Digital',
           'Sapphire', 'XFX', 'EVGA' ]
 
+# Populate Category model
 if Category.all.empty?
     categories.each do |category|
         seeded_category = Category.new("name": category)
@@ -27,6 +29,7 @@ if Category.all.empty?
     end
 end
 
+# Populate Brand model
 if Brand.all.empty?
     brands.each do |brand|
         seeded_brand = Brand.new("name": brand)
@@ -36,6 +39,7 @@ if Brand.all.empty?
     end
 end
 
+# Populate Location model
 if Location.all.empty?
     locations = get_locations
     locations.each do |location|
@@ -45,9 +49,8 @@ if Location.all.empty?
         lat = location["lat"]
         lng = location["lng"]
 
-        # Remove weird leading string for some ACT suburbs
-        leading_string = "ACT Remainder - "
-        city.gsub(/#{leading_string}/, "")
+        # Remove leading string for some ACT suburbs
+        city.gsub!(/ACT Remainder - /, "")
 
         # Save location
         seeded_location = Location.new("postcode": postcode, "city": city,
