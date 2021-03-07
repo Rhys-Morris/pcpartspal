@@ -26,16 +26,6 @@ module ApplicationHelper
         end
     end
 
-    def get_coords(postcode)
-        response = Faraday.get("http://api.beliefmedia.com/postcodes/#{postcode}.json")
-        parsed_response = JSON.parse(response.body)
-  
-        # puts "--------------"
-        # puts parsed_response
-  
-        coords = {lat: parsed_response["data"]["latitude"], long: parsed_response["data"]["longitude"]}
-      end
-
     def get_distance(start, finish)
         start_lat = start[:lat]
         start_long = start[:long]
@@ -53,4 +43,13 @@ module ApplicationHelper
         pp parsed_response
         
     end
+    
+    # #  Insert latitude and longitude into profile
+    # geocoded_by :address
+    # before_save :geocode
+
+    # def address
+    #   "#{self.city}, #{self.state}, #{self.postcode} Australia"
+    # end
+
 end

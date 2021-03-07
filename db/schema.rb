@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_120230) do
+ActiveRecord::Schema.define(version: 2021_03_07_042434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_120230) do
     t.string "title"
     t.text "description"
     t.integer "price"
-    t.boolean "sold"
+    t.boolean "sold", default: false
     t.integer "condition"
     t.bigint "category_id", null: false
     t.bigint "brand_id", null: false
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(version: 2021_03_06_120230) do
     t.index ["brand_id"], name: "index_listings_on_brand_id"
     t.index ["category_id"], name: "index_listings_on_category_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "postcode"
+    t.string "city"
+    t.string "state"
+    t.integer "latitude"
+    t.integer "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -91,9 +101,6 @@ ActiveRecord::Schema.define(version: 2021_03_06_120230) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.text "bio"
-    t.string "location"
-    t.integer "postcode"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -122,7 +129,9 @@ ActiveRecord::Schema.define(version: 2021_03_06_120230) do
     t.string "username"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "location_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -145,6 +154,7 @@ ActiveRecord::Schema.define(version: 2021_03_06_120230) do
   add_foreign_key "profiles", "users"
   add_foreign_key "purchases", "listings"
   add_foreign_key "purchases", "users"
+  add_foreign_key "users", "locations"
   add_foreign_key "watches", "listings"
   add_foreign_key "watches", "profiles"
 end

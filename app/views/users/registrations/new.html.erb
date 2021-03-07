@@ -3,7 +3,7 @@
 
     <h2 class="form__header">Register</h2>
 
-    <%= form_for([resource_name, resource.with_profile], url: registration_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field form__field">
@@ -16,19 +16,10 @@
         <%= f.text_field :username, class: "form__input" %>
       </div>
 
-      <%= f.fields_for :profile do |profile| %>
-        <div class="field form__field">
-          <%= profile.label :location, class: "form__label" %>
-          <span class="form__field__extra-info">(city you reside in)</span>
-          <%= profile.text_field :location, class: "form__input" %>
-        </div>
-        <div class="field form__field">
-          <%= profile.label :postcode, class: "form__label" %>
-          <%= profile.number_field :postcode, class: "form__input" %>
-        </div>
-      <% end %>
-        
-
+      <div class="field form__field">
+        <%= f.label :location_id, class: "form__label" %>
+        <%= f.select :location_id, @locations.map {|location| ["#{location.city}, #{location.postcode}, #{location.state}", location.id]} %>
+      </div>
 
       <div class="field form__field">
         <%= f.label :password, class: "form__label" %>

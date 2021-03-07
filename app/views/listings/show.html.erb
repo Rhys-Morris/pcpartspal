@@ -73,6 +73,11 @@
       <!-- Seller Details -->
       <div class="listing-show__user-details">
         <span class="listing-show__user-details__name">
+
+          <!-- DEBUG HERE -->
+         <% puts "--------" %>
+         <% puts @listing.user.profile.id %>
+
           <%= link_to @listing.user.username, profile_path(@listing.user.profile.id) %>
         </span>
         <span class="listing-show__user-details__listing-total">

@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  before_action :form_locations, only: [:new, :create]
 
   # GET /resource/sign_up
   def new
@@ -11,8 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    puts "-----------"
-    pp params
+    # puts "-----------"
+    # pp params
     super
   end
 
@@ -44,12 +45,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, profile_attributes: [:location, :postcode]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :location_id])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :location_id])
   end
 
   # The path used after sign up.
@@ -60,5 +61,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
     super(resource)
+  end
+
+  def form_locations
+    @locations = Location.all.sort_by { |location| location.city }
   end
 end
