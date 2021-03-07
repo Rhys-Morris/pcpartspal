@@ -3,7 +3,12 @@ class Profile < ApplicationRecord
   has_many :watches, dependent: :destroy
   has_many :listings, through: :watches
   has_one_attached :image
-  validates :location, presence: true
-  validates :postcode, numericality: { greater_than: 200, less_than: 9945 }
-  validates :bio, length: { maximum: 500 }
+
+  #  Insert latitude and longitude into profile
+  geocoded_by :location
+  before_save :geocode
+
+    def location
+      "#{self.user.location.city}, #{self.user.location.state}, Australia"
+    end
 end

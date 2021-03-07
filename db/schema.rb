@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_225523) do
+ActiveRecord::Schema.define(version: 2021_03_07_042434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,11 +55,18 @@ ActiveRecord::Schema.define(version: 2021_03_03_225523) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "listings", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.integer "price"
-    t.boolean "sold"
+    t.boolean "sold", default: false
     t.integer "condition"
     t.bigint "category_id", null: false
     t.bigint "brand_id", null: false
@@ -71,13 +78,34 @@ ActiveRecord::Schema.define(version: 2021_03_03_225523) do
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "postcode"
+    t.string "city"
+    t.string "state"
+    t.integer "latitude"
+    t.integer "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "subject"
+    t.text "body"
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "read", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
-    t.text "bio"
-    t.string "location"
-    t.integer "postcode"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "latitude"
+    t.string "longitude"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -101,7 +129,9 @@ ActiveRecord::Schema.define(version: 2021_03_03_225523) do
     t.string "username"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "location_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -119,9 +149,12 @@ ActiveRecord::Schema.define(version: 2021_03_03_225523) do
   add_foreign_key "listings", "brands"
   add_foreign_key "listings", "categories"
   add_foreign_key "listings", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "purchases", "listings"
   add_foreign_key "purchases", "users"
+  add_foreign_key "users", "locations"
   add_foreign_key "watches", "listings"
   add_foreign_key "watches", "profiles"
 end

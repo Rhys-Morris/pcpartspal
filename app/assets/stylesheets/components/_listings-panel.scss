@@ -1,17 +1,36 @@
 .listings-panel {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     padding-bottom: 2rem;
     box-shadow: $box-shadow-default;
     &__total {
         padding: 0 2rem;
     }
+
+    &__distance-filter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__label {
+            margin-right: 1rem;
+        }
+
+        select {
+            padding: 1rem;
+            border: 1px solid $color-grey-medium;
+            border-radius: .3rem;
+            background-color: white;
+        }
+    }
+
     &__search {
         padding: 1rem 1.5rem;
         width: 30rem;
         border: 1px solid $color-grey-medium;
+        border-radius: .3rem;
 
         &::placeholder {
             font-family: 'Roboto', sans-serif;

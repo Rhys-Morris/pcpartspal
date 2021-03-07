@@ -12,7 +12,7 @@
         <h2 class="categories__title header-2">Browse by category</h2>
         <div class="card-wrapper">
             <% @categories.each do |category| %>
-                <a href="./listings?category=<%= category.name %>" class="card", style='background-image: url(<%= asset_path format_background_image(category.name, "jpg") %>);'>
+                <a href="./listings/filter?filtered%5Bcategory_id%5D=<%=category.id%>" class="card", style='background-image: url(<%= asset_path format_background_image(category.name, "jpg") %>);'>
                     <span class="card__text"><%= category.name %></span>
                 </a>
             <% end %>
@@ -22,7 +22,7 @@
         <h2 class="brands__title header-2">Browse popular brands</h2>
         <div class="card-wrapper">
             <% @brands.each do |brand| %>
-                <a href="/listings?brand=<%= brand.name %>" class="card--brand">
+                <a href="./listings/filter?filtered%5Bbrand_id%5D=<%=brand.id%>" class="card--brand">
                     <%= image_tag format_background_image(brand.name, "png"), class: "card__image" %>
                 </a>
             <% end %>

@@ -47,7 +47,7 @@
       <!-- Postage costs -->
       <% if user_signed_in? %>
         <div class="listing-show__postage">
-          <%= aus_post(@listing.user.profile.postcode, current_user.profile.postcode) %>
+          Postage cost is <span>$<%= @postage_cost %></span> with Australia Post Regular Parcel delivery
         </div>
       <% end %>
 
@@ -67,12 +67,17 @@
       <!-- Buy and Message -->
       <% if user_signed_in? && current_user.id != @listing.user.id && @listing.sold != true %>
         <button data-stripe="payment" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
+        <%= link_to "Message", create_conversation_path(sender_id: current_user.id, receiver_id: @listing.user.id), method: :post, class: "listing-show__message btn btn-up btn-ghost" %>
       <% end %>
-      <button class="listing-show__message btn btn-up btn-ghost">Message</button>
 
       <!-- Seller Details -->
       <div class="listing-show__user-details">
         <span class="listing-show__user-details__name">
+
+          <!-- DEBUG HERE -->
+         <% puts "--------" %>
+         <% puts @listing.user.profile.id %>
+
           <%= link_to @listing.user.username, profile_path(@listing.user.profile.id) %>
         </span>
         <span class="listing-show__user-details__listing-total">

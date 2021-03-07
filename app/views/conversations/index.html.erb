@@ -1,0 +1,39 @@
+<div class="container">
+
+  <h1 class="inbox__header">Message Inbox</h1>
+
+  <div class="inbox">
+    <% @conversations.each do |conversation| %>
+      <% @recipient = conversation.recipient(current_user) %>
+      <!-- Guard against conversation created without messages yet sent -->
+      <!-- For example navigating to send message on user profile without actioning -->
+      <% if !conversation.messages.empty? %>
+        <a class="inbox__conversation" href="<%= conversation_messages_path(conversation) %>">
+          <div class="inbox__conversation__wrapper">
+            <div class="inbox__conversation__user-box">
+              <% if @recipient.profile.image.attached? %>
+                <%= image_tag @recipient.profile.image, alt: 'profile-picture', class: "user-panel__picture inbox__conversation__picture" %>
+              <% else %>
+                <%= image_tag "profile-default.png", alt: 'profile-picture', class: "user-panel__picture inbox__conversation__picture" %>
+              <% end %>
+              <span class="inbox__conversation__recipient"> <%= @recipient.username.upcase %></span>
+            </div>
+            <div class="inbox__conversation__recent-message">
+              <% last_message = conversation.messages[-1] %>
+            <h3 class="inbox__conversation__recent-message__subject">
+              <%= last_message.subject %>
+            </h3>
+            <p class="inbox__conversation__recent-message__body">
+              <%= last_message.body %>
+            </p>
+            <p class="inbox__conversation__recent-message__time-sent">
+              <%= time_ago_in_words(last_message.created_at) %> ago
+            </p>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

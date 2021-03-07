@@ -3,6 +3,7 @@
   <head>
     <title>Pcpartspal</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -30,3 +31,11 @@
     <%= yield %>
   </body>
 </html>
+
+<script>
+  // Hide flash messages after 8 secs
+  const flash = document.querySelector('.flash')
+  setTimeout(() => {
+    flash.classList.add("hidden")
+  }, 8000)
+</script>

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="conversation">  
+    <% @recipient = @conversation.recipient(current_user) %>
+
+    <div class="conversation__recipient">
+      <% if @recipient.profile.image.attached? %>
+        <%= image_tag @recipient.profile.image, alt: 'profile-picture', class: "user-panel__picture" %>
+      <% else %>
+        <%= image_tag "profile-default.png", alt: 'profile-picture', class: "user-panel__picture" %>
+      <% end %>
+      <h2 class="conversation__recipient__name"><%= @recipient.username %></h2>
+    </div>
+
+    <ul class="conversation__messages">
+      <% @messages.each do |message| %>
+        <% if message.body %>
+          <li class="conversation__message <%= current_user.id == message.user_id ? 'conversation__message--sent' : 'conversation__message--received' %>">
+            <div class="conversation__messages__header">
+              <h4 class="conversation__messages__subject"><%= message.subject %></h4>
+            </div>
+            <p class="conversation__messages__body"><%= message.body %></p>
+            <p class="conversation__messages__sent"><%= time_ago_in_words(message.created_at) %> ago</p>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <button class="conversation__send btn btn-cta">New Message</button>
+
+    <div class="conversation__new-message hidden">
+      <h2 class="conversation__new-message__header">New Message</h2>
+
+    <%= form_for [@conversation, @message] do |f| %>
+      <div class="field form__field">
+        <%= f.label :subject, class: "form__label" %>
+        <%= f.text_field :subject, placeholder: "Your message", class: "form__input" %>
+      </div>
+      <div class="field form__field">
+        <%= f.label :body, class: "form__label" %>
+        <%= f.text_area :body, placeholder: "Your message", class: "form__text" %>
+      </div>
+      
+      <%= f.submit "Send", class: "btn btn-ghost btn-up message-send" %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  const create_message = document.querySelector(".conversation__send");
+  const new_message_box = document.querySelector(".conversation__new-message")
+  const send_message = document.querySelector(".message-send");
+  [create_message, send_message].forEach(element => {
+    element.addEventListener('click', () => {
+    create_message.classList.toggle("hidden");
+    new_message_box.classList.toggle("hidden");
+    });
+  });
+</script>

@@ -100,6 +100,10 @@
         font-style: italic;
         width: 100%;
         margin-bottom: 3rem;
+
+        span {
+            font-weight: 500;
+        }
     }
 
     &__watchlist {
@@ -116,6 +120,10 @@
     &__message {
         margin-bottom: 2rem;
         margin-top: .3rem;
+        text-align: center;
+        text-decoration: none;
+        color: $color-black;
+        font-weight: 400;
     }
 
     &__user-details {
