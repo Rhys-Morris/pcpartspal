@@ -25,31 +25,4 @@ module ApplicationHelper
             title
         end
     end
-
-    def get_distance(start, finish)
-        start_lat = start[:lat]
-        start_long = start[:long]
-        finish_lat = finish[:lat]
-        finish_long = finish[:long]
-
-        response = Faraday.get("https://distance-calculator.p.rapidapi.com/distance/simple?lat_1=#{start_lat}&long_1=#{start_long}&lat_2=#{finish_lat}&long_2=#{finish_long}&unit=kilometers") do |req|
-            req.headers["x-rapidapi-key"] = '1fea4c3efamshad5050ff344dcc5p1eea7djsn4ba1a7cb847a'
-            req.headers["x-rapidapi-host"] = 'distance-calculator.p.rapidapi.com'
-            req.headers["content-type"] = 'application/json'
-        end
-
-        parsed_response = JSON.parse(response.body)
-
-        pp parsed_response
-        
-    end
-    
-    # #  Insert latitude and longitude into profile
-    # geocoded_by :address
-    # before_save :geocode
-
-    # def address
-    #   "#{self.city}, #{self.state}, #{self.postcode} Australia"
-    # end
-
 end

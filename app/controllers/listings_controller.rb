@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
   before_action :calculate_postage, only: %i[ show ]
   before_action :create_stripe_session, only: %i[ show ]
 
-  # GET /listings or /listings.json
+  # GET /listings
   def index
     @listings = Listing.all
   end
@@ -16,7 +16,7 @@ class ListingsController < ApplicationController
     render "index"
   end
 
-  # GET /listings/1 or /listings/1.json
+  # GET /listings/1
   def show
   end
 
@@ -29,12 +29,12 @@ class ListingsController < ApplicationController
   def edit
   end
 
-  # POST /listings or /listings.json
+  # POST /listings
   def create
     @listing = current_user.listings.new(listing_params)
       
     if @listing.save
-      flash[:success] = "Listing successfully created."
+      flash[:success] = "Listing successfully created"
       redirect_to @listing
     else
       set_form_parameters
@@ -42,10 +42,10 @@ class ListingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /listings/1 or /listings/1.json
+  # PATCH/PUT /listings/1
   def update
       if @listing.update(listing_params)
-        flash[:success] = "Listing successfully updated."
+        flash[:success] = "Listing successfully updated"
         redirect_to @listing
       else
         set_form_parameters
@@ -56,7 +56,7 @@ class ListingsController < ApplicationController
   # DELETE /listings/1 or /listings/1.json
   def destroy
     @listing.destroy
-    flash[:success] = "Listing was successfully destroyed."
+    flash[:success] = "Listing successfully destroyed"
     redirect_to listings_path
   end
 
@@ -81,6 +81,7 @@ class ListingsController < ApplicationController
       @conditions = Listing.conditions.keys
     end
 
+    # Create stripe session if user signed in
     def create_stripe_session
       return if !user_signed_in?
       session = Stripe::Checkout::Session.create(
@@ -106,6 +107,7 @@ class ListingsController < ApplicationController
       @session_id = session.id
     end
 
+    # Calculate listing postage for current user if signed in
     def calculate_postage
       return nil if !user_signed_in?
       # API key

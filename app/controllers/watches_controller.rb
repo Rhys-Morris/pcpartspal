@@ -4,15 +4,14 @@ class WatchesController < ApplicationController
     before_action :watch_params, only: %i[ create ]
 
     def create
-        puts "Made it to create"
 
         @watch = Watch.new(watch_params)
 
         if @watch.save
-            flash[:success] = "Added to watchlist"
+            flash[:success] = "Added #{@watch.listing.title} to watchlist"
             redirect_to listing_path(@watch.listing_id)
         else
-            flash[:alert] = "Could not add to watchlist"
+            flash[:alert] = "Unable to add to watchlist"
             redirect_to listing_path(@watch.listing_id)
         end
     end

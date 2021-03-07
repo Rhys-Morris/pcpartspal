@@ -1,22 +1,41 @@
 .payment-success {
 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5rem;
+
     &__image-box {
-        width: 40%;
         margin-right: 3rem;
 
         &__image{
-            width: 100%;
+            width: 30rem;
         }
     }
     &__text {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        text-align: center;
+        width: 50%;
 
         &__header, &__subheader, &__receipt {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        &__header {
+            padding-bottom: .5rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            font-size: 2.4rem;
+            border-bottom: 2px solid $color-orangered;
+        }
+
+        &__subheader {
+            font-weight: 400;
+            font-size: 1.6rem;
         }
 
         &__receipt {

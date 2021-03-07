@@ -5,9 +5,10 @@
   <div class="inbox">
     <% @conversations.each do |conversation| %>
       <% @recipient = conversation.recipient(current_user) %>
+      
       <!-- Guard against conversation created without messages yet sent -->
-      <!-- For example navigating to send message on user profile without actioning -->
       <% if !conversation.messages.empty? %>
+      
         <a class="inbox__conversation" href="<%= conversation_messages_path(conversation) %>">
           <div class="inbox__conversation__wrapper">
             <div class="inbox__conversation__user-box">

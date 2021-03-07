@@ -37,19 +37,11 @@
         <span>Condition:</span> <%= @listing.condition %>
       </span>
       <span class="listing-show__price">
-        <% if !@listing.sold %>
-          $<%= @listing.price %>
-        <% else %>
-          <span class="sold-text">Sold</span>
-        <% end %>
+        <%= render_price(@listing.sold, @listing.price) %>
       </span>
 
       <!-- Postage costs -->
-      <% if user_signed_in? %>
-        <div class="listing-show__postage">
-          Postage cost is <span>$<%= @postage_cost %></span> with Australia Post Regular Parcel delivery
-        </div>
-      <% end %>
+      <%= render_postage(@listing.sold, @postage_cost) %>
 
       <!-- Watchlist -->
       <% if current_user && current_user.id != @listing.user.id %>
@@ -73,11 +65,6 @@
       <!-- Seller Details -->
       <div class="listing-show__user-details">
         <span class="listing-show__user-details__name">
-
-          <!-- DEBUG HERE -->
-         <% puts "--------" %>
-         <% puts @listing.user.profile.id %>
-
           <%= link_to @listing.user.username, profile_path(@listing.user.profile.id) %>
         </span>
         <span class="listing-show__user-details__listing-total">
