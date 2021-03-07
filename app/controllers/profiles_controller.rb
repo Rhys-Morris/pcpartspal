@@ -47,6 +47,13 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   def update
     respond_to do |format|
+
+      # If blank update return profile unaltered without error
+      if !params[:profile]
+        redirect_to profile_path(@profile.id)
+        return 
+      end
+
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: "Profile was successfully updated!" }
         format.json { render :show, status: :ok, location: @profile }

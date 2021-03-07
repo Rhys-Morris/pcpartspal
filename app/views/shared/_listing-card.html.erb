@@ -1,7 +1,9 @@
-<% listing_lat = listing.user.profile.latitude %>
-<% listing_long = listing.user.profile.longitude %>
-
-<% distance = current_user.profile.distance_to([listing_lat, listing_long]) %>
+<!-- Place distance from current user on each card as data attr -->
+<% if user_signed_in? %>
+  <% listing_lat = listing.user.profile.latitude %>
+  <% listing_long = listing.user.profile.longitude %>
+  <% distance = current_user.profile.distance_to([listing_lat, listing_long]) %>
+<% end %>
 
 <a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>">
     <% if listing.images.attached? %>
@@ -25,4 +27,8 @@
     <span class="card--listing__price">
       $<%= listing.price %>
     </span>
+    <!-- Add watched icon if in current_user watchlist -->
+    <% if current_user && current_user.profile.listings.include?(listing) %>
+      <div class="card--listing__watched"></div>
+    <% end %>
 </a>

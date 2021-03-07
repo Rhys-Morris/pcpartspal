@@ -24,6 +24,7 @@
       <% flash.each do |key, message| %>
         <div class="flash">
           <p class="<%= key %>"><%= message %></p>
+          <span class="flash__close">X</span>
         </div>
       <% end %>
 
@@ -33,9 +34,9 @@
 </html>
 
 <script>
-  // Hide flash messages after 8 secs
   const flash = document.querySelector('.flash')
-  setTimeout(() => {
-    flash.classList.add("hidden")
-  }, 8000)
+  const flashClose = document.querySelector('.flash__close')
+  flashClose.addEventListener('click', () => {
+    flash.classList.add("hidden");
+  });
 </script>

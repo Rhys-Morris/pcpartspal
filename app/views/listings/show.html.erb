@@ -15,7 +15,7 @@
       <% if @listing.images.attached? %>
         <%= image_tag @listing.images[0], class: "listing-show__images__main"%>
         <div class="listing-show__images__thumbnail-container">
-          <% (1...@listing.images.count).each do |image| %>
+          <% (0...@listing.images.count).each do |image| %>
             <%= image_tag @listing.images[image], class: "listing-show__images__thumbnail" %>
           <% end %>
         </div>
@@ -68,7 +68,7 @@
           <%= link_to @listing.user.username, profile_path(@listing.user.profile.id) %>
         </span>
         <span class="listing-show__user-details__listing-total">
-          <%= user_listing_count(@listing.user) %>
+          <%= listing_count(@listing.user.listings) %>
         </span>
       </div>
 
@@ -94,4 +94,14 @@
       sessionId: "<%= @session_id %>"
     });
   });
+</script>
+
+<script>
+  const thumbnailBox = document.querySelector(".listing-show__images__thumbnail-container")
+  const mainImage = document.querySelector(".listing-show__images__main")
+  thumbnailBox.addEventListener("click", (e) => {
+    const target = e.target.closest(".listing-show__images__thumbnail");
+    const src = target.src;
+    mainImage.src = src;
+  })
 </script>

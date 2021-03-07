@@ -73,6 +73,7 @@
     margin: 2rem;
     height: 32.5rem;
     width: 20rem;
+    position: relative;
 
     &:hover {
         border: 1px solid $color-grey-dark;
@@ -108,5 +109,16 @@
         padding-bottom: .5rem;
         font-weight: 500;
         font-size: 1.6rem;
+    }
+
+    &__watched {
+        height: 1.8rem;
+        width: 2rem;
+        background-image: image-url("watched-icon.png");
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
     }
 }
