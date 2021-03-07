@@ -9,9 +9,12 @@ class User < ApplicationRecord
   has_many :listings, dependent: :destroy
   has_many :purchases
   validates :username, uniqueness: true
+  belongs_to :location
 
-  def with_profile
-    self.profile = Profile.new
-    self
+  # Create profile
+  before_save :init_profile
+
+  def init_profile
+    self.build_profile
   end
 end

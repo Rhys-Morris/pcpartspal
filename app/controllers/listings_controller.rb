@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :authenticate_user!, except: %i[ index show filter ]
   before_action :set_form_parameters, only: %i[ new edit index filter ]
   before_action :calculate_postage, only: %i[ show ]
   before_action :create_stripe_session, only: %i[ show ]
@@ -120,8 +120,8 @@ class ListingsController < ApplicationController
 
       # Set up query params
       query_params = {
-          "from_postcode" => @listing.user.profile.postcode,
-          "to_postcode" => current_user.profile.postcode,
+          "from_postcode" => @listing.user.location.postcode,
+          "to_postcode" => current_user.location.postcode,
           "length" => parcel_length,
           "width" => parcel_width,
           "height" => parcel_height,

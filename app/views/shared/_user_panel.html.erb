@@ -13,18 +13,10 @@
         </div>
         <div class="user-panel__user-info">
             <p class="user-panel__user-info__top">
-                <% if !@profile.location.blank? %>
-                    <%= @profile.location %>
-                <% else %>
-                    <%= "No location" %> 
-                <% end %>
+                <%= @profile.user.location.city %>
             </p>
             <p>
-                <% if !@profile.postcode.blank? %>
-                    <%= @profile.postcode %>
-                <% else %>
-                    <%= "No postcode" %> 
-                <% end %>
+               <%= @profile.user.location.postcode %>
             </p>
         </div>
         <div class="user-panel__user-listings-info">
@@ -32,7 +24,7 @@
         </div>
     </div>
     <div class="user-panel__buttons">
-        <% if @profile.id == current_user.id %>
+        <% if @profile.id == current_user.profile.id %>
             <%= link_to "Edit Profile", edit_profile_path(current_user.id), class: "user-panel__btn btn btn-ghost" %>
             <%= link_to "Delete Account", "/users", method: :delete, class: "user-panel__btn btn btn-delete", data: { confirm: "Are you sure?" } %>
         <% else %>
