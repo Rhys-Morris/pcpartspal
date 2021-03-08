@@ -1,9 +1,9 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show filter ]
+  before_action :set_listing, only: %i[ show edit update destroy postage ]
+  before_action :authenticate_user!, except: %i[ index show filter postage ]
   before_action :set_form_parameters, only: %i[ new edit index filter ]
-  before_action :calculate_postage, only: %i[ show ]
-  before_action :create_stripe_session, only: %i[ show ]
+  before_action :get_postage_options, only: %i[ show postage ]
+  before_action :create_stripe_session, only: %i[ postage ]
 
   # GET /listings
   def index
@@ -14,6 +14,12 @@ class ListingsController < ApplicationController
     filtered_hash = filter_params.reject {|k, v| v.blank?}.to_h
     @listings = Listing.filter(filtered_hash)
     render "index"
+  end
+
+  # Render postage costs to view and update Stripe session
+  def postage
+    @postage_cost = params[:postage_option] unless params[:postage_option].blank?
+    render "show"
   end
 
   # GET /listings/1
@@ -91,7 +97,7 @@ class ListingsController < ApplicationController
           name: @listing.title,
           description: @listing.description,
           images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
-          amount: (@listing.price.to_i * 100) + (@postage_cost * 100).to_i,
+          amount: (@listing.price.to_i * 100) + (params[:postage_option].to_i * 100),
           currency: 'aud',
           quantity: 1,
         }],
@@ -108,7 +114,7 @@ class ListingsController < ApplicationController
     end
 
     # Calculate listing postage for current user if signed in
-    def calculate_postage
+    def get_postage_options
       return nil if !user_signed_in?
       # API key
       api_key = "c48a22bb-0ffa-4a4e-aa55-586af1e58b92"
@@ -118,7 +124,7 @@ class ListingsController < ApplicationController
       parcel_length = 50
       parcel_width = 30
       parcel_height = 10
-      parcel_weight = 1.5
+      parcel_weight = 1
 
       # Set up query params
       query_params = {
@@ -131,17 +137,19 @@ class ListingsController < ApplicationController
           "service_code" => service_code    
       }
 
-      url = "https://digitalapi.auspost.com.au/postage/parcel/domestic/calculate.json?"
+      url = "https://digitalapi.auspost.com.au/postage/parcel/domestic/service.json?"
   
       response = Faraday.get(url + query_params.to_query) do |req|
           req.headers["AUTH-KEY"] = api_key
       end
-
-      # Response debugging
-      # puts "------------"
-      # pp response
-
       parsed_response = JSON.parse(response.body)
-      @postage_cost = parsed_response["postage_result"]["total_cost"].to_f
+
+      # Extract postage options from response
+      @postage_options = []
+      parsed_response["services"]["service"].each do |option|
+        @postage_options.push({code: option["code"], name: option["name"], price: option["price"]})
+      end
+
+      @postage_options
     end
 end

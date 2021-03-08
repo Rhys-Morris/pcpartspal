@@ -3,7 +3,7 @@
   <div class="listing-show__return-links">
     <%= link_to "All Listings", listings_path, class: "listing-show__return-links__link" %>
     <span class="listing-show__return-links__spacer">></span>
-    <%= link_to @listing.category.name, listings_path, class: "listing-show__return-links__link" %>
+    <%= link_to @listing.category.name, "#{filter_listings_path}?filtered%5Bcategory_id%5D=#{@listing.category.id}", class: "listing-show__return-links__link" %>
     <span class="listing-show__return-links__spacer">></span>
     <span class="listing-show__return-links__current"><%= @listing.title %></span>
   </div>
@@ -39,12 +39,14 @@
       <span class="listing-show__price">
         <%= render_price(@listing.sold, @listing.price) %>
       </span>
-
-      <!-- Postage costs -->
-      <%= render_postage(@listing.sold, @postage_cost) %>
+      <% if @postage_cost %>
+        <span class="listing-show__postage-cost">
+          <%= "+ $#{@postage_cost} postage cost" %>
+        </span>
+      <% end %>
 
       <!-- Watchlist -->
-      <% if current_user && current_user.id != @listing.user.id %>
+      <% if current_user && current_user.id != @listing.user.id && !@listing.sold %>
         <% if !current_user.profile.listings.include?(@listing) %>
           <span class="listing-show__watchlist">
             Add to <%= link_to "Watchlist", create_watch_path(watch: { listing_id: @listing.id, profile_id: current_user.profile.id}), method: :post %>
@@ -56,8 +58,15 @@
         <% end %>
       <% end %>
 
+      <!-- Postage costs -->
+      <% if current_user && current_user.id != @listing.user.id && !@listing.sold %>
+        <div class="listing-show__postage-options">
+          <%= render "shared/postage-select", listing: @listing, postage_options: @postage_options %>
+        </div>
+      <% end %>
+
       <!-- Buy and Message -->
-      <% if user_signed_in? && current_user.id != @listing.user.id && @listing.sold != true %>
+      <% if user_signed_in? && current_user.id != @listing.user.id && !@listing.sold %>
         <button data-stripe="payment" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
         <%= link_to "Message", create_conversation_path(sender_id: current_user.id, receiver_id: @listing.user.id), method: :post, class: "listing-show__message btn btn-up btn-ghost" %>
       <% end %>
@@ -88,7 +97,19 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-  document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+    document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+    // Don't send session if no postage option selected
+    if (!"<%= @postage_cost %>") {
+      const flash = document.createElement("div");
+      flash.className = "flash";
+      const flashMessage = document.createElement("p");
+      flashMessage.className = "alert";
+      flashMessage.textContent = "Please select postage before proceeding to checkout";
+      flash.appendChild(flashMessage);
+      document.querySelector('.nav').after(flash);
+      return
+    }
+    
     const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
     stripe.redirectToCheckout({
       sessionId: "<%= @session_id %>"
