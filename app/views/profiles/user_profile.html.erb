@@ -39,18 +39,24 @@
             <div class="user-profile__content__sold hidden" data-target="sold-listings">
                 <h3 class="user-profile__content__header">My Sales</h3>
                 <div class="card-container">
-                    <% @profile.user.listings.each do |listing| %>
-                        <% if listing.sold %>
-                            <%= render "shared/listing-card", listing: listing %>
+                    <div class="user-profile__cards-wrapper">
+                        <% @profile.user.listings.each do |listing| %>
+                            <% if listing.sold %>
+                                <%= render "shared/listing-card", listing: listing %>
+                            <% end %>
+                            <div class="sales">
+                                <p> Purchaser: <%= link_to listing.purchase.user.username, profile_path(listing.purchase.user.profile.id), class: "sales__link" %> </p>
+                                <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: listing.purchase.user.id), method: :post, class: "sales__button btn btn-up btn-ghost" %>
+                            </div>
                         <% end %>
-                    <% end %>
+                    </div>
                 </div>
             </div>
 
             <div class="user-profile__content__purchases hidden" data-target="purchases">
                 <h3 class="user-profile__content__header">My Purchases</h3>
                 <div class="card-container">
-                    <div class="purchases__container">
+                    <div class="user-profile__cards-wrapper">
                         <% @profile.user.purchases.each do |purchase| %>
                         <% if purchase.user_id == @profile.user.id %>
                             <% listing = Listing.find(purchase.listing_id) %>

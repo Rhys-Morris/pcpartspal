@@ -5,8 +5,8 @@ class Listing < ApplicationRecord
   has_many_attached :images
   has_many :watches, dependent: :destroy
   has_many :profiles, through: :watches
-  has_many :purchases, dependent: :destroy
-  has_one :review
+  has_one :purchase, dependent: :destroy
+  has_one :review, dependent: :destroy
   enum condition: { Used: 0, New: 1 }
 
   # Validations

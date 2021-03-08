@@ -30,8 +30,7 @@ class ProfilesController < ApplicationController
   # POST /profiles
   def create
 
-    @profile = Profile.new(profile_params)
-    @profile.user_id = current_user.id
+    @profile = current_user.profile.new(profile_params)
 
     respond_to do |format|
       if @profile.save

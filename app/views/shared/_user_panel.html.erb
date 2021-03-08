@@ -24,8 +24,8 @@
                 <%= listing_count(@profile.user.listings) %>
             </p>
             <p>
-                Feedback Score: <%= @profile.user.reviews.count %>
-            </p>>
+                Feedback Score: <%= calc_feedback_score(@profile.user.reviews) %>
+            </p>
         </div>
     </div>
     <div class="user-panel__buttons">
