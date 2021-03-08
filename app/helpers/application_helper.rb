@@ -1,20 +1,14 @@
 require 'faraday'
 
 module ApplicationHelper
-    def user_listing_count(user)
-        count = Listing.where("user_id": user.id, "sold": false).count
-        if count == 1
-            "#{count} listing for sale"
-        else
-            "#{count} listings for sale"
-        end
-    end
 
+    # Return formatted string
     def listing_count(listings)
+        listings = listings.select { |list| !list.sold }
         if listings.count == 1
-            "1 listing"
+            "1 listing for sale"
         else
-            "#{listings.count} listings"
+            "#{listings.count} listings for sale"
         end
     end
 
@@ -26,30 +20,10 @@ module ApplicationHelper
         end
     end
 
-    def get_distance(start, finish)
-        start_lat = start[:lat]
-        start_long = start[:long]
-        finish_lat = finish[:lat]
-        finish_long = finish[:long]
-
-        response = Faraday.get("https://distance-calculator.p.rapidapi.com/distance/simple?lat_1=#{start_lat}&long_1=#{start_long}&lat_2=#{finish_lat}&long_2=#{finish_long}&unit=kilometers") do |req|
-            req.headers["x-rapidapi-key"] = '1fea4c3efamshad5050ff344dcc5p1eea7djsn4ba1a7cb847a'
-            req.headers["x-rapidapi-host"] = 'distance-calculator.p.rapidapi.com'
-            req.headers["content-type"] = 'application/json'
-        end
-
-        parsed_response = JSON.parse(response.body)
-
-        pp parsed_response
-        
+    def calc_feedback_score(reviews)
+        return "No feedback yet" if reviews.empty? 
+        ratings = reviews.map { |review| review.rating }
+        score = (ratings.reduce(:+).to_f / reviews.count.to_f)
+        "#{score} / 5.0"
     end
-    
-    # #  Insert latitude and longitude into profile
-    # geocoded_by :address
-    # before_save :geocode
-
-    # def address
-    #   "#{self.city}, #{self.state}, #{self.postcode} Australia"
-    # end
-
 end

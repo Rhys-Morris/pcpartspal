@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     .notice, .alert, .success {
         text-align: center;
@@ -22,5 +23,22 @@
 
     .success {
         background: $color-success;
+    }
+
+    &__close {
+        font-size: 1.4rem;
+        font-weight: 400;
+        padding: .8rem 1rem;
+        border-radius: 50%;
+        position: absolute;
+        right: 2.5rem;
+        top: .4rem;
+        transition:.2s all;
+
+        &:hover {
+            background-color: $color-black;
+            color: $color-grey-light;
+            cursor: pointer;
+        }
     }
 }

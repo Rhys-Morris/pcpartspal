@@ -2,12 +2,12 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
-  # GET /profiles or /profiles.json
+  # GET /profiles
   def index
     @profiles = Profile.all
   end
 
-  # GET /profiles/1 or /profiles/1.json
+  # GET /profiles/1
   def show
     if current_user.profile.id == params[:id].to_i
       # Current users profile
@@ -27,11 +27,10 @@ class ProfilesController < ApplicationController
   def edit
   end
 
-  # POST /profiles or /profiles.json
+  # POST /profiles
   def create
 
-    @profile = Profile.new(profile_params)
-    @profile.user_id = current_user.id
+    @profile = current_user.profile.new(profile_params)
 
     respond_to do |format|
       if @profile.save
@@ -44,9 +43,16 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /profiles/1 or /profiles/1.json
+  # PATCH/PUT /profiles/1
   def update
     respond_to do |format|
+
+      # If blank update return profile unaltered without error
+      if !params[:profile]
+        redirect_to profile_path(@profile.id)
+        return 
+      end
+
       if @profile.update(profile_params)
         format.html { redirect_to @profile, notice: "Profile was successfully updated!" }
         format.json { render :show, status: :ok, location: @profile }
@@ -57,7 +63,7 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # DELETE /profiles/1 or /profiles/1.json
+  # DELETE /profiles/1
   def destroy
     @profile.destroy
     respond_to do |format|

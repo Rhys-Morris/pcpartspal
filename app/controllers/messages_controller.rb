@@ -2,11 +2,10 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_conversation
 
+  # Display all messages for a conversation between users
   def index
     @messages = @conversation.messages
-
     @messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
-
     @message = @conversation.messages.new
   end
 
@@ -17,7 +16,7 @@ class MessagesController < ApplicationController
     if @message.save
       redirect_to conversation_messages_path(@conversation)
     else
-      flash[:alert] = "Could not save message all fields must be completed"
+      flash[:alert] = "Could not save message, check all fields completed"
       redirect_to conversation_messages_path(@conversation)
     end
   end

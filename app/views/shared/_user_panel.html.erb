@@ -19,13 +19,18 @@
                <%= @profile.user.location.postcode %>
             </p>
         </div>
-        <div class="user-panel__user-listings-info">
-            <%= user_listing_count(@profile.user) %>
+        <div class="user-panel__user-info">
+            <p class="user-panel__user-info__top">
+                <%= listing_count(@profile.user.listings) %>
+            </p>
+            <p>
+                Feedback Score: <%= calc_feedback_score(@profile.user.reviews) %>
+            </p>
         </div>
     </div>
     <div class="user-panel__buttons">
         <% if @profile.id == current_user.profile.id %>
-            <%= link_to "Edit Profile", edit_profile_path(current_user.id), class: "user-panel__btn btn btn-ghost" %>
+            <%= link_to "Edit Profile", edit_profile_path(current_user.profile.id), class: "user-panel__btn btn btn-ghost" %>
             <%= link_to "Delete Account", "/users", method: :delete, class: "user-panel__btn btn btn-delete", data: { confirm: "Are you sure?" } %>
         <% else %>
             <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: :post, class: "user-panel__btn btn btn-ghost" %>

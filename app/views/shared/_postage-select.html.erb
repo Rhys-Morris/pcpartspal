@@ -1,0 +1,11 @@
+<%= form_with url: "/listings/#{@listing.id}/postage", method: :get do |form| %>
+
+  <div class="field form__field">
+    <h3 class="listing-show__postage-options__label">Postage Options</h3>
+    <%= form.select "postage_option", @postage_options.map { |option| ["#{option[:name]} $#{option[:price]}", (option[:price].to_f * 100)] }, { include_blank: true }, id: "postage-choice" %>
+  </div>
+
+  <div class="actions"> 
+    <%= form.submit "Select Postage", class: "btn btn-up btn-ghost listing-show__postage-options__select" %>
+  </div>
+<% end %>
