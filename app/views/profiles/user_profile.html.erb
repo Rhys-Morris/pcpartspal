@@ -18,7 +18,7 @@
                 <h3 class="user-profile__content__header">My Listings</h3>
                 <div class="card-container">
                     <% @profile.user.listings.each do |listing| %>
-                        <% if listing.sold != true %>
+                        <% if !listing.sold %>
                             <%= render "shared/listing-card", listing: listing %>
                         <% end %>
                     <% end %>
@@ -29,7 +29,7 @@
                 <h3 class="user-profile__content__header">Watchlist</h3>
                 <div class="card-container">
                     <% @profile.listings.each do |listing| %>
-                        <% if listing.sold != true %>
+                        <% if !listing.sold %>
                             <%= render "shared/listing-card", listing: listing %>
                         <% end %>
                     <% end %>
@@ -40,7 +40,7 @@
                 <h3 class="user-profile__content__header">My Sales</h3>
                 <div class="card-container">
                     <% @profile.user.listings.each do |listing| %>
-                        <% if listing.sold == true %>
+                        <% if listing.sold %>
                             <%= render "shared/listing-card", listing: listing %>
                         <% end %>
                     <% end %>
@@ -50,12 +50,18 @@
             <div class="user-profile__content__purchases hidden" data-target="purchases">
                 <h3 class="user-profile__content__header">My Purchases</h3>
                 <div class="card-container">
-                    <% @profile.user.purchases.each do |purchase| %>
+                    <div class="purchases__container">
+                        <% @profile.user.purchases.each do |purchase| %>
                         <% if purchase.user_id == @profile.user.id %>
                             <% listing = Listing.find(purchase.listing_id) %>
                             <%= render "shared/listing-card", listing: listing %>
+                            <div class="purchases__buttons">
+                                <button class="purchases__button btn btn-up btn-ghost">Leave Feedback</button>
+                                <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: listing.user.id), method: :post, class: "purchases__button btn btn-up btn-ghost" %>
+                            </div>
                         <% end %>
                     <% end %>
+                    </div>
                 </div>
             </div>
 

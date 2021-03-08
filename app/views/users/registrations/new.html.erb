@@ -18,7 +18,7 @@
 
       <div class="field form__field">
         <%= f.label :location_id, class: "form__label" %>
-        <%= f.select :location_id, @locations.map {|location| ["#{location.city}, #{location.postcode}, #{location.state}", location.id]} %>
+        <%= f.select :location_id, @locations.map {|location| ["#{location.city}, #{location.state} #{location.postcode}", location.id]} %>
       </div>
 
       <div class="field form__field">

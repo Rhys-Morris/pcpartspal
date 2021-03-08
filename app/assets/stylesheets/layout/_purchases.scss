@@ -1,0 +1,26 @@
+.purchases {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: -1.75rem;
+    }
+
+    &__button {
+        width: 90%;
+        text-decoration: none;
+        color: $color-black;
+        font-weight: 400;
+        text-align: center;
+    }
+}

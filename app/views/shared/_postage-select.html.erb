@@ -2,7 +2,7 @@
 
   <div class="field form__field">
     <h3 class="listing-show__postage-options__label">Postage Options</h3>
-    <%= form.select "postage_option", @postage_options.map { |option| ["#{option[:name]} $#{option[:price]}", option[:price]] }, { include_blank: true }, id: "postage-choice" %>
+    <%= form.select "postage_option", @postage_options.map { |option| ["#{option[:name]} $#{option[:price]}", (option[:price].to_f * 100)] }, { include_blank: true }, id: "postage-choice" %>
   </div>
 
   <div class="actions"> 
