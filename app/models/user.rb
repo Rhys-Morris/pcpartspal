@@ -8,6 +8,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile
   has_many :listings, dependent: :destroy
   has_many :purchases
+  has_many :reviews
   validates :username, uniqueness: true
   belongs_to :location
 

@@ -6,6 +6,7 @@ class Listing < ApplicationRecord
   has_many :watches, dependent: :destroy
   has_many :profiles, through: :watches
   has_many :purchases, dependent: :destroy
+  has_one :review
   enum condition: { Used: 0, New: 1 }
 
   # Validations

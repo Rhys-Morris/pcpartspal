@@ -56,7 +56,11 @@
                             <% listing = Listing.find(purchase.listing_id) %>
                             <%= render "shared/listing-card", listing: listing %>
                             <div class="purchases__buttons">
-                                <button class="purchases__button btn btn-up btn-ghost">Leave Feedback</button>
+                                <% if !listing.reviewed %>
+                                    <%= link_to "Leave Feedback", new_review_path(:listing_id => listing.id), class: "purchases__button btn btn-up btn-ghost" %>
+                                <% else %>
+                                    <%= link_to "Update Feedback", edit_review_path(listing.review.id), class: "purchases__button btn btn-up btn-ghost" %>
+                                <% end %>                                
                                 <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: listing.user.id), method: :post, class: "purchases__button btn btn-up btn-ghost" %>
                             </div>
                         <% end %>
