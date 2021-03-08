@@ -39,9 +39,11 @@
       <span class="listing-show__price">
         <%= render_price(@listing.sold, @listing.price) %>
       </span>
-
-      <!-- Postage costs -->
-      <%= render_postage(@listing.sold, @postage_cost) %>
+      <% if @postage_cost %>
+        <span class="listing-show__postage-cost">
+          <%= "+ $#{@postage_cost} postage cost" %>
+        </span>
+      <% end %>
 
       <!-- Watchlist -->
       <% if current_user && current_user.id != @listing.user.id %>
@@ -54,6 +56,13 @@
             Remove from <%= link_to "Watchlist", delete_watch_path(current_user.profile.watches.where("listing_id": @listing.id)[0].id), method: :delete %>
           </span>
         <% end %>
+      <% end %>
+
+      <!-- Postage costs -->
+      <% if user_signed_in? %>
+        <div class="listing-show__postage-options">
+          <%= render "shared/postage-select", listing: @listing, postage_options: @postage_options %>
+        </div>
       <% end %>
 
       <!-- Buy and Message -->
@@ -88,7 +97,19 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-  document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+    document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
+    // Don't send session if no postage option selected
+    if (!"<%= @postage_cost %>") {
+      const flash = document.createElement("div");
+      flash.className = "flash";
+      const flashMessage = document.createElement("p");
+      flashMessage.className = "alert";
+      flashMessage.textContent = "Please select postage before proceeding to checkout";
+      flash.appendChild(flashMessage);
+      document.querySelector('.nav').after(flash);
+      return
+    }
+    
     const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
     stripe.redirectToCheckout({
       sessionId: "<%= @session_id %>"

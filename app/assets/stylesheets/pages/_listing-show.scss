@@ -91,9 +91,19 @@
     &__price {
         font-size: 2.4rem;
         font-weight: 500;
-        margin-bottom: 2rem;
+        margin-bottom: .5rem;
         align-self: flex-end;
         margin-right: 1.5rem;
+    }
+
+    &__postage-options {
+        margin-bottom: 3rem;
+
+        &__label {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: .3rem;
+        }
     }
 
     &__postage {
@@ -102,14 +112,16 @@
         width: 100%;
         margin-bottom: 3rem;
 
-        span {
-            font-weight: 500;
+        &-cost {
+            color: $color-danger;
+            align-self: flex-end;
+            margin-right: 1.5rem;
         }
     }
 
     &__watchlist {
         font-size: 1.6rem;
-        margin-bottom: 2rem;
+        margin-top: 1.5rem;
         a {
             color: $color-black;
             &:hover {
