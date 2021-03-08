@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :location do
-    postcode { "MyString" }
-    city { "MyString" }
-    state { "MyString" }
-    latitude { 1 }
-    longitude { 1 }
+    postcode { "3429" }
+    city { "Sunbury" }
+    state { "VIC" }
+    latitude { 37.58 }
+    longitude { 144.71 }
   end
 end

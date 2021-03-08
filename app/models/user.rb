@@ -7,7 +7,8 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
   has_many :listings, dependent: :destroy
-  has_many :purchases
+  has_many :purchases, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   validates :username, uniqueness: true
   belongs_to :location
 

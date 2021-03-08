@@ -37,6 +37,11 @@
         margin-bottom: .3rem;
     }
 
+    &__label--small {
+        margin-bottom: .3rem;
+        font-size: 1.4rem;
+    }
+
     &__label--radio {
         margin-right: 1rem;
     }
@@ -67,6 +72,24 @@
         border-radius: .3rem;
     }
     
+    &__subheader {
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin-bottom: .5rem;
+    }
+
+    &__dimensions {
+        display: flex;
+        flex-wrap: wrap;
+
+        div {
+            margin-right: 2rem;
+        }
+        
+        &__info {
+            font-size: 1.4rem;
+        }
+    }
 
     &__text {
         resize: vertical;

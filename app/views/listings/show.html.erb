@@ -41,7 +41,7 @@
       </span>
       <% if @postage_cost %>
         <span class="listing-show__postage-cost">
-          <%= "+ $#{@postage_cost} postage cost" %>
+          <%= "+ $#{((@postage_cost).to_f / 100).round(2)} postage cost" %>
         </span>
       <% end %>
 

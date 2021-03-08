@@ -1,0 +1,38 @@
+<div class="form">
+
+    <h2 class="form__header">Provide Feedback</h2>
+  
+    <%= form_with(model: review) do |form| %>
+    <% if review.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+  
+        <ul>
+          <% review.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+      
+    <div class="field form__field ">
+      <%= form.label :rating, class: "form__label" %>
+      <%= form.number_field :rating, class: "form__number", min: "0", max: "5" %>
+    </div>
+
+    <div class="field form__field ">
+        <%= form.label :message, class: "form__label" %>
+        <%= form.text_area :message, class: "form__text", placeholder: "Please leave any comments here" %>
+    </div>
+    
+    <!-- Hidden fields for listing and user id -->
+    <%= form.hidden_field :listing_id, value: @listing.id %>
+    <%= form.hidden_field :user_id, value: @listing.user.id %>
+  
+    <div class="actions">
+      <%= form.submit "Leave Feedback", class: "form__submit btn btn-ghost btn-up" %>
+    </div>
+  <% end %>
+  
+  
+  </div>

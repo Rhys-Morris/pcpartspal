@@ -78,7 +78,7 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params 
-      params.require(:listing).permit(:title, :description, :price, :condition, :category_id, :brand_id, images: [])
+      params.require(:listing).permit(:title, :description, :price, :condition, :length, :width, :height, :weight, :category_id, :brand_id, images: [])
     end 
 
     def set_form_parameters
@@ -97,7 +97,7 @@ class ListingsController < ApplicationController
           name: @listing.title,
           description: @listing.description,
           images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
-          amount: (@listing.price.to_i * 100) + (params[:postage_option].to_i * 100),
+          amount: (@listing.price * 100) + params[:postage_option].to_i,
           currency: 'aud',
           quantity: 1,
         }],
@@ -121,10 +121,10 @@ class ListingsController < ApplicationController
 
       # Package set up
       service_code = "AUS_PARCEL_REGULAR"
-      parcel_length = 50
-      parcel_width = 30
-      parcel_height = 10
-      parcel_weight = 1
+      parcel_length = @listing.length
+      parcel_width = @listing.width
+      parcel_height = @listing.height
+      parcel_weight = @listing.weight
 
       # Set up query params
       query_params = {
