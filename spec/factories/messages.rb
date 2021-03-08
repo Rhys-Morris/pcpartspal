@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :message do
-    subject { "MyString" }
-    body { "MyText" }
+    subject { "Post Title" }
+    body { "This is the post body" }
     conversation { nil }
-    user { nil }
+    user factory: :user
     read { false }
   end
 end

@@ -5,6 +5,10 @@ FactoryBot.define do
         price { 200 }
         sold { false }
         condition { 0 }
+        height { 10 }
+        width { 10}
+        length { 30 }
+        weight { 1.5 }
         user factory: :user
         brand factory: :brand
         category factory: :category
