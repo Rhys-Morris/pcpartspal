@@ -94,7 +94,7 @@
 
 <!-- Stripe session -->
 
-<script src="https://js.stripe.com/v3/"></script>
+<%= javascript_include_tag "https://js.stripe.com/v3/" %>
 
 <script>
     document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
@@ -117,12 +117,4 @@
   });
 </script>
 
-<script>
-  const thumbnailBox = document.querySelector(".listing-show__images__thumbnail-container")
-  const mainImage = document.querySelector(".listing-show__images__main")
-  thumbnailBox.addEventListener("click", (e) => {
-    const target = e.target.closest(".listing-show__images__thumbnail");
-    const src = target.src;
-    mainImage.src = src;
-  })
-</script>
+<%= javascript_pack_tag "imageToggle" %>

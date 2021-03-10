@@ -10,6 +10,9 @@
                 <li id="sold-listings" class="user-profile__sidebar__list__list-item"><span>Sold Listings</span></li>
                 <li id="purchases" class="user-profile__sidebar__list__list-item"><span>Purchases</span></li>
                 <a href="<%= conversations_path %>" class="user-profile__sidebar__messages-link"><li class="user-profile__sidebar__list__list-item">My Messages</li></a>
+                <%= link_to "/users", method: :delete, class: "user-profile__sidebar__delete-account", data: { confirm: "Are you sure?" } do %>
+                    <%= content_tag :li, "Delete Account", class: "user-profile__sidebar__list__list-item user-profile__sidebar__list__list-item--delete" %>
+                <% end %>
             </ul>
         </div>
         <!-- Could be made into partial - listings -->
@@ -80,14 +83,4 @@
 
 </div>
 
-<script>
-    const container = document.querySelector('.user-profile__sidebar');
-    container.addEventListener('click', (e) => {
-        // Prevent hidden class addition if redirecting to inbox
-        if (e.target.className == "user-profile__sidebar__messages-link") return
-        
-        const target = e.target.closest(".user-profile__sidebar__list__list-item").id;
-        document.querySelectorAll("[data-target]").forEach(section => section.classList.add("hidden"));
-        document.querySelector(`[data-target='${target}']`).classList.remove("hidden");
-    });
-</script>
+<%= javascript_pack_tag "profileNav" %>

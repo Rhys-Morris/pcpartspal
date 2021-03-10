@@ -18,6 +18,11 @@
             <%= link_to "Sell", new_listing_path, class: "nav__navlist__link" %>
         </li>
         <li class="nav__navlist__list-item">
+            <%= link_to root_url, class: "nav__navlist__link" do %>
+                <%= image_tag "watched-icon.png", alt: "link-to-watched-items", id: "watch" %>
+            <% end %>
+        </li>
+        <li class="nav__navlist__list-item">
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav__navlist__link" %>
         </li>
         <li class="nav__navlist__list-item">

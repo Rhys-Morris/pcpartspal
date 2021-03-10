@@ -27,10 +27,18 @@
                         color: $color-grey-light;
                     }
                 }
+                &--delete {
+                    &:hover  {
+                    cursor: pointer;
+                    background: $color-orangered;
+                    box-shadow: none;
+                    
+                    }
+                }
             }
         }
 
-        &__messages-link {
+        &__messages-link, &__delete-account {
             color: $color-black;
             text-decoration: none;
 
