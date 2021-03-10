@@ -79,6 +79,10 @@
         border: 1px solid $color-grey-dark;
     }
 
+    span {
+        text-align: left;
+    }
+
     &__image-wrapper {
         width: 15rem;
         height: 17.5rem;
@@ -95,20 +99,25 @@
         padding-bottom: .5rem;
         box-shadow: $box-shadow-default;
         margin-bottom: 1.5rem;
+        width: 100%;
+        align-self: flex-start;
     }
     &__brand {
         padding-bottom: .5rem;
         font-weight: 500;
         font-size: 1.6rem;
+        align-self: flex-start;
     }
     &__title {
         padding-bottom: 1rem;
         font-weight: 300;
+        align-self: flex-start;
     }
     &__price {
         padding-bottom: .5rem;
         font-weight: 500;
         font-size: 1.6rem;
+        align-self: flex-end;
     }
 
     &__watched {

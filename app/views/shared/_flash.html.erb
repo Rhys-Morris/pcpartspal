@@ -1,0 +1,8 @@
+<% flash.each do |key, message| %>
+    <div class="flash">
+        <p class="<%= key %>">
+            <%= message %>
+        </p>
+        <span class="flash__close">X</span>
+    </div>
+<% end %>

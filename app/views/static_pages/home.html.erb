@@ -8,8 +8,8 @@
                 <%= link_to "Browse", listings_path, class: "hero__cta--1 btn btn-cta--ghost" %>
             </div>
         </section>
-    <section class="categories">
-        <h2 class="categories__title header-2">Browse by category</h2>
+    <section class="home-section categories">
+        <h2 class="home-section__title header-2">Browse by category</h2>
         <div class="card-wrapper">
             <% @categories.each do |category| %>
                 <a href="./listings/filter?filtered%5Bcategory_id%5D=<%=category.id%>" class="card", style='background-image: url(<%= asset_path format_background_image(category.name, "jpg") %>);'>
@@ -18,13 +18,21 @@
             <% end %>
         </div>
     </section>
-    <section class="brands">
-        <h2 class="brands__title header-2">Browse popular brands</h2>
+    <section class="home-section brands">
+        <h2 class="home-section__title header-2">Browse popular brands</h2>
         <div class="card-wrapper">
             <% @brands.each do |brand| %>
                 <a href="./listings/filter?filtered%5Bbrand_id%5D=<%=brand.id%>" class="card--brand">
                     <%= image_tag format_background_image(brand.name, "png"), class: "card__image" %>
                 </a>
+            <% end %>
+        </div>
+    </section>
+    <section class="home-section recently-listed">
+        <h2 class="home-section__title header-2">Recently listed</h2>
+        <div class="card-wrapper">
+            <% @listings.each do |listing| %>
+                <%= render "shared/listing-card", listing: listing %>
             <% end %>
         </div>
     </section>

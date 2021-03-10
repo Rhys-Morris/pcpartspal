@@ -17,26 +17,18 @@
 
   <body>
 
-    <!-- Render nav -->
-    <%= render "shared/nav" %>
+    <header>
+      <!-- Render nav -->
+      <%= render "shared/nav" %>
 
-    <!-- Flash messages -->
-      <% flash.each do |key, message| %>
-        <div class="flash">
-          <p class="<%= key %>"><%= message %></p>
-          <span class="flash__close">X</span>
-        </div>
-      <% end %>
+      <!-- Flash messages -->
+      <%= render "shared/flash" %>
+    </header>
 
     <!-- Main yield block -->
     <%= yield %>
   </body>
-</html>
 
-<script>
-  const flash = document.querySelector('.flash')
-  const flashClose = document.querySelector('.flash__close')
-  flashClose.addEventListener('click', () => {
-    flash.classList.add("hidden");
-  });
-</script>
+  <%= javascript_pack_tag "closeFlash" %>
+
+</html>
