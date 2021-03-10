@@ -31,14 +31,21 @@
             font-size: 1.8rem;
             transition: .2s all;
 
-            &:hover {
-                border-bottom: 2px solid $color-orangered;
-            }
+            &--hover {
+                &:hover {
+                    border-bottom: 2px solid $color-orangered;
+                }
+            }  
         }
     }
 }
 
-#watch {
+.nav__icon {
     height: 2.2rem;
     width: 2.2rem;
+
+    &--2 {
+        width: 4rem;
+        height: 4rem;
+    }
 }
