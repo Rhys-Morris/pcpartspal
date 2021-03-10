@@ -43,11 +43,11 @@
                         <% @profile.user.listings.each do |listing| %>
                             <% if listing.sold %>
                                 <%= render "shared/listing-card", listing: listing %>
+                                <div class="sales">
+                                    <p> Purchaser: <%= link_to listing.purchase.user.username, profile_path(listing.purchase.user.profile.id), class: "sales__link" %> </p>
+                                    <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: listing.purchase.user.id), method: :post, class: "sales__button btn btn-up btn-ghost" %>
+                                </div>
                             <% end %>
-                            <div class="sales">
-                                <p> Purchaser: <%= link_to listing.purchase.user.username, profile_path(listing.purchase.user.profile.id), class: "sales__link" %> </p>
-                                <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: listing.purchase.user.id), method: :post, class: "sales__button btn btn-up btn-ghost" %>
-                            </div>
                         <% end %>
                     </div>
                 </div>

@@ -1,8 +1,8 @@
 <!-- Place distance from current user on each card as data attr -->
 <% if user_signed_in? %>
-  <% listing_lat = listing.user.profile.latitude %>
-  <% listing_long = listing.user.profile.longitude %>
-  <% distance = current_user.profile.distance_to([listing_lat, listing_long]) %>
+  <% listing_lat = listing.user.latitude %>
+  <% listing_long = listing.user.longitude %>
+  <% distance = current_user.distance_to([listing_lat, listing_long]) %>
 <% end %>
 
 <a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>">
