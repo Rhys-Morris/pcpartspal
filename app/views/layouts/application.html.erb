@@ -16,17 +16,20 @@
   </head>
 
   <body>
-
-    <header>
-      <!-- Render nav -->
-      <%= render "shared/nav" %>
-
-      <!-- Flash messages -->
-      <%= render "shared/flash" %>
-    </header>
-
-    <!-- Main yield block -->
-    <%= yield %>
+    <div class="body-container">
+      <header>
+        <!-- Render nav -->
+        <%= render "shared/nav" %>
+  
+        <!-- Flash messages -->
+        <%= render "shared/flash" %>
+      </header>
+  
+      <!-- Main yield block -->
+      <%= yield %>
+    </div>
+      <!-- Footer -->
+      <%= render "shared/footer" %>
   </body>
 
   <%= javascript_pack_tag "closeFlash" %>
