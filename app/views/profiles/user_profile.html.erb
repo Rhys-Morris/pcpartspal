@@ -3,7 +3,7 @@
     <%= render "shared/user_panel" %>
 
     <section class="user-profile">
-        <div class="user-profile__sidebar">
+        <div class="user-profile__sidebar" data-display=<%=@display if @display %>>
             <ul class="user-profile__sidebar__list">
                 <li id="my-listings" class="user-profile__sidebar__list__list-item"><span>My Listings</span></li>
                 <li id="watchlist" class="user-profile__sidebar__list__list-item"><span>Watchlist</span></li>
@@ -84,3 +84,4 @@
 </div>
 
 <%= javascript_pack_tag "profileNav" %>
+<%= javascript_pack_tag "sidebarSelect" %>

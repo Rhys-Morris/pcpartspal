@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
+  before_action :check_sidebar_display, only: %i[ show ]
   before_action :authenticate_user!
 
   # GET /profiles
@@ -81,5 +82,9 @@ class ProfilesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def profile_params
       params.require(:profile).permit(:bio, :location, :postcode, :user_id, :image, :address)
+    end
+
+    def check_sidebar_display
+      @display = params["display"]
     end
 end

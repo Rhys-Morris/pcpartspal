@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :reviews
   delete '/listings/(:id)', to: 'listings#destroy', as: 'delete_listing'
   post '/watches', to: 'watches#create', as: 'create_watch'
+  get '/watchlist', to: 'watches#index', as: 'watchlist'
   delete '/watches/(:id)', to: 'watches#destroy', as: 'delete_watch'
   resources :conversations, only: [:index, :create] do
     resources :messages, only: [:index, :create]
