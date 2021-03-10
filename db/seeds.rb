@@ -41,20 +41,18 @@ end
 
 # Populate Location model
 if Location.all.empty?
-    locations = get_locations
-    locations.each do |location|
+    get_locations.each do |location|
+        next if location["population"] < 300
         postcode = location["postcode"]
         city = location["suburb"]
         state = location["state"]
-        lat = location["lat"]
-        lng = location["lng"]
 
         # Remove leading string for some ACT suburbs
         city.gsub!(/ACT Remainder - /, "")
 
         # Save location
         seeded_location = Location.new("postcode": postcode, "city": city,
-             "state": state, "latitude": lat, "longitude": lng)
+             "state": state)
         if seeded_location.save
             puts "Created #{city} in locations"
         end

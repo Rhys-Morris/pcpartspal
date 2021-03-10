@@ -18,4 +18,12 @@ class User < ApplicationRecord
   def init_profile
     self.build_profile
   end
+
+  #  Insert latitude and longitude into profile
+  geocoded_by :geolocation
+  before_save :geocode
+  
+  def geolocation
+      "#{self.location.city}, #{self.location.state}, Australia"
+  end
 end
