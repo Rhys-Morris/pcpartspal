@@ -12,8 +12,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    # puts "-----------"
-    # pp params
     super
   end
 

@@ -3,7 +3,6 @@ class Review < ApplicationRecord
   belongs_to :listing
 
   # Validations
-  validates :rating, presence: true, numericality: { greater_than: -1, less_than: 6}
-  validates :message, presence: true
-  
+  validates :rating, presence: true, numericality: { in: 1..5 }
+  validates :message, presence: true, length: { maximum: 250 }
 end

@@ -9,7 +9,7 @@ function makeCardsVisible () {
     });
 }
 
-// Filter card titles by search input
+// SEARCH LISTINGS CURRENTLY DISPLAYED BY TITLE
 search.addEventListener('keyup', () => {
     const searchString = search.value;
     if (searchString == "") {
@@ -24,7 +24,7 @@ search.addEventListener('keyup', () => {
     });
 });
 
-// Reset search input
+// RESET SEARCH INPUT
 const resetSearch = document.getElementById("reset-search")
 resetSearch.addEventListener('click', () => {
     search.value = "";
@@ -32,7 +32,7 @@ resetSearch.addEventListener('click', () => {
     makeCardsVisible()
 })
 
-// Sort cards
+// SORTING FUNCTIONALITY
 const cardContainer = document.querySelector(".card-container")
 const sort = document.getElementById("sort")
 sort.addEventListener('change', () => {
@@ -60,7 +60,7 @@ function sortCards (param, cards) {
     }
 }
 
-
+// FILTER FUNCTIONALITY
 const price = document.querySelector("#price");
 const distance = document.querySelector("#distance");
 const condition = document.querySelector("#condition");
