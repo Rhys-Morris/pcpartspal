@@ -125,7 +125,7 @@ class ListingsController < ApplicationController
           "length" => @listing.length,
           "width" => @listing.width,
           "height" => @listing.height,
-          "weight" => @listing.height,
+          "weight" => @listing.weight,
       }
 
       url = "https://digitalapi.auspost.com.au/postage/parcel/domestic/service.json?"

@@ -1,6 +1,6 @@
 const search = document.querySelector(".listings-panel__search");
 const titles = document.querySelectorAll(".card--listing__title")
-const cards = Array.from(document.querySelectorAll(".card--listing"))
+const cards = document.querySelectorAll(".card--listing");
 
 // Show all cards
 function makeCardsVisible () {
@@ -69,6 +69,26 @@ condition.addEventListener('change', () => {
 const cardContainer = document.querySelector(".card-container")
 const sort = document.getElementById("sort")
 sort.addEventListener('change', () => {
-    sorted_cards = cards.sort(card => card.dataset.price).map(card => card.querySelector(".card--listing__title").textContent)
-    console.log(sorted_cards);
+    sortParam = sort.value;
+    currentStateCards = Array.from(document.querySelectorAll(".card--listing"));
+
+    sortedCards = sortCards(sortParam, currentStateCards);
+
+    cardContainer.innerHTML = "";
+    sortedCards.forEach(card => {
+        cardContainer.append(card);
+    })
 })
+
+function sortCards (param, cards) {
+    switch(param) {
+        case "cheapest":
+            return cards.sort((cardOne, cardTwo) => cardOne.dataset.price - cardTwo.dataset.price);
+        case "expensive":
+            return cards.sort((cardOne, cardTwo) => cardTwo.dataset.price - cardOne.dataset.price);
+        case "newest":
+            return cards.sort((cardOne, cardTwo) => cardTwo.dataset.created - cardOne.dataset.created);
+        case "oldest":
+            return cards.sort((cardOne, cardTwo) => cardOne.dataset.created - cardTwo.dataset.created);
+    }
+}
