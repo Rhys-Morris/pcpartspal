@@ -24,17 +24,6 @@ search.addEventListener('keyup', () => {
     });
 });
 
-// Filter by location distance
-const filter = document.querySelector("#filter");
-filter.addEventListener('change', () => {
-    cards.forEach(card => {
-        card.classList.remove("hidden");
-        if (Number(card.dataset.distance) > Number(filter.value)) {
-        card.classList.add("hidden");
-        }
-    });
-});
-
 // Reset search input
 const resetSearch = document.getElementById("reset-search")
 resetSearch.addEventListener('click', () => {
@@ -42,28 +31,6 @@ resetSearch.addEventListener('click', () => {
     search.textContent = "";
     makeCardsVisible()
 })
-
-// Filter by price
-const price = document.querySelector("#price");
-price.addEventListener('change', () => {
-    cards.forEach(card => {
-        card.classList.remove("hidden");
-        if (Number(card.dataset.price) > Number(price.value)) {
-        card.classList.add("hidden");
-        }
-    });
-});
-
-// Filter by condition
-const condition = document.querySelector("#condition");
-condition.addEventListener('change', () => {
-    cards.forEach(card => {
-        card.classList.remove("hidden");
-        if (card.dataset.condition.toLowerCase() != condition.value.toLowerCase()) {
-        card.classList.add("hidden");
-        }
-    });
-});
 
 // Sort cards
 const cardContainer = document.querySelector(".card-container")
@@ -92,3 +59,29 @@ function sortCards (param, cards) {
             return cards.sort((cardOne, cardTwo) => cardOne.dataset.created - cardTwo.dataset.created);
     }
 }
+
+
+const price = document.querySelector("#price");
+const distance = document.querySelector("#distance");
+const condition = document.querySelector("#condition");
+const selectBoxes = Array.from(document.querySelectorAll(".filter-select"));
+
+selectBoxes.forEach(select => select.addEventListener('change', () => {
+    console.log("change");
+    cards.forEach(card => {
+        card.classList.remove("hidden")
+        // Condition filter
+        listingCondition = card.dataset.condition;
+        if ( condition.value != "none" && listingCondition.toLowerCase() != condition.value.toLowerCase()) {
+            card.classList.add("hidden");
+        }
+        // Distance filter
+        if (Number(card.dataset.distance) > Number(distance.value)) {
+            card.classList.add("hidden");
+        }
+        // Price filter
+        if (Number(card.dataset.price) > Number(price.value)) {
+            card.classList.add("hidden");
+        }
+    });
+}));

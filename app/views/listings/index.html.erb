@@ -11,40 +11,14 @@
       <select name="sort" id="sort">
         <option value="oldest">Date Added: Old to New</option>
         <option value="newest">Date Added: New to Old</option>
-        <option value="cheapest">Price: Lowest</option>
-        <option value="expensive">Price: Highest</option>
+        <option value="cheapest">Price: Lowest First</option>
+        <option value="expensive">Price: Highest First  </option>
       </select>
     </div>
   </div>
   <div class="listings-main">
     <div class="filter">
       <%= render "shared/filter-listings" %>
-      <div class="filter__distance-filter">
-        <h3 class="filter__header">Distance</h3>
-        <select name="distance" id="filter">
-          <option value="Infinity">No limit</option>
-          <option value="50">50 kilometres</option>
-          <option value="100">100 kilometres</option>
-          <option value="200">200 kilometres</option>
-        </select>
-      </div>
-      <div class="filter__price-filter">
-        <h3 class="filter__header">Price</h3>
-        <select name="price" id="price">
-          <option value="Infinity">No limit</option>
-          <option value="50">$50</option>
-          <option value="100">$100</option>
-          <option value="250">$250</option>
-          <option value="500">$500</option>
-        </select>
-      </div>
-      <div class="filter__condition-filter">
-        <h3 class="filter__header">Condition</h3>
-        <select name="condition" id="condition">
-          <option value="new">New</option>
-          <option value="used">Used</option>
-        </select>
-      </div>
     </div>
     <div class="card-container">
       <% @listings.each do |listing| %>
