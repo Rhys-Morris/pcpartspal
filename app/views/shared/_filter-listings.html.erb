@@ -1,17 +1,13 @@
-<%= form_with url: "/listings/filter", method: :get do |form| %>
-  <div class="field form__field">
-    <%= form.label :category_id, class: "form__label" %>
-    <%= form.select "filtered[category_id]", @categories.map {|cat| [cat.name, cat.id]}, {include_blank: true} %>
+<%= form_with do |form| %>
+
+  <div class="filter__category-filter">
+    <h3 class="filter__header">Category</h3>
+    <%= form.select "filtered[category_id]", @categories.map {|cat| [cat.name, cat.id]}, {include_blank: true}, id: "category", class: "filter-select" %>
   </div>
 
-  <div class="field form__field ">
-    <%= form.label :brand_id, class: "form__label" %>
-    <%= form.select "filtered[brand_id]", @brands.map {|brand| [brand.name, brand.id]},{include_blank: true}  %>
-  </div>
-
-  <div class="actions"> 
-    <%= form.submit "Filter", class: "btn btn-up btn-ghost" %>
-    <%= link_to "Reset", listings_path, class: "btn btn-up btn-ghost filter__reset" %>
+  <div class="filter__brand-filter ">
+    <h3 class="filter__header">Brand</h3>
+    <%= form.select "filtered[brand_id]", @brands.map {|brand| [brand.name, brand.id]},{include_blank: true}, id: "brand", class: "filter-select" %>
   </div>
 <% end %>
 
@@ -47,3 +43,6 @@
     <option value="used">Used</option>
   </select>
 </div>
+
+<!-- Reset -->
+<%= link_to "Reset", listings_path, class: "btn btn-up btn-ghost filter__reset" %>

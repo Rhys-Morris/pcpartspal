@@ -64,15 +64,16 @@ function sortCards (param, cards) {
 const price = document.querySelector("#price");
 const distance = document.querySelector("#distance");
 const condition = document.querySelector("#condition");
+const category = document.querySelector("#category");
+const brand = document.querySelector("#brand");
 const selectBoxes = Array.from(document.querySelectorAll(".filter-select"));
 
 selectBoxes.forEach(select => select.addEventListener('change', () => {
-    console.log("change");
     cards.forEach(card => {
         card.classList.remove("hidden")
         // Condition filter
-        listingCondition = card.dataset.condition;
-        if ( condition.value != "none" && listingCondition.toLowerCase() != condition.value.toLowerCase()) {
+        const conditionSelected = condition.value;
+        if ( conditionSelected != "none" && card.dataset.condition.toLowerCase() != conditionSelected.toLowerCase()) {
             card.classList.add("hidden");
         }
         // Distance filter
@@ -81,6 +82,17 @@ selectBoxes.forEach(select => select.addEventListener('change', () => {
         }
         // Price filter
         if (Number(card.dataset.price) > Number(price.value)) {
+            card.classList.add("hidden");
+        }
+        const brandSelected = brand.value;
+        // Brand filter
+        if ( brandSelected && card.dataset.brand != brandSelected) {
+            card.classList.add("hidden");
+        }
+        const categorySelected = category.value;
+        // Brand filter
+        if ( categorySelected && card.dataset.category != categorySelected) {
+            console.log(categorySelected);
             card.classList.add("hidden");
         }
     });

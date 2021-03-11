@@ -1,8 +1,10 @@
 .filter {
     width: 27.5rem;
     margin-right: 1rem;
-    padding: 3rem 2rem 0 2rem;
+    padding: 2rem 2rem 0 2rem;
     box-shadow: $box-shadow-right;
+    display: flex;
+    flex-direction: column;
 
     &__header {
         font-weight: 300;
@@ -13,25 +15,13 @@
 
     }
 
-    &__select {
-        width: 100%;
-        padding: 1rem;
-        margin: .5rem 0;
-        border-radius: .3rem;
-        background: white;
-    }
-
-    &__submit {
-        width: 100%;
-        margin-top: .5rem;
-    }
-
     &__reset {
         color: $color-black;
         text-decoration: none;
+        margin-top: 3rem;
     }
 
-    &__distance-filter, &__price-filter, &__condition-filter {
+    &__distance-filter, &__price-filter, &__condition-filter, &__brand-filter, &__category-filter {
         display: flex;
         flex-direction: column;
         margin-top: 3rem;
