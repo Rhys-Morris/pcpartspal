@@ -7,7 +7,7 @@
     &__header {
         font-weight: 300;
         text-transform: uppercase;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         padding: 0 1rem;
         border-left: 2px solid $color-orangered;
 
@@ -29,5 +29,22 @@
     &__reset {
         color: $color-black;
         text-decoration: none;
+    }
+
+    &__distance-filter, &__price-filter, &__condition-filter {
+        display: flex;
+        flex-direction: column;
+        margin-top: 3rem;
+
+        &__label {
+            margin-right: 1rem;
+        }
+
+        select {
+            padding: 1rem;
+            border: 1px solid $color-grey-medium;
+            border-radius: .3rem;
+            background-color: white;
+        }
     }
 }

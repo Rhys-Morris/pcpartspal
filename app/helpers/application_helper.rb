@@ -24,6 +24,6 @@ module ApplicationHelper
         return "No feedback yet" if reviews.empty? 
         ratings = reviews.map { |review| review.rating }
         score = (ratings.reduce(:+).to_f / reviews.count.to_f)
-        "#{score} / 5.0"
+        "Rating: #{score} / 5.0"
     end
 end

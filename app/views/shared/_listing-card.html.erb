@@ -5,7 +5,7 @@
   <% distance = current_user.distance_to([listing_lat, listing_long]) %>
 <% end %>
 
-<a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>">
+<a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>" data-price="<%= listing.price %>" data-condition="<%= listing.condition %>" >
     <% if listing.images.attached? %>
       <div class="card--listing__image-wrapper">
         <%= image_tag listing.images[0], class: "card--listing__image" %>

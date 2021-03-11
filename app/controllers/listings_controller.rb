@@ -118,23 +118,14 @@ class ListingsController < ApplicationController
       return nil if !user_signed_in?
       # API key
       api_key = "c48a22bb-0ffa-4a4e-aa55-586af1e58b92"
-
-      # Package set up
-      service_code = "AUS_PARCEL_REGULAR"
-      parcel_length = @listing.length
-      parcel_width = @listing.width
-      parcel_height = @listing.height
-      parcel_weight = @listing.weight
-
       # Set up query params
       query_params = {
           "from_postcode" => @listing.user.location.postcode,
           "to_postcode" => current_user.location.postcode,
-          "length" => parcel_length,
-          "width" => parcel_width,
-          "height" => parcel_height,
-          "weight" => parcel_weight,
-          "service_code" => service_code    
+          "length" => @listing.length,
+          "width" => @listing.width,
+          "height" => @listing.height,
+          "weight" => @listing.height,
       }
 
       url = "https://digitalapi.auspost.com.au/postage/parcel/domestic/service.json?"
@@ -143,11 +134,14 @@ class ListingsController < ApplicationController
           req.headers["AUTH-KEY"] = api_key
       end
       parsed_response = JSON.parse(response.body)
+      
+      # puts "---------"
+      # pp parsed_response
 
       # Extract postage options from response
       @postage_options = []
       parsed_response["services"]["service"].each do |option|
-        @postage_options.push({code: option["code"], name: option["name"], price: option["price"]})
+        @postage_options.push({code: option["code"], name: convert_postage_name(option["code"]), price: option["price"]})
       end
 
       @postage_options
