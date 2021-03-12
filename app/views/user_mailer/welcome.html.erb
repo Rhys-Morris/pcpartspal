@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>Welcome to PCPartsPal, <%= @user.username %></h1>
+    <h1>Welcome to PCPartsPal, <%=@user.username%></h1>
     <p>You have successfully created an account, your login is <%= @user.email %></p> <br>
     <p>
         To login to the site, follow the following link: <%= @url %>.
-    </p>
+    </p><br>
     <p>
         See you soon! The PcPartsPal Team.
     </p>

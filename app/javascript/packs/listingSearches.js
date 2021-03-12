@@ -67,33 +67,53 @@ const condition = document.querySelector("#condition");
 const category = document.querySelector("#category");
 const brand = document.querySelector("#brand");
 const selectBoxes = Array.from(document.querySelectorAll(".filter-select"));
+const listingCount = document.querySelector(".listings-panel__total")
 
 selectBoxes.forEach(select => select.addEventListener('change', () => {
+    let count = cards.length
     cards.forEach(card => {
         card.classList.remove("hidden")
         // Condition filter
         const conditionSelected = condition.value;
         if ( conditionSelected != "none" && card.dataset.condition.toLowerCase() != conditionSelected.toLowerCase()) {
             card.classList.add("hidden");
+            count -= 1;
+            return
         }
         // Distance filter
         if (Number(card.dataset.distance) > Number(distance.value)) {
             card.classList.add("hidden");
+            count -= 1;
+            return
         }
         // Price filter
         if (Number(card.dataset.price) > Number(price.value)) {
             card.classList.add("hidden");
+            count -= 1;
+            return
         }
         const brandSelected = brand.value;
         // Brand filter
         if ( brandSelected && card.dataset.brand != brandSelected) {
             card.classList.add("hidden");
+            count -= 1;
+            return
         }
         const categorySelected = category.value;
         // Brand filter
         if ( categorySelected && card.dataset.category != categorySelected) {
-            console.log(categorySelected);
             card.classList.add("hidden");
+            count -= 1;
+            return
         }
     });
+    updateListingCount(count);
 }));
+ 
+function updateListingCount(count) {
+    if (count == 1) {
+        listingCount.textContent = "1 listing for sale"
+    } else {
+        listingCount.textContent = `${count} listings for sale`
+    }
+}

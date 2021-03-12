@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy postage ]
   before_action :authenticate_user!, except: %i[ index show filter postage ]
+  before_action :confirm_listing_owner, only: %i[ edit destroy ]
   before_action :set_form_parameters, only: %i[ new edit index filter ]
   before_action :get_postage_options, only: %i[ show postage ]
   before_action :create_stripe_session, only: %i[ postage ]
@@ -87,6 +88,13 @@ class ListingsController < ApplicationController
       @conditions = Listing.conditions.keys
     end
 
+    def confirm_listing_owner
+      if current_user.id != @listing.user.id
+        flash[:alert] = "Unable to authorise, cannot edit a listing that is not your own."
+        redirect_to @listing
+      end
+    end
+
     # Create stripe session if user signed in
     def create_stripe_session
       return if !user_signed_in?
@@ -95,7 +103,7 @@ class ListingsController < ApplicationController
         customer_email: current_user.email || nil,
         line_items: [{
           name: @listing.title,
-          description: @listing.description,
+          description: @listing.description.blank? ? nil : @listing.description,
           images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
           amount: (@listing.price * 100) + params[:postage_option].to_i,
           currency: 'aud',

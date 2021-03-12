@@ -1,7 +1,11 @@
+<% puts "---------" %>
+<% puts @purchase %>
+
+
 <div class="container">
     <div class="payment-success">
         <div class="payment-success__image-box">
-            <%= image_tag @purchase.listing.images[0], alt: "listing-image", class: "payment-success__image-box__image" if @purchase.listing.images[0]%>
+            <%= image_tag @purchase.listing.images[0], alt: "listing-image", class: "payment-success__image-box__image" if @purchase.listing.images[0] %>
         </div>
         <div class="payment-success__text">
             <h2 class="payment-success__text__header">Payment successful!</h2>
