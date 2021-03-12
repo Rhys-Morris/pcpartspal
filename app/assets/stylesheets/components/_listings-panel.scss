@@ -5,8 +5,20 @@
     width: 100%;
     padding-bottom: 2rem;
     box-shadow: $box-shadow-default;
+
+    @media only screen and (max-width: 750px) {
+        justify-content: space-evenly;
+    }
+    @media only screen and (max-width: 700px) {
+        justify-content: space-between;
+    }
+
     &__total {
         padding: 0 2rem;
+
+        @media only screen and (max-width: 750px) {
+            font-size: 1.2rem;
+        }
     }
 
     &__search {
@@ -15,6 +27,27 @@
         border: 1px solid $color-grey-medium;
         border-radius: .3rem;
         margin-right: 1rem;
+
+        @media only screen and (max-width: 1000px) {
+            width: 20rem;
+        }
+        @media only screen and (max-width: 750px) {
+            padding: .8rem 1.2rem;
+            margin-right: .5rem;
+        }
+        
+        &-box {
+            @media only screen and (max-width: 700px) {
+                order: 2;
+                display: none;
+            }
+        }
+    
+        &__reset {
+            @media only screen and (max-width: 750px) {
+                padding: .5rem .8rem;
+            }
+        }
 
         &::placeholder {
             font-family: 'Roboto', sans-serif;
@@ -28,6 +61,11 @@
         border: 1px solid $color-grey-medium;
         border-radius: .3rem;
         background-color: white;
+
+        @media only screen and (max-width: 1000px) {
+            font-size: 1.2rem;
+            padding: .8rem 1.2rem;
+        }
         }
     }
 }

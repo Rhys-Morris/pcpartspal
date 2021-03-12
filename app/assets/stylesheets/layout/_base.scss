@@ -10,6 +10,10 @@
     align-items: center;
     margin: 0 10vw;
 
+    @media only screen and (max-width: 1200px) {
+        margin: 0 2vw;
+    }
+
     &__start {
         align-self: start;
         margin-top: 3rem;

@@ -3,13 +3,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    margin-top: 5rem;
+
     &__header {
         font-size: 2.8rem;
         font-weight: 300;
         letter-spacing: 2px;
+        align-self: center;
     }
     &__field {
-        margin: 2rem 0;
+        margin: 1.5rem 0;
         display: flex;
         flex-direction: column;
         font-size: 1.6rem;
@@ -25,11 +28,22 @@
         
         select {
         padding: 1rem 1rem;
-        width: 100%;
+        width: 50rem;
         margin-top: .3rem;
         border: 1px solid $color-grey-medium;
         background: white;
         border-radius: .3rem;
+
+        @media only screen and (max-width: 650px) {
+            width: 35rem;
+        }
+        @media only screen and (max-width: 450px) {
+            width: 30rem;
+        }
+        @media only screen and (max-width: 325px) {
+            width: 25rem;
+        }
+
         }
     }
 
@@ -58,6 +72,16 @@
         border-radius: .3rem;
         font-family: 'Roboto', sans-serif;
 
+        @media only screen and (max-width: 650px) {
+            width: 35rem;
+        }
+        @media only screen and (max-width: 450px) {
+            width: 30rem;
+        }
+        @media only screen and (max-width: 325px) {
+            width: 25rem;
+        }
+
         &::placeholder {
             font-family: 'Roboto', sans-serif;
     
@@ -82,12 +106,33 @@
         display: flex;
         flex-wrap: wrap;
 
+        @media only screen and (max-width: 650px) {
+            width: 35rem;
+        }
+        @media only screen and (max-width: 450px) {
+            width: 30rem;
+        }
+        @media only screen and (max-width: 325px) {
+            width: 25rem;
+        }
+
         div {
             margin-right: 2rem;
         }
         
         &__info {
             font-size: 1.4rem;
+            width: 50rem;
+
+            @media only screen and (max-width: 650px) {
+                width: 35rem;
+            }
+            @media only screen and (max-width: 450px) {
+                width: 30rem;
+            }
+            @media only screen and (max-width: 325px) {
+                width: 25rem;
+            }
         }
     }
 

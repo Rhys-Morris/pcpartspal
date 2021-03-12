@@ -1,0 +1,23 @@
+.toggle {
+    display: none;
+
+    @media only screen and (max-width: 500px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: .3rem;
+        margin-top: 1.5rem;
+        background-color: $color-black;
+        
+    }
+
+    &__hamburger-line {
+        width: 65%;
+        height: 2px;
+        margin: .2rem 0;
+        background: $color-grey-light;
+    }
+}

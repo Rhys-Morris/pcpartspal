@@ -107,7 +107,7 @@ class ListingsController < ApplicationController
           name: @listing.title,
           description: @listing.description.blank? ? nil : @listing.description,
           images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
-          amount: @listing.price + params[:postage_option].to_i,
+          amount: @listing.price.to_i + params[:postage_option].to_i,
           currency: 'aud',
           quantity: 1,
         }],

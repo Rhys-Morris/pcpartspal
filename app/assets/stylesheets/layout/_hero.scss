@@ -9,19 +9,48 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     &__text {
+
+        @media only screen and (max-width: 450px) {
+            width: 80%;
+        }
+
         &__title {
             color: $color-grey-light;
             font-size: 8rem;
             font-weight: 100;
             letter-spacing: 2px;
             margin-bottom: 1rem;
+
+            @media only screen and (max-width: 1000px) {
+                font-size: 6.5rem;
+            }
+            @media only screen and (max-width: 750px) {
+                font-size: 5rem;
+            }
+            @media only screen and (max-width: 600px) {
+                font-size: 4rem;
+            }
         }
         &__subtitle {
             color: $color-grey-light;
             font-size: 3rem;
             font-weight: 300;
             letter-spacing: 1px;
+
+            @media only screen and (max-width: 1000px) {
+                font-size: 2.5rem;
+            }
+            @media only screen and (max-width: 750px) {
+                font-size: 2rem;
+            }
+            @media only screen and (max-width: 600px) {
+                font-size: 1.5rem;
+            }
+            @media only screen and (max-width: 450px) {
+                
+            }
         }
     }
     &__buttons {
@@ -35,5 +64,16 @@
         margin-right: 3rem;
         text-decoration: none;
         font-size: 2rem;
+
+        @media only screen and (max-width: 1000px) {
+            font-size: 1.8rem;
+        }
+        @media only screen and (max-width: 750px) {
+            font-size: 1.6rem;
+        }
+        @media only screen and (max-width: 600px) {
+            font-size: 1.2rem;
+            padding: 1.5rem 2rem;
+        }
     }
 }

@@ -1,12 +1,31 @@
 .listing-show {
+    padding: 2rem;
+    width: 80%;
 
-    padding: 5rem;
+    @media only screen and (max-width: 1600px) {
+        width: 90%;
+    }
+
+    @media only screen and (max-width: 1375px) {
+        width: 100%;
+        padding: 1rem;
+    }
 
     &__return-links {
         display: flex;
+        margin-bottom: 7.5rem;
         &__link {
             color: $color-black;
             margin-right: .8rem;
+
+            @media only screen and (max-width: 1200px) {
+                font-size: 1.2rem;
+            }
+            @media only screen and (max-width: 450px) {
+                margin-right: .5rem;
+                max-width: 10rem;
+            }
+            
 
             &:hover {
                 color: $color-grey-dark;
@@ -15,26 +34,55 @@
         &__spacer {
             color: $color-black;
             margin-right: .8rem;
+
+            @media only screen and (max-width: 450px) {
+                margin-right: .5rem;
+            }
         }
         &__current {
             color: $color-grey-dark;
             text-decoration: none;
+
+            @media only screen and (max-width: 1200px) {
+                font-size: 1.2rem;
+            }
         }
     }
 
     &__wrapper {
         display: flex;
         justify-content: center;
+
+        @media only screen and (max-width: 850px) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     &__images {
-        width: 50%;
-        max-width: 80rem;
+        width: 50rem;
         padding: 2rem;
+
+        @media only screen and (max-width: 1200px) {
+            padding: 1rem;
+        }
+
+        @media only screen and (max-width: 750px) {
+            width: 90%;
+        }
+    
 
         &__main {
             width: 100%;
-            margin-bottom: 1rem;;
+            margin-bottom: 1rem;
+            overflow: hidden;
+
+            &__wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
 
         &__thumbnail-container {
@@ -45,10 +93,11 @@
             padding: 2rem;
         }
         &__thumbnail {
-            width: 15rem;
-            height: 12.5rem;
-            border: 2px solid transparent;
+            width: 10rem;
+            height: 8rem;
+            border: 1px solid $color-grey-light;
             transition: .3s all;
+            padding: .5rem;
 
             &:hover {
                 border: 2px solid $color-black;
@@ -59,21 +108,40 @@
     &__details {
         display: flex;
         flex-direction: column;
-        padding-top: 5rem;
+        padding-top: 3rem;
         margin-left: 5rem;
-        width: 40%;
+        width: 45rem;
+
+        @media only screen and (max-width: 1200px) {
+            font-size: 1.2rem;
+        }
+        @media only screen and (max-width: 850px) {
+            margin: 0;
+        }
+        
+        @media only screen and (max-width: 750px) {
+            width: 90%;
+        }
     }
 
     &__title {
         font-weight: 300;
         font-size: 2.4rem;
         margin-bottom: .5rem;
+
+        @media only screen and (max-width: 750px) {
+            font-size: 2.2rem;
+        }
     }
     &__brand {
         text-transform: uppercase;
         font-weight: 500;
         font-size: 1.8rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
+
+        @media only screen and (max-width: 750px) {
+            font-size: 1.5rem;
+        }
     }
     &__description {
         font-size: 1.4rem;
@@ -91,7 +159,7 @@
     &__price {
         font-size: 2.4rem;
         font-weight: 500;
-        margin-bottom: .5rem;
+        margin: 1.75rem 0;
         align-self: flex-end;
         margin-right: 1.5rem;
     }

@@ -4,14 +4,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 5rem;
+    padding: 2.5rem 5rem;
     background: $color-black;
+
+    @media only screen and (max-width: 750px) {
+        padding: 2rem 1rem;
+    }
+
+    @media only screen and (max-width: 450px) {
+        flex-direction: column;
+        justify-content: center;
+        height: 10vh;
+    }
 
     &__logo {
         color: $color-grey-medium;
         font-weight: 300;
         font-size: 2.4rem;
         text-decoration: none;
+
+        @media only screen and (max-width: 750px) {
+            font-size: 2rem;
+        }
+        @media only screen and (max-width: 450px) {
+            justify-self: flex-start;
+        }
     }
 
     &__navlist {
@@ -22,6 +39,13 @@
         &__list-item {
             padding: 0 2rem;
             list-style: none;
+
+            @media only screen and (max-width: 750px) {
+                padding: 0 1.2rem;
+            }
+            @media only screen and (max-width: 450px) {
+                margin-top: .5rem;
+            }
         }
         &__link {
             color: $color-grey-medium;
@@ -30,6 +54,10 @@
             border: 2px solid transparent;
             font-size: 1.8rem;
             transition: .2s all;
+
+            @media only screen and (max-width: 750px) {
+                font-size: 1.5rem;
+            }
 
             &--hover {
                 &:hover {
@@ -44,8 +72,18 @@
     height: 2.2rem;
     width: 2.2rem;
 
+    @media only screen and (max-width: 750px) {
+        height: 1.8rem;
+        width: 1.8rem;
+    }
+
     &--2 {
         width: 4rem;
         height: 4rem;
+
+        @media only screen and (max-width: 750px) {
+            height: 3.4rem;
+            width: 3.4rem;
+        }
     }
 }
