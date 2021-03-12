@@ -34,6 +34,8 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+    # Convert price from cents to dollars on form render
+    @listing.price = @listing.price / 100
   end
 
   # POST /listings
@@ -105,7 +107,7 @@ class ListingsController < ApplicationController
           name: @listing.title,
           description: @listing.description.blank? ? nil : @listing.description,
           images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
-          amount: (@listing.price * 100) + params[:postage_option].to_i,
+          amount: @listing.price + params[:postage_option].to_i,
           currency: 'aud',
           quantity: 1,
         }],

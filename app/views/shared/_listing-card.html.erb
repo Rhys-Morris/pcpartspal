@@ -28,7 +28,7 @@
       <%= format_title(listing.title) %>
     </span>
     <span class="card--listing__price">
-      $<%= listing.price %>
+      $<%= cents_to_dollars(listing.price) %>
     </span>
     <!-- Add watched icon if in current_user watchlist -->
     <% if current_user && current_user.profile.listings.include?(listing) %>

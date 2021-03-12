@@ -37,11 +37,11 @@
         <span>Condition:</span> <%= @listing.condition %>
       </span>
       <span class="listing-show__price">
-        <%= render_price(@listing.sold, @listing.price) %>
+        <%= render_price(@listing.sold, cents_to_dollars(@listing.price)) %>
       </span>
       <% if @postage_cost %>
         <span class="listing-show__postage-cost">
-          <%= "+ $#{((@postage_cost).to_f / 100).round(2)} postage cost" %>
+          <%= "+ $#{cents_to_dollars(@postage_cost)} postage cost" %>
         </span>
       <% end %>
 

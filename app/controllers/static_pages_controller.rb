@@ -9,6 +9,6 @@ class StaticPagesController < ApplicationController
     def retrieve_page_data
       @categories = Category.all
       @brands = Brand.all.sample(8)
-      @listings = Listing.last(5)
+      @listings = Listing.where("sold": false).last(5)
     end
 end

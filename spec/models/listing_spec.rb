@@ -24,4 +24,24 @@ RSpec.describe Listing, type: :model do
             expect(build(:listing, condition: nil)).to be_invalid
         end
     end
+    context "santizations" do
+        before(:all) do
+            @listing = build(:listing)
+        end
+        it "strips whitespace at the beginning and end of a title" do
+            @listing.title = "    Title     "
+            @listing.save
+            expect(@listing.title).to eq "Title"
+        end
+        it "strips whitespace at the beginning and end of a description" do
+            @listing.description = "    Description     "
+            @listing.save
+            expect(@listing.description).to eq "Description"
+        end
+        it "converts a dollar value to cents prior to save" do
+            @listing.price = 100.45
+            @listing.save
+            expect(@listing.price).to eq 10045
+        end
+    end
 end

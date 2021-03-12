@@ -1,0 +1,124 @@
+
+Listing Factory
+  is valid
+  testing factory properties
+    has the correct title
+    has the correct price
+    has a correct association with a user
+    has a correct association with a brand
+    has a correct association with a category
+
+User Factory
+  is valid
+  testing factory properties
+    has the correct email
+    has the correct username
+    has the correct association with location
+
+Brand Factory
+  is valid
+  testing factory properties
+    has the correct name
+
+Category Factory
+  is valid
+  testing factory properties
+    has the correct name
+
+Purchase Factory
+  is valid
+  testing factory properties
+    has the correct receipt_url
+    has the correct association with a listing
+    has the correct association with a user
+
+Profile Factory
+  is valid
+  testing factory properties
+    has the correct association with a user
+
+Watch Factory
+  is valid
+  testing factory properties
+    has the correct association with a profile and user
+    has the correct association with a listing
+
+Location Factory
+  is valid
+  testing factory properties
+    has the correct state
+    has the correct postcode
+
+Message Factory
+  is valid
+  testing factory properties
+    has the correct message
+    has the correct title
+
+Review Factory
+  is valid
+  testing factory properties
+    has the correct rating
+    has the correct message
+
+Brand
+  validations
+    is valid when given all attributes
+    is invalid when name is empty
+    is invalid when a duplicate entry
+
+Category
+  validations
+    is valid when given all attributes
+    is invalid when name is empty
+    is invalid when a duplicate entry
+
+Listing
+  validations
+    is valid when given all attributes
+    is invalid when title is empty
+    is invalid when price is empty
+    is invalid when price is < 1
+    is invalid when description length is > 500 characters
+    is invalid when condition is empty
+  santizations
+    strips whitespace at the beginning and end of a title
+    strips whitespace at the beginning and end of a description
+    converts a dollar value to cents prior to save
+
+Location
+  validations
+    should only allow postcodes within a valid range
+    should allow postcodes within a valid range
+    should only allow state abbreviations between 2-3 letters
+    should only allow state abbreviations between 2-3 letters
+    should only allow city names < 100 chars
+  santizations
+    should convert states to uppercase before save
+
+Message
+  validations
+    should have a body < 500 chars
+    should have a subject < 50 chars
+    should be invalid without a body or title
+
+Profile
+  validations
+    is valid when given all attributes
+
+Purchase
+  validations
+    is valid when given all attributes
+    is invalid when payment_id is empty
+
+Review
+  validations
+    should be invalid without a rating
+    should be invalid without a message
+    should be invalid with a rating < 1
+    should be invalid with a rating > 5
+    should have a message < 250 chars
+
+Finished in 1.26 seconds (files took 1.07 seconds to load)
+64 examples, 0 failures
+

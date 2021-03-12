@@ -14,7 +14,7 @@
 
   <div class="field form__field">
     <%= form.label :price, class: "form__label"  %>
-    <%= form.number_field :price, class: "form__number", min: "1", placeholder: "in AUD" %>
+    <%= form.number_field :price, class: "form__number", min: "1", placeholder: "in AUD", step: ".05" %>
   </div>
 
   <div class="field form__field form__field--row">
