@@ -35,6 +35,9 @@
         </a>
       <% end %>
     <% end %>
+    <% if @conversations.empty? %>
+      <p>No active conversations </p>
+    <% end %>
   </div>
 
 </div>
