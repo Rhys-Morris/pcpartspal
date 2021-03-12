@@ -67,7 +67,7 @@
 
       <!-- Buy and Message -->
       <% if user_signed_in? && current_user.id != @listing.user.id && !@listing.sold %>
-        <button data-stripe="payment" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
+        <button data-stripe="payment" data-pubKey="<%=Rails.application.credentials.dig(:stripe, :public_key)%>" data-sessionId="<%=@session_id%>" data-postage="<%=@postage_cost%>" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
         <%= link_to "Message", create_conversation_path(sender_id: current_user.id, receiver_id: @listing.user.id), method: :post, class: "listing-show__message btn btn-up btn-ghost" %>
       <% end %>
 
@@ -94,35 +94,8 @@
 
 <!-- Stripe session -->
 
-<script src="https://js.stripe.com/v3/"></script>
+<%= javascript_include_tag "https://js.stripe.com/v3/" %>
 
-<script>
-    document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
-    // Don't send session if no postage option selected
-    if (!"<%= @postage_cost %>") {
-      const flash = document.createElement("div");
-      flash.className = "flash";
-      const flashMessage = document.createElement("p");
-      flashMessage.className = "alert";
-      flashMessage.textContent = "Please select postage before proceeding to checkout";
-      flash.appendChild(flashMessage);
-      document.querySelector('.nav').after(flash);
-      return
-    }
-    
-    const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
-    stripe.redirectToCheckout({
-      sessionId: "<%= @session_id %>"
-    });
-  });
-</script>
+<%= javascript_pack_tag "stripe" %>
 
-<script>
-  const thumbnailBox = document.querySelector(".listing-show__images__thumbnail-container")
-  const mainImage = document.querySelector(".listing-show__images__main")
-  thumbnailBox.addEventListener("click", (e) => {
-    const target = e.target.closest(".listing-show__images__thumbnail");
-    const src = target.src;
-    mainImage.src = src;
-  })
-</script>
+<%= javascript_pack_tag "imageToggle" %>

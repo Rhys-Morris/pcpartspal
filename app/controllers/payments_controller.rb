@@ -33,9 +33,13 @@ class PaymentsController < ApplicationController
     end
 
     # Add new Purchase
-    new_purchase = Purchase.new("user_id": purchaser_id, "listing_id": listing_id, "payment_intent": payment_id, "receipt_url": receipt_url)
+    @new_purchase = Purchase.new("user_id": purchaser_id, "listing_id": listing_id, "payment_intent": payment_id, "receipt_url": receipt_url)
+    @user = User.find(purchaser_id)
 
-    if new_purchase.save
+
+    if @new_purchase.save
+      # Send confirmation of purchase to user email
+      UserMailer.with(purchase: @new_purchase, user: @user).purchase_confirmation.deliver_now
       render plain: "Success"
     else
       puts "----- Error saving new purchase ----- "

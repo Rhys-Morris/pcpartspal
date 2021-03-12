@@ -10,7 +10,7 @@ class Listing < ApplicationRecord
   enum condition: { Used: 0, New: 1 }
 
   # Validations
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 500 }
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :condition, presence: true

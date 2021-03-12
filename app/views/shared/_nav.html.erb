@@ -5,23 +5,30 @@
     <ul class="nav__navlist">
         <% if !user_signed_in? %>
             <li class="nav__navlist__list-item">
-                <%= link_to "Register", new_user_registration_path, class: "nav__navlist__link" %>
+                <%= link_to "Register", new_user_registration_path, class: "nav__navlist__link nav__navlist__link--hover" %>
             </li>
             <li class="nav__navlist__list-item">
-                <%= link_to "Sign In", new_user_session_path, class: "nav__navlist__link" %>
+                <%= link_to "Sign In", new_user_session_path, class: "nav__navlist__link nav__navlist__link--hover" %>
             </li>
         <% else %>
         <li class="nav__navlist__list-item">
-            <%= link_to "Buy", listings_path, class: "nav__navlist__link" %>
+            <%= link_to "Buy", listings_path, class: "nav__navlist__link nav__navlist__link--hover" %>
         </li>
         <li class="nav__navlist__list-item">
-            <%= link_to "Sell", new_listing_path, class: "nav__navlist__link" %>
+            <%= link_to "Sell", new_listing_path, class: "nav__navlist__link nav__navlist__link--hover" %>
         </li>
         <li class="nav__navlist__list-item">
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav__navlist__link" %>
+            <%= link_to watchlist_path, class: "nav__navlist__link" do %>
+                <%= image_tag "watched-icon.png", alt: "link-to-watched-items", class: "nav__icon" %>
+            <% end %>
         </li>
         <li class="nav__navlist__list-item">
-            <%= link_to "Profile", profile_path(current_user.profile.id), class: "nav__navlist__link" %>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav__navlist__link nav__navlist__link--hover" %>
+        </li>
+        <li class="nav__navlist__list-item">
+            <%= link_to profile_path(current_user.profile.id), class: "nav__navlist__link" do %>
+                <%= image_tag "profile-default.png", alt: "profile-link", class: "nav__icon--2" %>
+            <% end %>
         </li>
         <% end %>
     </ul>

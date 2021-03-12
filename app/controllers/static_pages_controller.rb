@@ -1,13 +1,14 @@
 class StaticPagesController < ApplicationController
-  before_action :set_categories_and_brands, only: %i[ home ]
+  before_action :retrieve_page_data, only: %i[ home ]
 
   def home
   end
 
   private
 
-    def set_categories_and_brands
+    def retrieve_page_data
       @categories = Category.all
       @brands = Brand.all.sample(8)
+      @listings = Listing.last(5)
     end
 end

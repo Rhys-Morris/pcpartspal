@@ -3,16 +3,18 @@
     <span class="listings-panel__total">
       <%= listing_count(@listings) %>
     </span>
-    <div class="listings-panel__distance-filter">
-      <label for="distance" class="listings-panel__distance-filter__label">Distance Filter:</label>
-      <select name="distance" id="filter">
-        <option value="Infinity">No limit</option>
-        <option value="50">50 kilometres</option>
-        <option value="100">100 kilometres</option>
-        <option value="200">200 kilometres</option>
+    <div class="listings-panel__search-box">
+      <input type="text" class="listings-panel__search", placeholder="Search titles">
+      <button id="reset-search" class="btn btn-up btn-ghost">Reset</button>
+    </div>
+    <div class="listings-panel__sort">
+      <select name="sort" id="sort">
+        <option value="oldest">Date Added: Old to New</option>
+        <option value="newest">Date Added: New to Old</option>
+        <option value="cheapest">Price: Lowest First</option>
+        <option value="expensive">Price: Highest First  </option>
       </select>
     </div>
-    <input type="text" class="listings-panel__search", placeholder="Search titles">
   </div>
   <div class="listings-main">
     <div class="filter">
@@ -28,35 +30,4 @@
   </div>
 </div>
 
-<script>
-  const search = document.querySelector(".listings-panel__search");
-  const titles = document.querySelectorAll(".card--listing__title")
-  const cards = document.querySelectorAll(".card--listing")
-  search.addEventListener('keyup', () => {
-    const searchString = search.value;
-    if (searchString == "") {
-      cards.forEach(card => {
-        card.classList.remove("hidden");
-      });
-    }
-    const regExp = new RegExp(searchString, 'i')
-    titles.forEach(title => {
-      const titleText = title.textContent;
-      if (!titleText.match(regExp)) {
-        title.closest(".card--listing").classList.add("hidden");
-      }
-    });
-  })
-</script>
-
-<script>
-  const filter = document.querySelector("#filter");
-  filter.addEventListener('change', () => {
-    cards.forEach(card => {
-      card.classList.remove("hidden");
-      if (Number(card.dataset.distance) > Number(filter.value)) {
-        card.classList.add("hidden");
-      }
-    })
-  })
-</script>
+<%= javascript_pack_tag "listingSearches" %>

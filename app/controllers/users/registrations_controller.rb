@@ -12,8 +12,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    # puts "-----------"
-    # pp params
     super
   end
 
@@ -45,12 +43,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :location_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :location_id, :latitude, :longitude])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :location_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :location_id, :latitude, :longitude])
   end
 
   # The path used after sign up.

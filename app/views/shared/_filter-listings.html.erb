@@ -1,18 +1,48 @@
-<h3 class="filter__header">Filter Results</h3>
+<%= form_with do |form| %>
 
-<%= form_with url: "/listings/filter", method: :get do |form| %>
-  <div class="field form__field">
-    <%= form.label :category_id, class: "form__label" %>
-    <%= form.select "filtered[category_id]", @categories.map {|cat| [cat.name, cat.id]}, {include_blank: true} %>
+  <div class="filter__category-filter">
+    <h3 class="filter__header">Category</h3>
+    <%= form.select "filtered[category_id]", @categories.map {|cat| [cat.name, cat.id]}, {include_blank: true}, id: "category", class: "filter-select" %>
   </div>
 
-  <div class="field form__field ">
-    <%= form.label :brand_id, class: "form__label" %>
-    <%= form.select "filtered[brand_id]", @brands.map {|brand| [brand.name, brand.id]},{include_blank: true}  %>
-  </div>
-
-  <div class="actions"> 
-    <%= form.submit "Filter", class: "btn btn-up btn-ghost" %>
-    <%= link_to "Reset", listings_path, class: "btn btn-up btn-ghost filter__reset" %>
+  <div class="filter__brand-filter ">
+    <h3 class="filter__header">Brand</h3>
+    <%= form.select "filtered[brand_id]", @brands.map {|brand| [brand.name, brand.id]},{include_blank: true}, id: "brand", class: "filter-select" %>
   </div>
 <% end %>
+
+<!-- Distance -->
+<div class="filter__distance-filter">
+  <h3 class="filter__header">Distance</h3>
+  <select name="distance" id="distance" class="filter-select">
+    <option value="Infinity">No limit</option>
+    <option value="50">50 kilometres</option>
+    <option value="100">100 kilometres</option>
+    <option value="200">200 kilometres</option>
+  </select>
+</div>
+
+<!-- Price -->
+<div class="filter__price-filter">
+  <h3 class="filter__header">Price</h3>
+  <select name="price" id="price" class="filter-select">
+    <option value="Infinity">No limit</option>
+    <option value="50">$50</option>
+    <option value="100">$100</option>
+    <option value="250">$250</option>
+    <option value="500">$500</option>
+  </select>
+</div>
+
+<!-- Condition -->
+<div class="filter__condition-filter">
+  <h3 class="filter__header">Condition</h3>
+  <select name="condition" id="condition" class="filter-select">
+    <option value="none">Not specified</option>
+    <option value="new">New</option>
+    <option value="used">Used</option>
+  </select>
+</div>
+
+<!-- Reset -->
+<%= link_to "Show All", listings_path, class: "btn btn-up btn-ghost filter__reset" %>

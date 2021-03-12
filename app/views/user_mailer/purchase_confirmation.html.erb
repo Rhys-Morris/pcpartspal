@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Congratulations on your purchase, <%=@user.username%>!</h1>
+    <p>
+        You have successfully completed checkout for <%= @purchase.listing.title %>.
+    </p><br>
+    <p>
+        To view your payment receipt please follow this link: <%= @purchase.receipt_url %>.
+    </p><br>
+    <p>
+        Please take the time to review <%= @purchase.user.username %>, the seller of this item. You can do this through the Purchases tab of your profile.
+    </p><br>
+    <p>
+        Thanks for your purchase and have a great day! The PcPartsPal Team.
+    </p>
+</body>
+</html>

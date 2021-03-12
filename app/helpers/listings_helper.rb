@@ -14,4 +14,6 @@ module ListingsHelper
           </div>".html_safe
         end
     end
+
+    
 end

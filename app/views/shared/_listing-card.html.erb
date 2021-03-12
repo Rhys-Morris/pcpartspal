@@ -1,11 +1,14 @@
 <!-- Place distance from current user on each card as data attr -->
 <% if user_signed_in? %>
-  <% listing_lat = listing.user.profile.latitude %>
-  <% listing_long = listing.user.profile.longitude %>
-  <% distance = current_user.profile.distance_to([listing_lat, listing_long]) %>
+  <% listing_lat = listing.user.latitude %>
+  <% listing_long = listing.user.longitude %>
+  <% distance = current_user.distance_to([listing_lat, listing_long]) %>
 <% end %>
 
-<a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>">
+<a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>" data-price="<%= listing.price %>"
+    data-condition="<%= listing.condition %>" data-created="<%=listing.created_at.to_i%>"
+    data-brand="<%=listing.brand.id%>" data-category="<%=listing.category.id%>"
+  >
     <% if listing.images.attached? %>
       <div class="card--listing__image-wrapper">
         <%= image_tag listing.images[0], class: "card--listing__image" %>
