@@ -3,19 +3,16 @@
   <%= render "shared/user_panel" %>
 
   <!-- Could be made into partial  -->
-  <div class="container__start">
-    <div class="user-profile__content">
-      <div class="user-profile__content__my-listings">
-          <h3 class="user-profile__content__header">Listings</h3>
-          <div class="card-container">
-              <% @profile.user.listings.each do |listing| %>
-                <% if listing.sold != true %>
-                  <%= render "shared/listing-card", listing: listing %>
-                <% end %>
+  <div class="user-profile__content">
+    <div class="user-profile__content__my-listings">
+        <h3 class="user-profile__content__header">Listings</h3>
+        <div class="card-container">
+            <% @profile.user.listings.each do |listing| %>
+              <% if listing.sold != true %>
+                <%= render "shared/listing-card", listing: listing %>
               <% end %>
-          </div>
-      </div>
+            <% end %>
+        </div>
     </div>
   </div>
-
 </div>

@@ -5,7 +5,7 @@
   <% distance = current_user.distance_to([listing_lat, listing_long]) %>
 <% end %>
 
-<a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>" data-price="<%= listing.price %>"
+<a href="<%= listing_path(listing.id) %>" class="card--listing" data-distance="<%= distance %>" data-price="<%= (listing.price) / 100 %>"
     data-condition="<%= listing.condition %>" data-created="<%=listing.created_at.to_i%>"
     data-brand="<%=listing.brand.id%>" data-category="<%=listing.category.id%>"
   >

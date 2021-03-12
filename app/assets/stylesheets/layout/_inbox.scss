@@ -1,4 +1,10 @@
 .inbox {
+
+    border-right: 2px solid $color-black;
+    border-left: 2px solid $color-black;
+    border-top: 1px solid $color-black;
+    border-bottom: 1px solid $color-black;
+
     &__header {
         font-size: 2.8rem;
         text-transform: uppercase;
@@ -10,20 +16,33 @@
     &__conversation {
         text-decoration: none;
         color: $color-black;
-        margin-bottom: 3rem;
+
         &__wrapper {
-            border: 2px solid $color-grey-light;
             padding: 1.5rem;
-            border-radius: .5rem;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             width: 80rem;
-            box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.2);
             transition: .3s all;
+            border-top: 1px solid $color-black;
+            border-bottom: 1px solid $color-black;
 
             &:hover {
-                border: 2px solid $color-orangered;
+                background-color: #EAEAEA;
+            }
+
+            @media only screen and (max-width: 850px) {
+                width: 60rem;
+            }
+
+            @media only screen and (max-width: 650px) {
+                width: 50rem;
+                font-size: 1.2rem;
+            }
+
+            @media only screen and (max-width: 550px) {
+                width: 50rem;
+                font-size: 1.2rem;
             }
         }
         &__user-box {
@@ -31,7 +50,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 15%;
+            width: 20rem;
+            border-right: 2px solid $color-grey-light;
         }
 
         &__recent-message {
@@ -42,7 +62,7 @@
 
             &__subject {
                 text-transform: uppercase;
-                font-weight: 300;
+                font-weight: 500;
                 margin-bottom: 1rem;
             }
 

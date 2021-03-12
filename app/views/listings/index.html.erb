@@ -1,7 +1,13 @@
 <div class="container">
   <%= render "shared/listings-panel" %>
   <div class="listings-main">
+    <div class="filter__toggle">
+      <div class="filter__toggle__hamburger-line"></div>
+      <div class="filter__toggle__hamburger-line"></div>
+      <div class="filter__toggle__hamburger-line"></div>
+    </div>
     <div class="filter">
+      <input type="text" class="filter__search search", placeholder="Search titles">
       <%= render "shared/filter-listings" %>
     </div>
     <div class="card-container">

@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   # Associations
   has_one :profile, dependent: :destroy
-  accepts_nested_attributes_for :profile
   has_many :listings, dependent: :destroy
   has_many :purchases, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -15,8 +14,8 @@ class User < ApplicationRecord
 
   # Validations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  VALID_USERNAME_REGEX = /[\w]/i
-  validates :username, uniqueness: true, length: { maximum: 25 }, format: { with: VALID_USERNAME_REGEX }
+  VALID_USERNAME_REGEX = /[A-Za-z0-9]/i
+  validates :username, uniqueness: true, length: { maximum: 25, minimum: 5 }, format: { with: VALID_USERNAME_REGEX }
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
 
   # Create profile

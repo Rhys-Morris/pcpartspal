@@ -22,6 +22,8 @@
               <%= image_tag @listing.images[image], class: "listing-show__images__thumbnail" %>
             <% end %>
           </div>
+        <% else %>
+        <%= image_tag "profile-default.png", class: "listing-show__images__main"%>
         <% end %>
       </div>
   
@@ -66,6 +68,7 @@
           <div class="listing-show__postage-options">
             <%= render "shared/postage-select", listing: @listing, postage_options: @postage_options %>
           </div>
+          <div id="postage-selected" data-postage="<%=@postage_cost%>"></div>
         <% end %>
   
         <!-- Buy and Message -->
@@ -103,3 +106,5 @@
 <%= javascript_pack_tag "stripe" %>
 
 <%= javascript_pack_tag "imageToggle" %>
+
+<%= javascript_pack_tag "updatePostageOption" %>
