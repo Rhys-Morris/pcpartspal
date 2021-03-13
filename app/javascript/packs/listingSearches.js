@@ -1,6 +1,6 @@
-const search = document.querySelector(".listings-panel__search");
-const titles = document.querySelectorAll(".card--listing__title")
+const titleSearch = document.querySelector(".listings-panel__search");
 const cards = document.querySelectorAll(".card--listing");
+const titles = document.querySelectorAll(".card--listing__title")
 
 // Show all cards
 function makeCardsVisible () {
@@ -9,26 +9,45 @@ function makeCardsVisible () {
     });
 }
 
-// SEARCH LISTINGS CURRENTLY DISPLAYED BY TITLE
-search.addEventListener('keyup', () => {
-    const searchString = search.value;
+// TOGGLE HAMBURGER ICON FOR FILTERS
+const searchToggle = document.querySelector(".filter__toggle");
+const filterDiv = document.querySelector(".filter");
+searchToggle.addEventListener('click', () => {
+    filterDiv.style.display = filterDiv.style.display == "none" ? "flex" : "none";
+})
+
+function filterListingsByTitle (searchBox) {
+    const searchString = searchBox.value;
+    console.log(searchString);
     if (searchString == "") {
         makeCardsVisible();
     }
-    const regExp = new RegExp(searchString, 'i')
+    const regExp = new RegExp(searchString, 'i');
     titles.forEach(title => {
         const titleText = title.textContent;
         if (!titleText.match(regExp)) {
           title.closest(".card--listing").classList.add("hidden");
         }
     });
+}
+
+// SEARCH LISTINGS CURRENTLY DISPLAYED BY TITLE - INSIDE HAMBURGER DROP DOWN
+const hamburgerSearch = document.querySelector(".filter__search");
+hamburgerSearch.addEventListener('keyup', function () {
+    filterListingsByTitle(this)
+});
+
+
+// SEARCH LISTINGS CURRENTLY DISPLAYED BY TITLE - MAIN MENU
+titleSearch.addEventListener('keyup', function () {
+    filterListingsByTitle(this);
 });
 
 // RESET SEARCH INPUT
 const resetSearch = document.getElementById("reset-search")
 resetSearch.addEventListener('click', () => {
-    search.value = "";
-    search.textContent = "";
+    titleSearch.value = "";
+    titleSearch.textContent = "";
     makeCardsVisible()
 })
 

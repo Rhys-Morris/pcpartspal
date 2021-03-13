@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pcpartspal</title>
+    <title><%=page_title(yield(:title))%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     
     <%= csrf_meta_tags %>
@@ -33,5 +33,6 @@
   </body>
 
   <%= javascript_pack_tag "closeFlash" %>
+  <%= javascript_pack_tag "hamburgerMenu" %>
 
 </html>

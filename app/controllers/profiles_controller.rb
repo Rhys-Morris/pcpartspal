@@ -3,11 +3,6 @@ class ProfilesController < ApplicationController
   before_action :check_sidebar_display, only: %i[ show ]
   before_action :authenticate_user!
 
-  # GET /profiles
-  def index
-    @profiles = Profile.all
-  end
-
   # GET /profiles/1
   def show
     if current_user.profile.id == params[:id].to_i
@@ -84,6 +79,7 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(:bio, :location, :postcode, :user_id, :image, :address)
     end
 
+    # To allow immediate display of watchlist via front end code
     def check_sidebar_display
       @display = params["display"]
     end

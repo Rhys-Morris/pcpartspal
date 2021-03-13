@@ -1,39 +1,43 @@
 <div class="user-panel">
     <div class="user-panel__info">
-        <% if @profile.image.attached? %>
-            <%= image_tag @profile.image, alt: "profile-pic", class: "user-panel__picture" %>
-        <% else %>
-            <%= image_tag "profile-default.png", alt: "default-profile-pic", class: "user-panel__picture" %>
-        <% end %>
-        <div class="user-panel__user-info">
-            <p class="user-panel__user-info__top user-panel__user-info__username ">
-                <%= @profile.user.username %> 
-            </p>
-            <p>Joined in <%= @profile.created_at.year %> </p>
+        <div class="user-panel__flex-target user-panel__flex-target--1">
+            <% if @profile.image.attached? %>
+                <%= image_tag @profile.image, alt: "profile-pic", class: "user-panel__picture" %>
+            <% else %>
+                <%= image_tag "profile-default.png", alt: "default-profile-pic", class: "user-panel__picture" %>
+            <% end %>
+            <div class="user-panel__user-info">
+                <p class="user-panel__user-info__top user-panel__user-info__username ">
+                    <%= @profile.user.username %> 
+                </p>
+                <p>Joined in <%= @profile.created_at.year %> </p>
+            </div>
         </div>
-        <div class="user-panel__user-info">
-            <p class="user-panel__user-info__top">
-                <%= @profile.user.location.city %>
-            </p>
-            <p>
-               <%= @profile.user.location.postcode %>
-            </p>
+        <div class="user-panel__flex-target user-panel__flex-target--2">
+            <div class="user-panel__user-info">
+                <p class="user-panel__user-info__top">
+                    <%= @profile.user.location.city %>
+                </p>
+                <p>
+                <%= @profile.user.location.postcode %>
+                </p>
+            </div>
+            <div class="user-panel__user-info">
+                <p class="user-panel__user-info__top">
+                    <%= listing_count(@profile.user.listings) %>
+                </p>
+                <p>
+                    <%= calc_feedback_score(@profile.user.reviews) %>
+                </p>
+            </div>
+            <div class="user-panel__buttons">
+                <% if @profile.id == current_user.profile.id %>
+                    <%= link_to "Edit Profile", edit_profile_path(current_user.profile.id), class: "user-panel__btn btn btn-ghost" %>
+                <% else %>
+                    <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: :post, class: "user-panel__btn btn btn-ghost" %>
+                <% end %>
+            </div>
         </div>
-        <div class="user-panel__user-info">
-            <p class="user-panel__user-info__top">
-                <%= listing_count(@profile.user.listings) %>
-            </p>
-            <p>
-                <%= calc_feedback_score(@profile.user.reviews) %>
-            </p>
-        </div>
-    </div>
-    <div class="user-panel__buttons">
-        <% if @profile.id == current_user.profile.id %>
-            <%= link_to "Edit Profile", edit_profile_path(current_user.profile.id), class: "user-panel__btn btn btn-ghost" %>
-        <% else %>
-            <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: @profile.user.id), method: :post, class: "user-panel__btn btn btn-ghost" %>
-        <% end %>
     </div>
 </div>
 

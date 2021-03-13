@@ -4,24 +4,89 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 5rem;
+    padding: 2.5rem 5rem;
     background: $color-black;
+
+    @media only screen and (max-width: 750px) {
+        padding: 2rem 1rem;
+    }
+
+    @media only screen and (max-width: 500px) {
+        flex-direction: column;
+        height: 8vh;
+        justify-content: flex-start;
+        position: relative;
+        padding: 1.5rem 0;
+    }
+
+    &__toggle {
+        display: none;
+    
+        @media only screen and (max-width: 500px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: .3rem;
+            margin-top: 1.5rem;
+            background-color: $color-black;
+            position: absolute;
+            top: .2rem;
+            right: 1rem;
+            
+        }
+    
+        &__hamburger-line {
+            width: 65%;
+            height: 2px;
+            margin: .2rem 0;
+            background: $color-grey-light;
+        }
+    }
 
     &__logo {
         color: $color-grey-medium;
         font-weight: 300;
         font-size: 2.4rem;
         text-decoration: none;
+
+        @media only screen and (max-width: 750px) {
+            font-size: 2rem;
+        }
+
+        @media only screen and (max-width: 500px) {
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+        }
     }
 
     &__navlist {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @media only screen and (max-width: 500px) {
+            flex-direction: column;
+            display: none;
+        }
         
         &__list-item {
             padding: 0 2rem;
             list-style: none;
+
+            @media only screen and (max-width: 750px) {
+                padding: 0 1.2rem;
+            }
+
+            @media only screen and (max-width: 500px) {
+                padding: 2rem 0;
+
+                &:first-child {
+                    margin-top: 10rem;
+                }
+            }
         }
         &__link {
             color: $color-grey-medium;
@@ -31,11 +96,21 @@
             font-size: 1.8rem;
             transition: .2s all;
 
+            @media only screen and (max-width: 750px) {
+                font-size: 1.5rem;
+            }
+
             &--hover {
                 &:hover {
                     border-bottom: 2px solid $color-orangered;
                 }
-            }  
+            }
+
+            @media only screen and (max-width: 500px) {
+                font-size: 2rem;
+                font-weight: 300;
+                letter-spacing: 2px;
+            }
         }
     }
 }
@@ -44,8 +119,35 @@
     height: 2.2rem;
     width: 2.2rem;
 
+    @media only screen and (max-width: 750px) {
+        height: 1.8rem;
+        width: 1.8rem;
+    }
+
     &--2 {
         width: 4rem;
         height: 4rem;
+
+        @media only screen and (max-width: 750px) {
+            height: 3.4rem;
+            width: 3.4rem;
+        }
+        @media only screen and (max-width: 500px) {
+            display: none;
+            height: 0;
+            width: 0;
+        }
+    }
+}
+
+.profile {
+
+    &--alt {
+        display: none;
+
+        @media only screen and (max-width: 500px) {
+            display: block;
+            margin-top: -1.5rem;
+        }
     }
 }

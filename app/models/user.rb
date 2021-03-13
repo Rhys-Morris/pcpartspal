@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   # Associations
   has_one :profile, dependent: :destroy
-  accepts_nested_attributes_for :profile
   has_many :listings, dependent: :destroy
   has_many :purchases, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -15,12 +14,13 @@ class User < ApplicationRecord
 
   # Validations
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :username, uniqueness: true, length: { maximum: 25 }
+  VALID_USERNAME_REGEX = /\A[a-zA-Z0-9_]+\z/i
+  validates :username, uniqueness: true, length: { maximum: 25, minimum: 5 }, format: { with: VALID_USERNAME_REGEX }
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
 
   # Create profile
   before_save :init_profile
-  after_create :send_welcome
+  # after_create :send_welcome
 
   def init_profile
     self.build_profile
@@ -34,7 +34,7 @@ class User < ApplicationRecord
       "#{self.location.city}, #{self.location.state}, Australia"
   end
 
-  def send_welcome
-    UserMailer.with(user: self).welcome.deliver_now
-  end
+  # def send_welcome
+  #   UserMailer.with(user: self).welcome.deliver_now
+  # end
 end

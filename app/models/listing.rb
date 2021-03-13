@@ -19,7 +19,24 @@ class Listing < ApplicationRecord
   validates :width, presence: true, numericality: { greater_than: 0, less_than: 300 }
   validates :weight, presence: true, numericality: { greater_than: 0, less_than: 150 }
 
+  before_save :remove_whitespace
+  before_validation :convert_price_to_cents, if: :price_changed?
+
   def self.filter(filtered_params)
     Listing.where(filtered_params)
-  end 
+  end
+
+  def self.last_five
+    self.where("sold": false).last(5)
+  end
+
+  private
+    def remove_whitespace
+      self.title = title.strip
+      self.description = description.strip
+    end
+
+    def convert_price_to_cents
+      self.price = (price * 100)
+    end
 end

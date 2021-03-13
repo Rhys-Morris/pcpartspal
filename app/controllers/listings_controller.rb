@@ -34,6 +34,8 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+    # Convert price from cents to dollars on form render
+    @listing.price = @listing.price / 100
   end
 
   # POST /listings
@@ -83,8 +85,8 @@ class ListingsController < ApplicationController
     end 
 
     def set_form_parameters
-      @categories = Category.all.sort_by { |cat| cat.name }
-      @brands = Brand.all.sort_by { |brand| brand.name }
+      @categories = Category.sorted
+      @brands = Brand.sorted
       @conditions = Listing.conditions.keys
     end
 
@@ -105,7 +107,7 @@ class ListingsController < ApplicationController
           name: @listing.title,
           description: @listing.description.blank? ? nil : @listing.description,
           images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
-          amount: (@listing.price * 100) + params[:postage_option].to_i,
+          amount: @listing.price.to_i + params[:postage_option].to_i,
           currency: 'aud',
           quantity: 1,
         }],
@@ -143,9 +145,6 @@ class ListingsController < ApplicationController
       end
       parsed_response = JSON.parse(response.body)
       
-      # puts "---------"
-      # pp parsed_response
-
       # Extract postage options from response
       @postage_options = []
       parsed_response["services"]["service"].each do |option|

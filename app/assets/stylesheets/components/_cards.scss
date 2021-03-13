@@ -3,6 +3,11 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 2rem;
+
+    @media only screen and (max-width: 700px) {
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .card-wrapper {
@@ -28,6 +33,16 @@
     border-radius: 1rem;
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
 
+    @media only screen and (max-width: 750px) {
+        height: 15rem;
+        width: 20rem;
+        margin: 1rem;
+    }
+    @media only screen and (max-width: 500px) {
+        height: 12.5rem;
+        width: 16rem;
+    }
+
     &:hover {
         cursor: pointer;
         transform:translateY(-.5rem);
@@ -41,6 +56,11 @@
     border-radius: 50%;
     border: 1px solid $color-grey-medium;
     background-color: white;
+
+    @media only screen and (max-width: 750px) {
+        height: 15rem;
+        width: 17rem;
+    }
     }
 
     &__image {
@@ -58,6 +78,10 @@
         color: $color-grey-light;
         border-bottom-left-radius: 1rem;
         border-bottom-right-radius: 1rem;
+
+        @media only screen and (max-width: 500px) {
+            font-size: 1.2rem;
+        }
     }
 }
 
@@ -74,6 +98,10 @@
     height: 32.5rem;
     width: 20rem;
     position: relative;
+
+    @media only screen and (max-width: 1200px) {
+        margin: 0 1rem;
+    }
 
     &:hover {
         border: 1px solid $color-grey-dark;

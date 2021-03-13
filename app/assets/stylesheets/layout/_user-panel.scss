@@ -4,10 +4,42 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 3px 0px 0px #EAEAEA;
+
+    @media only screen and (max-width: 700px) {
+        flex-direction: column;
+        position: relative;
+        padding-bottom: 2rem;
+    }
+
+    &__flex-target {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__flex-target--1 {
+        @media only screen and (max-width: 700px) {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__flex-target--2 {
+
+        @media only screen and (max-width: 700px) {
+            justify-content: center;
+        }
+    }
+
     &__info {
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
         align-items: center;
+        width: 100%;
+
+        @media only screen and (max-width: 700px) {
+            flex-direction: column;
+            width: 100%;
+        }
     }
     &__picture {
         height: 7.5rem;
@@ -20,13 +52,28 @@
         padding: 0 3rem;
         border-right: 2px solid $color-grey-light;
 
+        &:nth-child(2) {
+            @media only screen and (max-width: 700px) {
+                border-right: none;
+            }
+        }
+
+        @media only screen and (max-width: 450px) {
+            padding: 0 1.5rem;
+            font-size: 1.2rem;
+        }
+
         &__top {
             margin-bottom: .5rem;
         }
 
         &__username {
             font-weight: 500;
-            font-size: 2rem
+            font-size: 2rem;
+
+            @media only screen and (max-width: 450px) {
+                font-size: 1.6rem;
+            }
         }
 
     }
@@ -38,12 +85,17 @@
 
     &__buttons {
         display: flex;
-        
+        padding-left: 3rem;
+        justify-self: flex-end;
     }
     
     &__btn {
         text-decoration: none;
         font-size: 1.4rem;
-        margin-right: 1rem;
+
+        @media only screen and (max-width: 450px) {
+            font-size: 1.2rem;
+            padding: 1rem;
+        }
     }
 }

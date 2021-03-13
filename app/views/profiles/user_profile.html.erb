@@ -1,11 +1,23 @@
+<% provide(:title, "#{@profile.user.username}") %>
+
 <div class="container">
 
     <%= render "shared/user_panel" %>
 
     <section class="user-profile">
+        <div class="user-profile__toggle">
+            <select name="user-profile__toggle" id="toggle">
+                <option value="my-listings">My Listings</option>
+                <option value="watchlist">Watchlist</option>
+                <option value="sold-listings">Sold Listings</option>
+                <option value="purchases">Purchases</option>
+                <option value="my-messages">My Messages</option>
+                <option value="delete-account">Delete Account</option>
+            </select>
+        </div>
         <div class="user-profile__sidebar" data-display=<%=@display if @display %>>
             <ul class="user-profile__sidebar__list">
-                <li id="my-listings" class="user-profile__sidebar__list__list-item"><span>My Listings</span></li>
+                <li id="my-listings" class="user-profile__sidebar__list__list-item "><span>My Listings</span></li>
                 <li id="watchlist" class="user-profile__sidebar__list__list-item"><span>Watchlist</span></li>
                 <li id="sold-listings" class="user-profile__sidebar__list__list-item"><span>Sold Listings</span></li>
                 <li id="purchases" class="user-profile__sidebar__list__list-item"><span>Purchases</span></li>
@@ -48,9 +60,9 @@
             <div class="user-profile__content__sold hidden" data-target="sold-listings">
                 <h3 class="user-profile__content__header">My Sales</h3>
                 <div class="card-container">
-                    <div class="user-profile__cards-wrapper">
-                        <% sold_listing = false %>
-                        <% @profile.user.listings.each do |listing| %>
+                    <% sold_listing = false %>
+                    <% @profile.user.listings.each do |listing| %>
+                        <div class="user-profile__cards-wrapper">
                             <% if listing.sold %>
                                 <% sold_listing = true %>
                                 <%= render "shared/listing-card", listing: listing %>
@@ -59,19 +71,19 @@
                                     <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: listing.purchase.user.id), method: :post, class: "sales__button btn btn-up btn-ghost" %>
                                 </div>
                             <% end %>
-                        <% end %>
-                        <% if !sold_listing %>
-                            <p>You currently have no sold listings</p>
-                        <% end %>
-                    </div>
+                        </div>
+                    <% end %>
+                    <% if !sold_listing %>
+                        <p>You currently have no sold listings</p>
+                    <% end %>
                 </div>
             </div>
 
             <div class="user-profile__content__purchases hidden" data-target="purchases">
                 <h3 class="user-profile__content__header">My Purchases</h3>
                 <div class="card-container">
-                    <div class="user-profile__cards-wrapper">
-                        <% @profile.user.purchases.each do |purchase| %>
+                    <% @profile.user.purchases.each do |purchase| %>
+                        <div class="user-profile__cards-wrapper">
                             <% if purchase.user_id == @profile.user.id %>
                                 <% listing = Listing.find(purchase.listing_id) %>
                                 <%= render "shared/listing-card", listing: listing %>
@@ -84,11 +96,11 @@
                                 <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: listing.user.id), method: :post, class: "purchases__button btn btn-up btn-ghost" %>
                                 </div>
                             <% end %>
-                        <% end %>
-                        <% if @profile.user.purchases.empty? %>
-                            <p>You currently have no purchased listings</p>
-                        <% end %>
-                    </div>
+                        </div>
+                    <% end %>
+                    <% if @profile.user.purchases.empty? %>
+                        <p>You currently have no purchased listings</p>
+                    <% end %>
                 </div>
             </div>
 
@@ -99,3 +111,4 @@
 
 <%= javascript_pack_tag "profileNav" %>
 <%= javascript_pack_tag "sidebarSelect" %>
+<%= javascript_pack_tag "mobileProfileToggle" %>

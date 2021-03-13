@@ -26,4 +26,16 @@ module ApplicationHelper
         score = (ratings.reduce(:+).to_f / reviews.count.to_f)
         "Rating: #{score} / 5.0"
     end
+
+    def cents_to_dollars(cents)
+        sprintf("%.2f", (cents.to_f / 100))
+    end
+
+    def page_title(title = "")
+        if title.empty?
+            "PcPartsPal"
+        else
+            "#{title} | PcPartsPal"
+        end
+    end
 end

@@ -1,4 +1,4 @@
-<%= form_with(model: listing) do |form| %>
+<%= form_with(model: listing, html: { class: "form" }) do |form| %>
   
   <h2 class="form__header">Create Listing</h2>
 
@@ -14,7 +14,7 @@
 
   <div class="field form__field">
     <%= form.label :price, class: "form__label"  %>
-    <%= form.number_field :price, class: "form__number", min: "1", placeholder: "in AUD" %>
+    <%= form.number_field :price, class: "form__number", min: "1", placeholder: "in AUD", step: ".05" %>
   </div>
 
   <div class="field form__field form__field--row">

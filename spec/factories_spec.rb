@@ -12,7 +12,7 @@ RSpec.describe "Listing Factory" do
             expect(@listing.title).to eq "Samsung Pro Evo Plus 970"
         end
         it "has the correct price" do
-            expect(@listing.price).to be 200
+            expect(@listing.price).to be 200.00
         end
         it "has a correct association with a user" do
             expect(@listing.user.username).to eq "Test_User"
@@ -39,6 +39,9 @@ RSpec.describe "User Factory" do
         end
         it "has the correct username" do
             expect(@user.username).to eq "Test_User"
+        end
+        it "has the correct association with location" do
+            expect(@user.location.city).to eq "Sunbury"
         end
     end
 end
@@ -112,6 +115,57 @@ RSpec.describe "Watch Factory" do
         end
         it "has the correct association with a listing" do
             expect(@watch.listing.brand.name).to eq "Samsung"
+        end
+    end
+end
+
+RSpec.describe "Location Factory" do
+    it "is valid" do
+        expect(build(:location)).to be_valid
+    end
+    context "testing factory properties" do
+        before(:all) do
+            @location = build(:location)
+        end
+        it "has the correct state" do
+            expect(@location.state).to eq "VIC"
+        end
+        it "has the correct postcode" do
+            expect(@location.postcode).to eq "3429"
+        end
+    end
+end
+
+RSpec.describe "Message Factory" do
+    it "is valid" do
+        expect(build(:message)).to be_valid
+    end
+    context "testing factory properties" do
+        before(:all) do
+            @message = build(:message)
+        end
+        it "has the correct message" do
+            expect(@message.subject).to eq "Post Title"
+        end
+        it "has the correct title" do
+            expect(@message.body).to eq "This is the post body"
+        end
+    end
+end
+
+RSpec.describe "Review Factory" do
+    it "is valid" do
+        expect(build(:review)).to be_valid
+    end
+    context "testing factory properties" do
+        before(:all) do
+            @review = build(:review)
+        end
+        it "has the correct rating" do
+            expect(@review.rating).to be 5
+        end
+        it "has the correct message" do
+            expect(@review.message).to eq "Review Message"
         end
     end
 end

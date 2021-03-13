@@ -2,7 +2,7 @@ FactoryBot.define do
     factory :listing do
         title { "Samsung Pro Evo Plus 970" }
         description { "Fast read and write times." }
-        price { 200 }
+        price { 200.00 }
         sold { false }
         condition { 0 }
         height { 10 }
