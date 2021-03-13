@@ -112,9 +112,7 @@
         margin-left: 5rem;
         width: 45rem;
 
-        @media only screen and (max-width: 1200px) {
-            font-size: 1.2rem;
-        }
+
         @media only screen and (max-width: 850px) {
             margin: 0;
         }
@@ -254,8 +252,34 @@
             }
         }
     }
+
+    &__purchase {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 #postage-choice {
     width: 100%;
+}
+
+#loading {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid $color-grey-dark;
+    border-radius: 50%;
+    border-top-color: $color-orangered;
+    margin-right: 1rem;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+  
+@keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
 }
