@@ -41,8 +41,13 @@
             }
 
             @media only screen and (max-width: 550px) {
-                width: 50rem;
-                font-size: 1.2rem;
+                width: 40rem;
+                padding: 1rem;
+            }
+
+            @media only screen and (max-width: 425px) {
+                width: 100%;
+                font-size: 1rem;
             }
         }
         &__user-box {
@@ -52,6 +57,14 @@
             align-items: center;
             width: 20rem;
             border-right: 2px solid $color-grey-light;
+
+            @media only screen and (max-width: 550px) {
+                width: 18rem;
+            }
+
+            @media only screen and (max-width: 425px) {
+                font-size: 1rem;
+            }
         }
 
         &__recent-message {

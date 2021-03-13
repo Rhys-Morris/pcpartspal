@@ -85,8 +85,8 @@ class ListingsController < ApplicationController
     end 
 
     def set_form_parameters
-      @categories = Category.all.sort_by { |cat| cat.name }
-      @brands = Brand.all.sort_by { |brand| brand.name }
+      @categories = Category.sorted
+      @brands = Brand.sorted
       @conditions = Listing.conditions.keys
     end
 
@@ -145,9 +145,6 @@ class ListingsController < ApplicationController
       end
       parsed_response = JSON.parse(response.body)
       
-      # puts "---------"
-      # pp parsed_response
-
       # Extract postage options from response
       @postage_options = []
       parsed_response["services"]["service"].each do |option|

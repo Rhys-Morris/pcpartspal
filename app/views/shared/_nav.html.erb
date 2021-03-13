@@ -2,6 +2,11 @@
     <div>
         <%= link_to "PCPartsPal", root_url, class:"nav__logo" %>
     </div>
+    <div class="nav__toggle">
+        <div class="nav__toggle__hamburger-line"></div>
+        <div class="nav__toggle__hamburger-line"></div>
+        <div class="nav__toggle__hamburger-line"></div>
+    </div>
     <ul class="nav__navlist">
         <% if !user_signed_in? %>
             <li class="nav__navlist__list-item">
@@ -27,7 +32,8 @@
         </li>
         <li class="nav__navlist__list-item">
             <%= link_to profile_path(current_user.profile.id), class: "nav__navlist__link" do %>
-                <%= image_tag "profile-default.png", alt: "profile-link", class: "nav__icon--2" %>
+                <%= image_tag "profile-default.png", alt: "profile-link", class: "nav__icon--2 profile" %>
+                <%= content_tag :p, "Profile", class: "nav__navlist__link profile--alt" %>
             <% end %>
         </li>
         <% end %>

@@ -5,6 +5,8 @@ class MessagesController < ApplicationController
   # Display all messages for a conversation between users
   def index
     @messages = @conversation.messages
+
+    # Remove if decide not to worry about read flag
     @messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
     @message = @conversation.messages.new
   end
@@ -16,6 +18,7 @@ class MessagesController < ApplicationController
     if @message.save
       redirect_to conversation_messages_path(@conversation)
     else
+      # Guard against empty subject/body
       flash[:alert] = "Could not save message, check all fields completed"
       redirect_to conversation_messages_path(@conversation)
     end

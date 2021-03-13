@@ -26,6 +26,10 @@ class Listing < ApplicationRecord
     Listing.where(filtered_params)
   end
 
+  def self.last_five
+    self.where("sold": false).last(5)
+  end
+
   private
     def remove_whitespace
       self.title = title.strip

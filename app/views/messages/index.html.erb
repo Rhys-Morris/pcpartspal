@@ -1,6 +1,7 @@
 <div class="container">
   <div class="conversation">  
     <% @recipient = @conversation.recipient(current_user) %>
+    <% provide(:title, "#{current_user.username} - #{@recipient.username} Conversation") %>
 
     <div class="conversation__recipient">
       <% if @recipient.profile.image.attached? %>

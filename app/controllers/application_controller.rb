@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_params, if: :devise_controller?
     
+    # Convert data from AusPost API for user readability
     def convert_postage_name(name)
         name = name.split("_").each { |option| option.capitalize! }
         name.join(" ")

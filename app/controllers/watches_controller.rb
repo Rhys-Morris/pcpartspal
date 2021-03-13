@@ -3,13 +3,12 @@ class WatchesController < ApplicationController
     before_action :set_watch, only: %i[ destroy ]
     before_action :watch_params, only: %i[ create ]
 
-
+    # Send to profile page with flag for front end to recognise request to display watchlist
     def index
         redirect_to profile_path(current_user.profile.id, display: "watchlist")
     end
 
     def create
-
         @watch = Watch.new(watch_params)
 
         if @watch.save
