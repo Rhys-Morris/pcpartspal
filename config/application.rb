@@ -11,6 +11,16 @@ module Pcpartspal
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # config.action_mailer.smtp_settings = {
+    #   address: "smtp.gmail.com",
+    #   port: 587,
+    #   domain: "gmail.com",
+    #   authentication: "plain",
+    #   enable_starttls_auto: true,
+    #   user_name: "my_gmail_username",
+    #   password: "my_gmail_password"
+    # }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
