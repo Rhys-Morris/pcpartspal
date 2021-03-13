@@ -12,8 +12,14 @@ function makeCardsVisible () {
 // TOGGLE HAMBURGER ICON FOR FILTERS
 const searchToggle = document.querySelector(".filter__toggle");
 const filterDiv = document.querySelector(".filter");
+let filterDisplayed = false;
 searchToggle.addEventListener('click', () => {
-    filterDiv.style.display = filterDiv.style.display == "none" ? "flex" : "none";
+    if (filterDisplayed) {
+        filterDiv.style.display = "none"
+    } else {
+        filterDiv.style.display = "flex"
+    }
+    filterDisplayed = !filterDisplayed
 })
 
 function filterListingsByTitle (searchBox) {

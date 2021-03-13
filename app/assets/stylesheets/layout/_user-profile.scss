@@ -14,7 +14,10 @@
         margin-top: 1.5rem;
 
         @media only screen and (max-width: 500px) {
-            display: block;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
         }
 
         select {
@@ -22,7 +25,15 @@
         border: 1px solid $color-grey-medium;
         background: white;
         border-radius: .3rem;
-        
+        }
+
+        &__delete {
+            border-radius: .3rem;
+            border: 2px solid $color-orangered;
+            background-color: $color-orangered;
+            color: $color-grey-light;
+            text-decoration: none;
+            padding: .8rem 1.2rem;
         }
         
     }

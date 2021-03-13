@@ -12,8 +12,8 @@
                 <option value="sold-listings">Sold Listings</option>
                 <option value="purchases">Purchases</option>
                 <option value="my-messages">My Messages</option>
-                <option value="delete-account">Delete Account</option>
             </select>
+            <%= link_to "Delete Account", "/users", method: :delete, class: "user-profile__toggle__delete", data: { confirm: "Are you sure?" } %>
         </div>
         <div class="user-profile__sidebar" data-display=<%=@display if @display %>>
             <ul class="user-profile__sidebar__list">
