@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy postage ]
   before_action :authenticate_user!, except: %i[ index show filter postage ]
-  before_action :authorise_user!, only: %i[ edit destroy ]
+  before_action :authorise_user!, only: %i[ edit update destroy ]
   before_action :set_form_parameters, only: %i[ new edit index filter ]
   before_action :get_postage_options, only: %i[ show postage ]
   skip_before_action :verify_authenticity_token, only: %i[ stripe_session ]
@@ -123,7 +123,7 @@ class ListingsController < ApplicationController
 
     def authorise_user!
       if current_user.id != @listing.user.id
-        flash[:alert] = "Unable to authorise!"
+        flash[:alert] = "Request not authorised!"
         redirect_to @listing
       end
     end

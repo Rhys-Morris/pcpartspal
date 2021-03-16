@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
   before_action :check_sidebar_display, only: %i[ show ]
   before_action :authenticate_user!
+  before_action :authorise_user!, only: %i[ edit destroy ]
 
   # GET /profiles/1
   def show
@@ -82,5 +83,12 @@ class ProfilesController < ApplicationController
     # To allow immediate display of watchlist via front end code
     def check_sidebar_display
       @display = params["display"]
+    end
+
+    def authorise_user!
+      if current_user.id != @profile.user.id
+        flash[:alert] = "Request not authorised!"
+        redirect_to root_url
+      end
     end
 end
