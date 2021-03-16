@@ -1,5 +1,5 @@
 .nav {
-    height: 6vh;
+    height: 6.5vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -12,8 +12,8 @@
     }
 
     @media only screen and (max-width: 500px) {
-        flex-direction: column;
         height: 8vh;
+        flex-direction: column;
         justify-content: flex-start;
         position: relative;
         padding: 1.5rem 0;
@@ -39,10 +39,11 @@
         }
     
         &__hamburger-line {
-            width: 65%;
+            width: 55%;
             height: 2px;
             margin: .2rem 0;
             background: $color-grey-light;
+            transform-origin: 0%;
         }
     }
 

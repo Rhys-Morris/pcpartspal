@@ -1,10 +1,10 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy postage ]
   before_action :authenticate_user!, except: %i[ index show filter postage ]
-  before_action :confirm_listing_owner, only: %i[ edit destroy ]
+  before_action :authorise_user!, only: %i[ edit update destroy ]
   before_action :set_form_parameters, only: %i[ new edit index filter ]
   before_action :get_postage_options, only: %i[ show postage ]
-  before_action :create_stripe_session, only: %i[ postage ]
+  skip_before_action :verify_authenticity_token, only: %i[ stripe_session ]
 
   # GET /listings
   def index
@@ -15,12 +15,6 @@ class ListingsController < ApplicationController
     filtered_hash = filter_params.reject {|k, v| v.blank?}.to_h
     @listings = Listing.filter(filtered_hash)
     render "index"
-  end
-
-  # Render postage costs to view and update Stripe session
-  def postage
-    @postage_cost = params[:postage_option] unless params[:postage_option].blank?
-    render "show"
   end
 
   # GET /listings/1
@@ -62,6 +56,39 @@ class ListingsController < ApplicationController
       end
   end
 
+  def stripe_session
+    puts "------ IN STRIPE SESSION -----"
+    pp params
+
+    @listing = Listing.find(params[:listingid])
+    @postage_cost = params[:postage]
+
+    return if !user_signed_in?
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email || nil,
+      line_items: [{
+        name: @listing.title,
+        description: @listing.description.blank? ? nil : @listing.description,
+        images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
+        amount: @listing.price.to_i + @postage_cost.to_i,
+        currency: 'aud',
+        quantity: 1,
+      }],
+      payment_intent_data: {
+        metadata: {
+          listing_id: @listing.id,
+          purchaser_id: current_user.id
+        }
+      },
+      success_url: "#{root_url}/payments/success?listingId=#{@listing.id}",
+      cancel_url: "#{root_url}/listings"
+    )
+    @session_id = session.id
+    # Return as JSON
+    render json: @session_id.to_json
+  end
+
   # DELETE /listings/1 or /listings/1.json
   def destroy
     @listing.destroy
@@ -77,7 +104,11 @@ class ListingsController < ApplicationController
 
     def filter_params 
       params.require(:filtered).permit(:commit, :category_id, :brand_id)
-    end 
+    end
+
+    def stripe_session_params
+      params.permit(:commit, :id, :postage)
+    end
 
     # Only allow a list of trusted parameters through.
     def listing_params 
@@ -90,37 +121,11 @@ class ListingsController < ApplicationController
       @conditions = Listing.conditions.keys
     end
 
-    def confirm_listing_owner
+    def authorise_user!
       if current_user.id != @listing.user.id
-        flash[:alert] = "Unable to authorise, cannot edit a listing that is not your own."
+        flash[:alert] = "Request not authorised!"
         redirect_to @listing
       end
-    end
-
-    # Create stripe session if user signed in
-    def create_stripe_session
-      return if !user_signed_in?
-      session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        customer_email: current_user.email || nil,
-        line_items: [{
-          name: @listing.title,
-          description: @listing.description.blank? ? nil : @listing.description,
-          images: @listing.images.attached? ? [@listing.images[0].service_url] : nil,
-          amount: @listing.price.to_i + params[:postage_option].to_i,
-          currency: 'aud',
-          quantity: 1,
-        }],
-        payment_intent_data: {
-          metadata: {
-            listing_id: @listing.id,
-            purchaser_id: current_user.id
-          }
-        },
-        success_url: "#{root_url}/payments/success?listingId=#{@listing.id}",
-        cancel_url: "#{root_url}/listings"
-      )
-      @session_id = session.id
     end
 
     # Calculate listing postage for current user if signed in

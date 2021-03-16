@@ -1,7 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ edit update ]
-  before_action :set_listing, only: %i[ new create ]
+  before_action :set_listing, only: %i[ new create edit ]
   before_action :authenticate_user!
+  before_action :authorise_user!, only: %i[ edit ]
 
   def new
     @review = Review.new
@@ -48,14 +49,24 @@ class ReviewsController < ApplicationController
       if params[:listing_id]
         # Get correct listing from profile link
         @listing =  Listing.find(params[:listing_id])
-      else
+      elsif params[:review]
         # Get correct listing inside create action
         @listing =  Listing.find(params[:review][:listing_id])
+      else
+        # Get correct listing for edit / update
+        @listing = @review.listing
       end
     end
 
     # Only allow a list of trusted parameters through.
     def review_params
       params.require(:review).permit(:rating, :message, :user_id, :listing_id)
+    end
+
+    def authorise_user!
+      if current_user.id != @listing.purchase.user.id
+        flash[:alert] = "Request not authorised!"
+        redirect_to root_url
+      end
     end
 end

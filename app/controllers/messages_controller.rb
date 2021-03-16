@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
   def index
     @messages = @conversation.messages
 
-    # Remove if decide not to worry about read flag
+    # Update messages to read if viewed
     @messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
     @message = @conversation.messages.new
   end

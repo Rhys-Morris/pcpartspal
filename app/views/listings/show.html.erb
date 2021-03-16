@@ -25,7 +25,7 @@
             <% end %>
           </div>
         <% else %>
-        <%= image_tag "profile-default.png", class: "listing-show__images__main"%>
+          <%= image_tag "profile-default.png", class: "listing-show__images__main"%>
         <% end %>
       </div>
   
@@ -46,12 +46,12 @@
         <span class="listing-show__price">
           <%= render_price(@listing.sold, cents_to_dollars(@listing.price)) %>
         </span>
-        <% if @postage_cost %>
+        <% if current_user && !@listing.sold %>
           <span class="listing-show__postage-cost">
-            <%= "+ $#{cents_to_dollars(@postage_cost)} postage cost" %>
+            Please select postage option
           </span>
         <% end %>
-  
+        
         <!-- Watchlist -->
         <% if current_user && current_user.id != @listing.user.id && !@listing.sold %>
           <% if !current_user.profile.listings.include?(@listing) %>
@@ -66,16 +66,15 @@
         <% end %>
   
         <!-- Postage costs -->
-        <% if current_user && current_user.id != @listing.user.id && !@listing.sold %>
+        <% if current_user && current_user.id != @listing.user.id && !@listing.sold %>     
           <div class="listing-show__postage-options">
             <%= render "shared/postage-select", listing: @listing, postage_options: @postage_options %>
           </div>
-          <div id="postage-selected" data-postage="<%=@postage_cost%>"></div>
         <% end %>
   
         <!-- Buy and Message -->
         <% if user_signed_in? && current_user.id != @listing.user.id && !@listing.sold %>
-          <button data-stripe="payment" data-pubKey="<%=Rails.application.credentials.dig(:stripe, :public_key)%>" data-sessionId="<%=@session_id%>" data-postage="<%=@postage_cost%>" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
+          <button data-listingId="<%=@listing.id%>" data-path="/listings/payment" data-stripe="payment" data-pubKey="<%=Rails.application.credentials.dig(:stripe, :public_key)%>" data-sessionId="<%=@session_id%>" data-postage="<%=@postage_cost%>" class="listing-show__purchase btn btn-ghost btn-up">Purchase</button>
           <%= link_to "Message", create_conversation_path(sender_id: current_user.id, receiver_id: @listing.user.id), method: :post, class: "listing-show__message btn btn-up btn-ghost" %>
         <% end %>
   
@@ -101,12 +100,7 @@
   </main>
 </div>
 
-<!-- Stripe session -->
-
+<!-- Javascript -->
 <%= javascript_include_tag "https://js.stripe.com/v3/" %>
-
-<%= javascript_pack_tag "stripe" %>
-
+<%= javascript_pack_tag "stripeWithPostage" %>
 <%= javascript_pack_tag "imageToggle" %>
-
-<%= javascript_pack_tag "updatePostageOption" %>
