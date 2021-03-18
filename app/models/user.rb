@@ -22,7 +22,7 @@ class User < ApplicationRecord
   before_save :init_profile
 
   # Send welcome email
-  # after_create :send_welcome
+  after_create :send_welcome
 
   def init_profile
     self.build_profile
@@ -36,7 +36,7 @@ class User < ApplicationRecord
       "#{self.location.city}, #{self.location.state}, Australia"
   end
 
-  # def send_welcome
-  #   UserMailer.with(user: self).welcome.deliver_now
-  # end
+  def send_welcome
+    UserMailer.with(user: self).welcome.deliver_now
+  end
 end
