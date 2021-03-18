@@ -1,0 +1,15 @@
+<div class="review-card">
+    <div class="review-card__header">
+        <h3 class="review-card__title"><%=review.listing.title%></h3>
+        <p class="review-card__score">
+            <% review.rating.to_i.times do %>
+                <%= image_tag "star.png", alt: "star-icon", class: "review-card__score__icon" %>
+            <% end %>
+        </p>
+    </div>
+    <div class="review-card__body">
+        <h3 class="review-card__subheader">Comments from buyer <%=review.listing.purchase.user.username%>:</h3>
+        <p><%=review.message%></p>
+        <%= link_to "Send Message", create_conversation_path(sender_id: current_user.id, receiver_id: review.listing.purchase.user.id), method: :post, class: "btn btn-up btn-ghost review-card__message" %>
+    </div>
+</div>

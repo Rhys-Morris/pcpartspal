@@ -5,6 +5,7 @@
     box-shadow: $box-shadow-right;
     display: flex;
     flex-direction: column;
+    position: relative;
 
     @media only screen and (max-width: 750px) {
         width: 20rem;
@@ -23,7 +24,7 @@
 
     &__toggle {
         display: none;
-    
+
         @media only screen and (max-width: 700px) {
             display: flex;
             align-self: flex-start;
@@ -44,6 +45,23 @@
             height: 2px;
             margin: .2rem 0;
             background: $color-grey-light;
+        }
+
+        &__text {
+            display: none;
+            position: absolute;
+            left: 5rem;
+            top: 15.3rem;
+            font-weight: 300;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+
+            @media only screen and (max-width: 700px) {
+                display: inline-block;
+            }
+            @media only screen and (max-width: 500px) {
+                top: 16.5rem; 
+            }
         }
     }
 

@@ -24,7 +24,6 @@ searchToggle.addEventListener('click', () => {
 
 function filterListingsByTitle (searchBox) {
     const searchString = searchBox.value;
-    console.log(searchString);
     if (searchString == "") {
         makeCardsVisible();
     }
@@ -72,7 +71,7 @@ sort.addEventListener('change', () => {
     })
 })
 
-function sortCards (param, cards) {
+function sortCards (param, cards) { 
     switch(param) {
         case "cheapest":
             return cards.sort((cardOne, cardTwo) => cardOne.dataset.price - cardTwo.dataset.price);
