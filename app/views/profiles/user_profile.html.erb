@@ -12,6 +12,7 @@
                 <option value="sold-listings">Sold Listings</option>
                 <option value="purchases">Purchases</option>
                 <option value="my-messages">My Messages</option>
+                <option value="reviews">Reviews</option>
             </select>
             <%= link_to "Delete Account", "/users", method: :delete, class: "user-profile__toggle__delete", data: { confirm: "Are you sure?" } %>
         </div>
@@ -21,13 +22,15 @@
                 <li id="watchlist" class="user-profile__sidebar__list__list-item"><span>Watchlist</span></li>
                 <li id="sold-listings" class="user-profile__sidebar__list__list-item"><span>Sold Listings</span></li>
                 <li id="purchases" class="user-profile__sidebar__list__list-item"><span>Purchases</span></li>
+                <li id="reviews" class="user-profile__sidebar__list__list-item"><span>Reviews</span></li>
                 <a href="<%= conversations_path %>" class="user-profile__sidebar__messages-link"><li class="user-profile__sidebar__list__list-item">My Messages</li></a>
                 <%= link_to "/users", method: :delete, class: "user-profile__sidebar__delete-account", data: { confirm: "Are you sure?" } do %>
                     <%= content_tag :li, "Delete Account", class: "user-profile__sidebar__list__list-item user-profile__sidebar__list__list-item--delete" %>
                 <% end %>
             </ul>
         </div>
-        <!-- Could be made into partial - listings -->
+
+        <!-- Display containers -->
         <div class="user-profile__content">
             <div class="user-profile__content__my-listings" data-target="my-listings">
                 <h3 class="user-profile__content__header">My Listings</h3>
@@ -37,7 +40,7 @@
                             <%= render "shared/listing-card", listing: listing %>
                         <% end %>
                     <% end %>
-                    <% if @profile.user.listings.empty? %>
+                    <% if @profile.user.listings.empty? || @profile.user.listings.where("sold": false).empty? %>
                         <p>You currently have no listings for sale</p>
                     <% end %>
                 </div>
@@ -105,6 +108,18 @@
                     <% end %>
                     <% if @profile.user.purchases.empty? %>
                         <p>You currently have no purchased listings</p>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="user-profile__content__reviews hidden" data-target="reviews">
+                <h3 class="user-profile__content__header">Reviews</h3>
+                <div class="card-container--column">
+                    <% @profile.user.reviews.each do |review| %>
+                        <%= render "shared/review-card", review: review %>
+                    <% end %>
+                    <% if @profile.user.reviews.empty? %>
+                        <p>You currently have no viewable reviews.</p>
                     <% end %>
                 </div>
             </div>

@@ -20,13 +20,15 @@ class User < ApplicationRecord
 
   # Create profile
   before_save :init_profile
-  after_create :send_welcome
+
+  # Send welcome email
+  # after_create :send_welcome
 
   def init_profile
     self.build_profile
   end
 
-  #  Insert latitude and longitude into profile
+  #  Insert latitude and longitude attributes
   geocoded_by :geolocation
   before_save :geocode
   
@@ -34,7 +36,7 @@ class User < ApplicationRecord
       "#{self.location.city}, #{self.location.state}, Australia"
   end
 
-  def send_welcome
-    UserMailer.with(user: self).welcome.deliver_now
-  end
+  # def send_welcome
+  #   UserMailer.with(user: self).welcome.deliver_now
+  # end
 end
