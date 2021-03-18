@@ -38,7 +38,7 @@ class PaymentsController < ApplicationController
 
     if @new_purchase.save
       # Send confirmation of purchase to user email
-      # UserMailer.with(purchase: @new_purchase, user: @user).purchase_confirmation.deliver_now
+      UserMailer.with(purchase: @new_purchase, user: @user).purchase_confirmation.deliver_now
       render plain: "Success"
     else
       puts "----- Error saving new purchase ----- "
