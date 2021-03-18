@@ -25,7 +25,7 @@ class User < ApplicationRecord
   after_create :send_welcome
 
   def init_profile
-    self.build_profile
+    self.build_profile unless self.profile
   end
 
   #  Insert latitude and longitude attributes
