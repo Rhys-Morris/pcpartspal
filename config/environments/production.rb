@@ -120,7 +120,7 @@ Rails.application.configure do
 
   # Action Mailer
   config.action_mailer.delivery_method = :smtp
-  host = 'https://staging-pcpartspal.herokuapp.com/' 
+  host = 'https://pcpartspal.herokuapp.com/' 
   config.action_mailer.default_url_options = { host: host }
 
   # SMTP settings for gmail
