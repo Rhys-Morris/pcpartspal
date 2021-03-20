@@ -7,6 +7,65 @@
 ## Github repository:
 [https://github.com/Rhys-Morris/pcpartspal](https://github.com/Rhys-Morris/pcpartspal)
 
+## To explore this application on a local machine
+
+### Installation:
+
+To check if you have Ruby already installed use ruby -v within your terminal.
+
+For instructions on how to install Ruby on your operating system please follow this [guide](https://www.ruby-lang.org/en/documentation/installation/).
+
+Once Ruby is installed correctly, the next step is to install Rails and the required gem dependencies.
+
+Inside your terminal:
+
+```
+gem install rails
+```
+
+To verify that you have everything installed correctly, you should be able to run the following:
+
+```
+rails --version
+```
+
+Next, in order for this application to function as intended, you will need to set up PostgreSQL on your local machine.
+
+Instructions for installation of PostgreSQL can be found [here](http://postgresguide.com/setup/install.html).
+Ensure you follow the correct instructions for your operating system. 
+
+To install the bundler gem, use the following command inside your terminal:
+
+```
+gem install bundler
+```
+
+Navigate to the application directory in your terminal and use the following command.
+
+```
+gem install 
+```
+
+This will ensure all gem dependencies are installed. 
+
+### Running the application:
+
+To correctly setup the application's relational database, inside your application directory, use the following terminal command:
+
+```
+rails db:create && rails db:migrate && rails db:seed
+```
+
+It will take about a minute to correctly seed required data into the database.
+
+To launch a local server use the following terminal commmand:
+
+```
+rails s
+```
+
+In the browser of your choice enter `localhost:3000` in the address bar. Provided everything has installed correctly you should be up and running with a local version of this application! Have fun!
+
 <br>
 <hr>
 <br>
@@ -19,7 +78,6 @@ The problem this application attempts to solve is the lack of a focused, quality
 
 <br>
 <hr>
-
 <br>
 
 ## Why is it a problem that needs solving?
@@ -86,6 +144,7 @@ To serve as a two-way marketplace for the buying and selling of computer parts b
 - View feedback received on user profile page.
 - View sold listings on user profile page.
 - Delete account.
+- Fully responsive design.
 
 <br>
 
@@ -193,14 +252,16 @@ The target audience for this application is anyone who wishes to buy, or sell a 
 - As a user I want to be able to update a listing I have made with new details, or to fix incorrect current details.
 - As a user I want to know whether the part I am interested in purchasing is used or new.
 - As a user I want details regarding the brand and item description when I am interested in purchasing a listing.
-- As a user I want to be able to filter listings by brand and category to more easily find the items I am interested in purchasing. 
-- As a user I want to be able to see pictures of the item I am interested in purchasing to verify it is in the condition stated.
+- As a user I want to be able to filter listings to more easily find the items I am interested in purchasing. 
+- As a user I want to be able to sort listings by price and date added to more easily find listings I am interested in purchasing.  
+- As a user I want to be able to search listings by title to more easily find listings I am interested in purchasing.  
+- As a user I want to be able to see (multiple) pictures of the item I am interested in purchasing to verify it is in the condition stated.
 - As a user I want a watchlist to track other user’s listings I’m interested in so that I can easily refer to them at a later date.
 - As a user I want to be able to view my current listings on my profile so that I can easily alter them.
 - As a user I want to be able to view my sales on my profile so that I can easily track them.
 - As a user I want to be able to send a message to another user regarding a listing to negotiate on price or ask further questions. 
 - As a user I want to be given an estimate on postage for item’s I am interested in purchasing.
-- As a user I want to be able to securely purchase listings with a credit card.
+- As a user I want to be able to securely purchase listings online.
 - As a user I want to be able to provide feedback on a listing to let other user’s know whether  the transactional experience I had with another user was positive or negative. 
 - As a user I want to be able to view feedback I have received to improve my sales.
 - As a user I want to be able to view the items I have purchased in my profile to easily recall my purchase history. 

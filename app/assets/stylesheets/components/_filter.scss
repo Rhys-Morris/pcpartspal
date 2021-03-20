@@ -47,20 +47,18 @@
             background: $color-grey-light;
         }
 
-        &__text {
+        &::after {
+            content: "filter listings";
             display: none;
             position: absolute;
+            width: 12rem;
             left: 5rem;
-            top: 15.3rem;
             font-weight: 300;
             font-size: 1.6rem;
             text-transform: uppercase;
 
             @media only screen and (max-width: 700px) {
                 display: inline-block;
-            }
-            @media only screen and (max-width: 500px) {
-                top: 16.5rem; 
             }
         }
     }

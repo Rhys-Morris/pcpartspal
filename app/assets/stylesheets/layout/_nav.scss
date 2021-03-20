@@ -1,5 +1,5 @@
 .nav {
-    height: 6.5vh;
+    height: 7rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -12,7 +12,6 @@
     }
 
     @media only screen and (max-width: 500px) {
-        height: 8vh;
         flex-direction: column;
         justify-content: flex-start;
         position: relative;
