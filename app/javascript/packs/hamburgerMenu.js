@@ -9,7 +9,7 @@ let toggleStatus = false;
 hamburgerIcon.addEventListener('click', () => {
     if (toggleStatus) {
         navBar.style.display = "none";
-        nav.style.height = "8vh";
+        nav.style.height = "7rem";
         hamburgerTwo.style.visibility = "visible";
         hamburgerOne.style.transform = "rotate(0deg)";
         hamburgerThree.style.transform = "rotate(0deg)";
