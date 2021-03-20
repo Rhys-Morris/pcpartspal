@@ -54,7 +54,7 @@
                             <%= render "shared/listing-card", listing: listing %>
                         <% end %>
                     <% end %>
-                    <% if @profile.listings.empty? %>
+                    <% if @profile.listings.where("sold": false).empty? %>
                         <p>You currently have no listings in your watchlist</p>
                     <% end %>
                 </div>

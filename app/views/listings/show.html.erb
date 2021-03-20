@@ -46,7 +46,7 @@
         <span class="listing-show__price">
           <%= render_price(@listing.sold, cents_to_dollars(@listing.price)) %>
         </span>
-        <% if current_user && !@listing.sold %>
+        <% if current_user && current_user.id != @listing.user.id && !@listing.sold %>
           <span class="listing-show__postage-cost">
             Please select postage option
           </span>
