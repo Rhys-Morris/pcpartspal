@@ -7,6 +7,65 @@
 ## Github repository:
 [https://github.com/Rhys-Morris/pcpartspal](https://github.com/Rhys-Morris/pcpartspal)
 
+## To explore this application on a local machine
+
+### Installation:
+
+To check if you have Ruby already installed use ruby -v within your terminal.
+
+For instructions on how to install Ruby on your operating system please follow this [guide](https://www.ruby-lang.org/en/documentation/installation/).
+
+Once Ruby is installed correctly, the next step is to install Rails and the required gem dependencies.
+
+Inside your terminal:
+
+```
+gem install rails
+```
+
+To verify that you have everything installed correctly, you should be able to run the following:
+
+```
+rails --version
+```
+
+Next, in order for this application to function as intended, you will need to set up PostgreSQL on your local machine.
+
+Instructions for installation of PostgreSQL can be found [here](http://postgresguide.com/setup/install.html).
+Ensure you follow the correct instructions for your operating system. 
+
+To install the bundler gem, use the following command inside your terminal:
+
+```
+gem install bundler
+```
+
+Navigate to the application directory in your terminal and use the following command.
+
+```
+gem install 
+```
+
+This will ensure all gem dependencies are installed. 
+
+### Running the application:
+
+To correctly setup the application's relational database, inside your application directory, use the following terminal command:
+
+```
+rails db:create && rails db:migrate && rails db:seed
+```
+
+It will take about a minute to correctly seed required data into the database.
+
+To launch a local server use the following terminal commmand:
+
+```
+rails s
+```
+
+In the browser of your choice enter `localhost:3000` in the address bar. Provided everything has installed correctly you should be up and running with a local version of this application! Have fun!
+
 <br>
 <hr>
 <br>
