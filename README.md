@@ -19,7 +19,6 @@ The problem this application attempts to solve is the lack of a focused, quality
 
 <br>
 <hr>
-
 <br>
 
 ## Why is it a problem that needs solving?
@@ -86,6 +85,7 @@ To serve as a two-way marketplace for the buying and selling of computer parts b
 - View feedback received on user profile page.
 - View sold listings on user profile page.
 - Delete account.
+- Fully responsive design.
 
 <br>
 
@@ -193,14 +193,16 @@ The target audience for this application is anyone who wishes to buy, or sell a 
 - As a user I want to be able to update a listing I have made with new details, or to fix incorrect current details.
 - As a user I want to know whether the part I am interested in purchasing is used or new.
 - As a user I want details regarding the brand and item description when I am interested in purchasing a listing.
-- As a user I want to be able to filter listings by brand and category to more easily find the items I am interested in purchasing. 
-- As a user I want to be able to see pictures of the item I am interested in purchasing to verify it is in the condition stated.
+- As a user I want to be able to filter listings to more easily find the items I am interested in purchasing. 
+- As a user I want to be able to sort listings by price and date added to more easily find listings I am interested in purchasing.  
+- As a user I want to be able to search listings by title to more easily find listings I am interested in purchasing.  
+- As a user I want to be able to see (multiple) pictures of the item I am interested in purchasing to verify it is in the condition stated.
 - As a user I want a watchlist to track other user’s listings I’m interested in so that I can easily refer to them at a later date.
 - As a user I want to be able to view my current listings on my profile so that I can easily alter them.
 - As a user I want to be able to view my sales on my profile so that I can easily track them.
 - As a user I want to be able to send a message to another user regarding a listing to negotiate on price or ask further questions. 
 - As a user I want to be given an estimate on postage for item’s I am interested in purchasing.
-- As a user I want to be able to securely purchase listings with a credit card.
+- As a user I want to be able to securely purchase listings online.
 - As a user I want to be able to provide feedback on a listing to let other user’s know whether  the transactional experience I had with another user was positive or negative. 
 - As a user I want to be able to view feedback I have received to improve my sales.
 - As a user I want to be able to view the items I have purchased in my profile to easily recall my purchase history. 

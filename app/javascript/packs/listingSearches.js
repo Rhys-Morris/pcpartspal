@@ -22,9 +22,10 @@ searchToggle.addEventListener('click', () => {
     filterDisplayed = !filterDisplayed
 })
 
-function filterListingsByTitle (searchBox) {
+function filterListingsByTitle (searchBox, e) {
     const searchString = searchBox.value;
-    if (searchString == "") {
+    console.log(searchString);
+    if (searchString == "" || e.code == "Backspace") {
         makeCardsVisible();
     }
     const regExp = new RegExp(searchString, 'i');
@@ -38,14 +39,15 @@ function filterListingsByTitle (searchBox) {
 
 // SEARCH LISTINGS CURRENTLY DISPLAYED BY TITLE - INSIDE HAMBURGER DROP DOWN
 const hamburgerSearch = document.querySelector(".filter__search");
-hamburgerSearch.addEventListener('keyup', function () {
-    filterListingsByTitle(this)
+hamburgerSearch.addEventListener('keyup', function (e) {
+    filterListingsByTitle(this, e)
+    console.log(e);
 });
 
 
 // SEARCH LISTINGS CURRENTLY DISPLAYED BY TITLE - MAIN MENU
 titleSearch.addEventListener('keyup', function () {
-    filterListingsByTitle(this);
+    filterListingsByTitle(this, e);
 });
 
 // RESET SEARCH INPUT
